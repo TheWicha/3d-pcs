@@ -131,8 +131,8 @@ export default function ChatBar({ onSend }: ChatBarProps) {
 
   return (
     <div
-      className="relative z-10 mx-auto w-full"
-      style={{ maxWidth: 1280, padding: '0 56px 32px' }}
+      className="relative z-10 mx-auto w-full px-4 md:px-14 pb-4 pt-24 md:pt-0"
+      style={{ maxWidth: 1280 }}
     >
       {/* ── Label row ── */}
       <div

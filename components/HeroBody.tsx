@@ -45,7 +45,7 @@ export default function HeroBody() {
             style={{
               textTransform: 'uppercase',
               fontFamily: 'var(--font-serif, serif)',
-              fontSize: 'clamp(50px, 7.6vw, 104px)',
+              fontSize: 'clamp(40px, 7.6vw, 104px)',
               lineHeight: 0.8,
               letterSpacing: '7px',
               fontWeight: 400,
@@ -65,6 +65,7 @@ export default function HeroBody() {
           </h1>
 
           <p
+            className="hidden md:block"
             style={{
               marginTop: 28,
               maxWidth: 540,
