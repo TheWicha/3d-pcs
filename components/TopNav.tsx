@@ -33,7 +33,7 @@ export default function TopNav() {
     >
       {/* ── Row 1: utility ticker ── */}
       <div
-        className="flex items-center justify-between px-6 overflow-hidden"
+        className="hidden md:flex items-center justify-between px-6 overflow-hidden"
         style={{
           paddingTop: 8,
           paddingBottom: 8,
@@ -52,7 +52,7 @@ export default function TopNav() {
           <span className="hidden sm:inline shrink-0" style={{ opacity: 0.3 }}>
             ─── PCS ───
           </span>
-          <span className="hidden lg:inline shrink-0">53.42°N · 14.57°E</span>
+          <span className="inline shrink-0">53.42°N · 14.57°E</span>
         </div>
         <span className="shrink-0 ml-4">{date}</span>
       </div>
