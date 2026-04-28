@@ -27,7 +27,7 @@ export default function Hero() {
 
   return (
     <main
-      className="relative min-h-dvw md:min-h-screen w-full overflow-x-hidden flex flex-col"
+      className="relative h-dvh md:min-h-screen w-full overflow-x-hidden flex flex-col"
       style={{ background: '#06080c' }}
     >
       <Background />
