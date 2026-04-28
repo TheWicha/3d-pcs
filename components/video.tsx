@@ -49,7 +49,23 @@ export default function Video() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [displayedProgress, setDisplayedProgress] = useState(0);
   const [showVideo, setShowVideo] = useState(false);
+  // Animate displayedProgress towards progress
+  useEffect(() => {
+    if (displayedProgress === progress) return;
+    let raf: number;
+    const step = () => {
+      setDisplayedProgress(prev => {
+        if (Math.abs(progress - prev) < 0.5) return progress;
+        // Ease towards target
+        return prev + (progress - prev) * 0.18 + (progress > prev ? 0.3 : -0.3);
+      });
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [progress, displayedProgress]);
 
   // Set playback rate
   useEffect(() => {
@@ -103,7 +119,7 @@ export default function Video() {
         <source src="/video/port_animation_fast.mp4" type="video/mp4" />
       </video>
       {/* Loading overlay */}
-      {loading && <VideoLoadingOverlay progress={progress} />}
+      {loading && <VideoLoadingOverlay progress={displayedProgress} />}
     </div>
   );
 }

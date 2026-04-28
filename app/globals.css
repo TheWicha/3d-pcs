@@ -1,23 +1,22 @@
-/* Custom scrollbar for chat thread */
-.chat-thread,
-.chat-thread * {
+/* Global custom scrollbar */
+* {
   scrollbar-width: thin;
   scrollbar-color: #232733 #181b22;
 }
 
-.chat-thread::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 8px;
   background: #181b22;
 }
-.chat-thread::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: #232733;
   border-radius: 6px;
   transition: background 0.2s;
 }
-.chat-thread::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: #3b82f6;
 }
-.chat-thread::-webkit-scrollbar-corner {
+*::-webkit-scrollbar-corner {
   background: #181b22;
 }
 @import 'tailwindcss';

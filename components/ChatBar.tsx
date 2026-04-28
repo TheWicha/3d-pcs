@@ -149,19 +149,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
           <span style={{ color: 'rgba(255,255,255,0.3)' }}>[INPUT/02]</span>
           {'  '}Konsola asystenta
         </span>
-        <span className="flex items-center gap-2">
-          <span
-            className="relative flex items-center justify-center"
-            style={{ width: 8, height: 8 }}
-          >
-            <span
-              className="absolute inset-0 rounded-full bg-green-400"
-              style={{ animation: 'chat-ping 2s ease-out infinite' }}
-            />
-            <span className="relative rounded-full bg-green-400" style={{ width: 8, height: 8 }} />
-          </span>
-          <span>Online · &lt; 2 s avg</span>
-        </span>
       </div>
 
       {/* ── Chips grid (hidden once chat started) ── */}
@@ -420,8 +407,8 @@ export default function ChatBar({ onSend }: ChatBarProps) {
             opacity: thinking ? 0.5 : 1,
           }}
         >
-          Wyślij
-          <ArrowRight size={12} />
+          <span className="hidden sm:inline">Wyślij</span>
+          <ArrowRight size={18} />
         </button>
       </form>
 
@@ -443,10 +430,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
             <span>wyślij</span>
           </span>
         </div>
-        <span className="flex items-center gap-1.5">
-          <span style={{ color: ACCENT }}>◆</span>
-          powered by PCS
-        </span>
       </div>
     </div>
   );

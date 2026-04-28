@@ -38,17 +38,14 @@ export default function Hero() {
         animate="visible"
         className="flex flex-col flex-1"
       >
-        {/* TopNav */}
         <motion.div variants={item}>
           <TopNav />
         </motion.div>
 
-        {/* Running header + headline + meta */}
         <motion.div variants={item} className="flex-1">
           <HeroBody />
         </motion.div>
 
-        {/* Chat bar */}
         <motion.div variants={item}>
           <ChatBar />
         </motion.div>

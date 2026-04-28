@@ -46,21 +46,13 @@ export default function TopNav() {
         }}
       >
         <div className="flex items-center gap-3 min-w-0">
-          <span className="flex items-center gap-1.5 shrink-0">
-            <span style={{ color: ACCENT }}>●</span>
-            PCS / v.2026.04
-          </span>
-          <span style={{ opacity: 0.3, flexShrink: 0 }}>│</span>
           <span className="hidden sm:inline shrink-0">
             Gdańsk · Gdynia · Szczecin · Świnoujście
           </span>
           <span className="hidden sm:inline shrink-0" style={{ opacity: 0.3 }}>
-            ───
+            ─── PCS ───
           </span>
           <span className="hidden lg:inline shrink-0">53.42°N · 14.57°E</span>
-          <span className="hidden lg:inline" style={{ opacity: 0.3 }}>
-            │
-          </span>
         </div>
         <span className="shrink-0 ml-4">{date}</span>
       </div>
