@@ -1,26 +1,86 @@
-@import "tailwindcss";
+/* Custom scrollbar for chat thread */
+.chat-thread,
+.chat-thread * {
+  scrollbar-width: thin;
+  scrollbar-color: #232733 #181b22;
+}
+
+.chat-thread::-webkit-scrollbar {
+  width: 8px;
+  background: #181b22;
+}
+.chat-thread::-webkit-scrollbar-thumb {
+  background: #232733;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.chat-thread::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+.chat-thread::-webkit-scrollbar-corner {
+  background: #181b22;
+}
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #06080c;
+  --foreground: #ffffff;
+}
+
+button {
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/chivo/v21/va9I4kzIxd1KFrBnQeNHkQ.woff2) format('woff2');
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: #3b82f6;
+  --color-accent-dark: #1e40af;
+  --font-sans: 'Chivo', Arial, sans-serif;
+  --font-mono: var(--font-jetbrains);
+  --font-serif: var(--font-playfair);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Chivo', Arial, sans-serif;
+}
+
+@keyframes ping-dot {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.animate-ping-dot {
+  animation: ping-dot 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes chat-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
