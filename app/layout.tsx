@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 
-import { Chivo } from 'next/font/google';
+import { Aldrich } from 'next/font/google';
 
-const chivo = Chivo({
+const chivo = Aldrich({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '900'],
-  variable: '--font-chivo',
+  weight: ['400'],
+  variable: '--font-michroma',
 });
 
 export const metadata: Metadata = {

@@ -44,7 +44,7 @@ export default function HeroBody() {
           <h1
             style={{
               textTransform: 'uppercase',
-              fontFamily: 'var(--font-serif, serif)',
+              fontFamily: 'var(--font-michroma, serif)',
               fontSize: 'clamp(40px, 7.6vw, 104px)',
               lineHeight: 0.8,
               letterSpacing: '7px',
