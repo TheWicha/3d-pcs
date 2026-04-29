@@ -41,38 +41,6 @@ export default function TopNav() {
         borderBottom: '1px solid var(--border)',
       }}
     >
-      {/* ── Row 1: utility ticker — hidden on scroll ── */}
-      <div
-        className="hidden md:flex items-center justify-between px-6 overflow-hidden"
-        style={{
-          paddingTop: scrolled ? 0 : 8,
-          paddingBottom: scrolled ? 0 : 8,
-          maxHeight: scrolled ? 0 : 40,
-          opacity: scrolled ? 0 : 1,
-          transition: 'max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease',
-          fontFamily: 'var(--font-mono, monospace)',
-          fontSize: '10.5px',
-          letterSpacing: '0.06em',
-          textTransform: 'uppercase',
-          color: 'var(--fg-2)',
-          borderBottom: scrolled ? 'none' : '1px solid var(--border-2)',
-        }}
-      >
-        <div className="flex items-center gap-3 min-w-0">
-          <span className="hidden sm:inline shrink-0">
-            Gdańsk · Gdynia · Szczecin · Świnoujście
-          </span>
-          <span className="hidden sm:inline shrink-0" style={{ opacity: 0.3 }}>
-            ─── PCS ───
-          </span>
-        </div>
-        <div>
-          <span className="inline shrink-0">53.42°N · 14.57°E</span>
-          <span className="mx-4 opacity-40">|</span>
-          <span className="shrink-0">{date}</span>
-        </div>
-      </div>
-
       {/* ── Row 2: main bar ── */}
       <div className="flex items-center justify-between px-6 py-3.5">
         {/* Logo */}
