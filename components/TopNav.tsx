@@ -4,7 +4,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const ACCENT = '#00edc2';
 
@@ -18,17 +18,6 @@ const NAV_ITEMS = [
 export default function TopNav() {
   const { theme, toggle } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const date = new Date()
-    .toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' })
-    .toUpperCase();
 
   return (
     <nav
@@ -45,14 +34,14 @@ export default function TopNav() {
       <div className="flex items-center justify-between px-6 py-3.5">
         {/* Logo */}
         <div className="flex items-center shrink-0">
-          <Image
-            src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
-            alt="Polski PCS"
-            width={120}
-            height={45}
-            style={{ width: 'auto' }}
-            priority
-          />
+          <div className="relative w-30 h-15">
+            <Image
+              src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
+              alt="Poski PCS"
+              fill
+              priority
+            />
+          </div>
         </div>
 
         {/* Center nav */}
