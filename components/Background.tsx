@@ -1,8 +1,5 @@
+import type { BackgroundProps } from '@/types';
 import Video from './video';
-
-interface BackgroundProps {
-  overlay?: number;
-}
 
 function Crosshair() {
   return (
@@ -18,10 +15,7 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
-      {/* Video layer */}
       <Video />
-
-      {/* Vertical gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -33,8 +27,6 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
           )`,
         }}
       />
-
-      {/* Hairline grid */}
       <div
         className="absolute inset-0"
         style={{
@@ -46,20 +38,10 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
           opacity: 0.18,
         }}
       />
-
-      {/* Corner crosshairs */}
-      <span className="absolute top-6 left-6 opacity-[0.35]">
-        <Crosshair />
-      </span>
-      <span className="absolute top-6 right-6 opacity-[0.35]">
-        <Crosshair />
-      </span>
-      <span className="absolute bottom-6 left-6 opacity-[0.35]">
-        <Crosshair />
-      </span>
-      <span className="absolute bottom-6 right-6 opacity-[0.35]">
-        <Crosshair />
-      </span>
+      <span className="absolute top-6 left-6 opacity-[0.35]"><Crosshair /></span>
+      <span className="absolute top-6 right-6 opacity-[0.35]"><Crosshair /></span>
+      <span className="absolute bottom-6 left-6 opacity-[0.35]"><Crosshair /></span>
+      <span className="absolute bottom-6 right-6 opacity-[0.35]"><Crosshair /></span>
     </div>
   );
 }

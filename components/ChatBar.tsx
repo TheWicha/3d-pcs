@@ -1,27 +1,9 @@
 'use client';
 
+import { ACCENT, CHIPS } from '@/constants';
+import { useChatMessages } from '@/hooks/useChatMessages';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-
-const ACCENT = 'var(--accent)';
-
-const CHIPS = [
-  { label: 'Sprawdź status MSKU7834521' },
-  { label: 'Gdzie jest mój kontener?' },
-  { label: 'Jak wygląda kolejka w porcie?' },
-];
-
-const MOCK: Record<string, string> = {
-  'Sprawdź status MSKU7834521':
-    '📦 Kontener **MSKU7834521** · Terminal T2, nabrzeże 7\n— Status: **Oczekuje na rozładunek**\n— Szac. czas operacji: 3–4 h\n— Armator: Maersk Line · Przyjazd: 27.04.2026',
-  'Gdzie jest mój kontener?':
-    'Podaj numer kontenera (np. MSKU7834521) lub numer B/L, a sprawdzę aktualną lokalizację. Aktualnie monitoruję **3 421** jednostek w ruchu.',
-  'Jak wygląda kolejka w porcie?':
-    '🚛 Brama wjazdowa: **12 pojazdów** · czas oczekiwania ~25 min\n— Terminal T1: bez opóźnień ✓\n— Terminal T2: spowolnienie +45 min ⚠\n— Dane odświeżone: 28.04.2026 · 14:32',
-};
-
-type Msg = { role: 'user' | 'assistant'; text: string };
 
 function MsgText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\n)/g);
@@ -38,36 +20,10 @@ function MsgText({ text }: { text: string }) {
 }
 
 export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
-  const [value, setValue] = useState('');
-  const [messages, setMessages] = useState<Msg[]>([]);
-  const [thinking, setThinking] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, thinking]);
-
-  const sendMessage = (text: string) => {
-    const trimmed = text.trim();
-    if (!trimmed || thinking) return;
-    setMessages(prev => [...prev, { role: 'user', text: trimmed }]);
-    setValue('');
-    setThinking(true);
-    onSend?.(trimmed);
-    setTimeout(() => {
-      const key = Object.keys(MOCK).find(k => trimmed.toLowerCase().includes(k.toLowerCase()));
-      const reply = key
-        ? MOCK[key]
-        : 'Rozumiem pytanie. Trwa przetwarzanie — zaraz wrócę z odpowiedzią systemu portowego.';
-      setMessages(prev => [...prev, { role: 'assistant', text: reply }]);
-      setThinking(false);
-    }, 1100);
-  };
-
-  const hasInput = value.length > 0;
-  const hasMessages = messages.length > 0;
+  const {
+    value, setValue, messages, thinking, focused, setFocused,
+    inputRef, bottomRef, sendMessage, hasInput, hasMessages,
+  } = useChatMessages(onSend);
 
   return (
     <div
@@ -81,8 +37,6 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
         padding: '24px',
       }}
     >
-
-      {/* chips */}
       <AnimatePresence>
         {!hasMessages && (
           <motion.div
@@ -108,12 +62,10 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                   transition: 'background 0.15s, color 0.15s, border-color 0.15s',
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'var(--surface)';
                   (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
                   (e.currentTarget as HTMLElement).style.color = 'var(--fg)';
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'var(--surface)';
                   (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
                   (e.currentTarget as HTMLElement).style.color = 'var(--fg-2)';
                 }}
@@ -125,7 +77,6 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
         )}
       </AnimatePresence>
 
-      {/* thread */}
       <AnimatePresence>
         {hasMessages && (
           <motion.div
@@ -212,7 +163,6 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
         )}
       </AnimatePresence>
 
-      {/* input */}
       <form
         onSubmit={e => { e.preventDefault(); sendMessage(value); }}
         className="flex items-center gap-3 transition-all duration-200"
@@ -264,7 +214,6 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           <ArrowRight size={16} />
         </button>
       </form>
-
     </div>
   );
 }

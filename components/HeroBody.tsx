@@ -1,4 +1,4 @@
-const ACCENT = '#00edc2';
+import { ACCENT_HEX } from '@/constants';
 
 export default function HeroBody() {
   return (
@@ -9,7 +9,7 @@ export default function HeroBody() {
           fontSize: '10px',
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
-          color: ACCENT,
+          color: ACCENT_HEX,
           marginBottom: 24,
           opacity: 0.9,
         }}
@@ -33,7 +33,7 @@ export default function HeroBody() {
         <br />
         <span style={{ color: 'var(--fg-3)' }}>polskich portów</span>
         <br />
-        morskich<span style={{ color: ACCENT }}>.</span>
+        morskich<span style={{ color: ACCENT_HEX }}>.</span>
       </h1>
 
       <p

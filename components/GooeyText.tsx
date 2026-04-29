@@ -1,14 +1,7 @@
 'use client';
 
-import { CSSProperties, useEffect, useRef } from 'react';
-
-interface GooeyTextProps {
-  texts: string[];
-  morphTime?: number;
-  cooldownTime?: number;
-  className?: string;
-  style?: CSSProperties;
-}
+import type { GooeyTextProps } from '@/types';
+import { useEffect, useRef } from 'react';
 
 export default function GooeyText({
   texts,
@@ -26,7 +19,6 @@ export default function GooeyText({
     const t2 = text2Ref.current;
     if (!t1 || !t2) return;
 
-    // Reduced motion: show first text statically
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       t1.textContent = texts[0];
       t1.style.opacity = '1';
@@ -44,12 +36,10 @@ export default function GooeyText({
       t1.textContent = texts[textIndex % texts.length];
       t2.textContent = texts[(textIndex + 1) % texts.length];
 
-      // t2 fades in
       const blur2 = Math.min(8 / (fraction + 0.001) - 8, 100);
       t2.style.filter = `blur(${blur2}px)`;
       t2.style.opacity = String(Math.pow(fraction, 0.4));
 
-      // t1 fades out
       const inv = 1 - fraction;
       const blur1 = Math.min(8 / (inv + 0.001) - 8, 100);
       t1.style.filter = `blur(${blur1}px)`;
@@ -90,7 +80,6 @@ export default function GooeyText({
       }
     };
 
-    // Initialize
     t1.textContent = texts[0];
     t1.style.opacity = '1';
     t2.textContent = texts[1] ?? texts[0];
@@ -104,10 +93,7 @@ export default function GooeyText({
 
   return (
     <>
-      <svg
-        aria-hidden="true"
-        style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
-      >
+      <svg aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
         <defs>
           <filter id="pcs-threshold">
             <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
@@ -123,27 +109,11 @@ export default function GooeyText({
       </svg>
       <span
         className={className}
-        style={{
-          position: 'relative',
-          display: 'inline-block',
-          filter: 'url(#pcs-threshold)',
-          ...style,
-        }}
+        style={{ position: 'relative', display: 'inline-block', filter: 'url(#pcs-threshold)', ...style }}
       >
-        <span
-          ref={text1Ref}
-          aria-live="polite"
-          style={{ position: 'absolute', left: 0, top: 0, whiteSpace: 'nowrap' }}
-        />
-        <span
-          ref={text2Ref}
-          aria-hidden="true"
-          style={{ position: 'absolute', left: 0, top: 0, whiteSpace: 'nowrap' }}
-        />
-        {/* Invisible spacer sets container width to the longest text */}
-        <span aria-hidden="true" style={{ visibility: 'hidden', whiteSpace: 'nowrap' }}>
-          {longest}
-        </span>
+        <span ref={text1Ref} aria-live="polite" style={{ position: 'absolute', left: 0, top: 0, whiteSpace: 'nowrap' }} />
+        <span ref={text2Ref} aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, whiteSpace: 'nowrap' }} />
+        <span aria-hidden="true" style={{ visibility: 'hidden', whiteSpace: 'nowrap' }}>{longest}</span>
       </span>
     </>
   );

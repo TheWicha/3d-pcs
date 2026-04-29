@@ -1,19 +1,11 @@
 'use client';
 
+import { ACCENT_HEX, NAV_ITEMS } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-
-const ACCENT = '#00edc2';
-
-const NAV_ITEMS = [
-  { code: '01', label: 'O nas' },
-  { code: '02', label: 'Moduł Towarowy' },
-  { code: '03', label: 'Moduł Maklerski' },
-  { code: '04', label: 'Kontakt' },
-];
 
 export default function TopNav() {
   const { theme, toggle } = useTheme();
@@ -30,9 +22,7 @@ export default function TopNav() {
         borderBottom: '1px solid var(--border)',
       }}
     >
-      {/* ── Row 2: main bar ── */}
       <div className="flex items-center justify-between px-6 py-3.5">
-        {/* Logo */}
         <div className="flex items-center shrink-0">
           <div className="relative w-30 h-15">
             <Image
@@ -44,41 +34,27 @@ export default function TopNav() {
           </div>
         </div>
 
-        {/* Center nav */}
         <div className="hidden lg:flex items-center gap-8">
           {NAV_ITEMS.map((item, i) => (
             <a
               key={item.code}
               href="#"
-              className={`flex items-center gap-1.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[${ACCENT}]`}
+              className={`flex items-center gap-1.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[${ACCENT_HEX}]`}
               style={{
                 textDecoration: 'none',
                 color: i === 0 ? 'var(--fg)' : 'var(--fg-2)',
               }}
             >
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono, monospace)',
-                  fontSize: 11,
-                  color: 'var(--fg-3)',
-                }}
-              >
+              <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, color: 'var(--fg-3)' }}>
                 {item.code}
               </span>
-              <span
-                style={{
-                  fontFamily: 'var(--font-sans, sans-serif)',
-                  fontSize: 13,
-                  fontWeight: 500,
-                }}
-              >
+              <span style={{ fontFamily: 'var(--font-sans, sans-serif)', fontSize: 13, fontWeight: 500 }}>
                 {item.label}
               </span>
             </a>
           ))}
         </div>
 
-        {/* Right actions */}
         <div className="flex items-center gap-3">
           <button
             aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'}
@@ -122,6 +98,7 @@ export default function TopNav() {
               </motion.div>
             </motion.div>
           </button>
+
           <button
             aria-label="Zmień język"
             className="hidden sm:flex items-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
@@ -139,6 +116,7 @@ export default function TopNav() {
           >
             PL / EN
           </button>
+
           <button
             aria-label="Zaloguj się do systemu PCS"
             className="hidden sm:flex items-center gap-1.5 hover:bg-white/90 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-[#06080c] focus-visible:ring-offset-2"
@@ -158,7 +136,6 @@ export default function TopNav() {
             <ArrowRight size={13} />
           </button>
 
-          {/* Mobile hamburger */}
           <button
             className="flex lg:hidden items-center justify-center w-9 h-9 text-white/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
@@ -169,7 +146,6 @@ export default function TopNav() {
         </div>
       </div>
 
-      {/* Mobile dropdown */}
       {mobileOpen && (
         <div
           className="lg:hidden border-t border-white/8 py-4 px-6 flex flex-col gap-4"
@@ -182,22 +158,13 @@ export default function TopNav() {
               className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
               style={{ textDecoration: 'none' }}
             >
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono, monospace)',
-                  fontSize: 11,
-                  color: 'var(--fg-3)',
-                }}
-              >
+              <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, color: 'var(--fg-3)' }}>
                 {item.code}
               </span>
               <span style={{ fontSize: 14, fontWeight: 500 }}>{item.label}</span>
             </a>
           ))}
-          <div
-            className="flex items-center gap-3 pt-3"
-            style={{ borderTop: '1px solid var(--border)' }}
-          >
+          <div className="flex items-center gap-3 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
             <button
               style={{
                 fontFamily: 'var(--font-mono, monospace)',
