@@ -17,7 +17,7 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
   const o = overlay;
 
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
       {/* Video layer */}
       <Video />
 

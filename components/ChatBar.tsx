@@ -10,7 +10,6 @@ const CHIPS = [
   { code: '01', tag: 'KONTENER', label: 'Sprawdź status MSKU7834521' },
   { code: '02', tag: 'TRACKING', label: 'Gdzie jest mój kontener?' },
   { code: '03', tag: 'OPERACJE', label: 'Jak wygląda kolejka w porcie?' },
-  { code: '04', tag: 'MAKLERSKI', label: 'Dokumenty maklerskie' },
 ];
 
 const MOCK: Record<string, string> = {
@@ -20,8 +19,6 @@ const MOCK: Record<string, string> = {
     'Podaj numer kontenera (np. MSKU7834521) lub numer B/L, a sprawdzę aktualną lokalizację. Aktualnie monitoruję **3 421** jednostek w ruchu.',
   'Jak wygląda kolejka w porcie?':
     '🚛 Brama wjazdowa: **12 pojazdów** · czas oczekiwania ~25 min\n— Terminal T1: bez opóźnień ✓\n— Terminal T2: spowolnienie +45 min ⚠\n— Dane odświeżone: 28.04.2026 · 14:32',
-  'Dokumenty maklerskie':
-    'Dostępne dokumenty:\n— **SAD** (Jednolity Dokument Administracyjny)\n— **List przewozowy CMR**\n— **Świadectwo fitosanitarne**\n\nCzy chcesz pobrać dokument lub złożyć nowe zlecenie?',
 };
 
 type Msg = { role: 'user' | 'assistant'; text: string };
@@ -55,7 +52,6 @@ function Kbd({ children }: { children: ReactNode }) {
 }
 
 function MsgText({ text }: { text: string }) {
-  // Very light markdown: **bold** and newlines
   const parts = text.split(/(\*\*[^*]+\*\*|\n)/g);
   return (
     <>
@@ -83,7 +79,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
   const bottomRef = useRef<HTMLDivElement>(null);
   const cycleRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Auto-cycle only when no conversation yet
   useEffect(() => {
     if (messages.length > 0) {
       if (cycleRef.current) clearInterval(cycleRef.current);
@@ -95,7 +90,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
     };
   }, [messages.length]);
 
-  // Scroll to bottom on new messages
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, thinking]);
@@ -134,7 +128,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
       className="relative z-10 mx-auto w-full px-4 md:px-14 pb-4 mt-auto md:pt-0"
       style={{ maxWidth: 1280 }}
     >
-      {/* ── Label row ── */}
       <div
         className="flex items-center justify-between mb-3.5"
         style={{
@@ -151,7 +144,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
         </span>
       </div>
 
-      {/* ── Chips grid (hidden once chat started) ── */}
       <AnimatePresence>
         {!hasMessages && (
           <motion.div
@@ -164,7 +156,7 @@ export default function ChatBar({ onSend }: ChatBarProps) {
               className="max-sm:flex max-sm:overflow-x-auto max-sm:snap-x"
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
+                gridTemplateColumns: `repeat(${CHIPS.length}, 1fr)`,
                 border: '1px solid rgba(255,255,255,0.12)',
                 borderBottom: 'none',
               }}
@@ -219,7 +211,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
         )}
       </AnimatePresence>
 
-      {/* ── Chat thread ── */}
       <AnimatePresence>
         {hasMessages && (
           <motion.div
@@ -258,7 +249,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
                     alignItems: 'flex-start',
                   }}
                 >
-                  {/* Avatar tag */}
                   <span
                     style={{
                       fontFamily: 'var(--font-mono, monospace)',
@@ -289,7 +279,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
                 </motion.div>
               ))}
 
-              {/* Thinking indicator */}
               <AnimatePresence>
                 {thinking && (
                   <motion.div
@@ -336,7 +325,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
         )}
       </AnimatePresence>
 
-      {/* ── Console bar ── */}
       <form
         onSubmit={handleSubmit}
         className="flex items-center gap-3.5 transition-all duration-200"
@@ -412,7 +400,6 @@ export default function ChatBar({ onSend }: ChatBarProps) {
         </button>
       </form>
 
-      {/* ── Footer row ── */}
       <div
         className="flex items-center justify-between pt-2.5 flex-wrap gap-2"
         style={{

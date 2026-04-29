@@ -52,9 +52,12 @@ export default function TopNav() {
           <span className="hidden sm:inline shrink-0" style={{ opacity: 0.3 }}>
             ─── PCS ───
           </span>
-          <span className="inline shrink-0">53.42°N · 14.57°E</span>
         </div>
-        <span className="shrink-0 ml-4">{date}</span>
+        <div>
+          <span className="inline shrink-0">53.42°N · 14.57°E</span>
+          <span className="mx-4 opacity-40">|</span>
+          <span className="shrink-0 ">{date}</span>
+        </div>
       </div>
 
       {/* ── Row 2: main bar ── */}
@@ -66,7 +69,8 @@ export default function TopNav() {
             alt="Polski PCS"
             width={120}
             height={36}
-            className="h-9 w-auto"
+            className="h-9"
+            style={{ width: 'auto' }}
             priority
           />
         </div>

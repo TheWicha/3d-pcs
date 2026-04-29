@@ -1,14 +1,13 @@
 'use client';
+import { Pause, Play } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-// Modern loading overlay for video background
 function VideoLoadingOverlay({ progress }: { progress: number }) {
   return (
     <div
       className="absolute inset-0 z-10 flex items-center justify-center"
       style={{ background: '#0a0d12', transition: 'opacity 0.5s', pointerEvents: 'none' }}
     >
-      {/* Pulsing grid */}
       <div
         className="absolute inset-0"
         style={{
@@ -20,7 +19,7 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
           animation: 'video-grid-pulse 1.2s ease-in-out infinite',
         }}
       />
-      {/* Centered progress */}
+
       <div
         style={{
           position: 'relative',
@@ -51,14 +50,26 @@ export default function Video() {
   const [progress, setProgress] = useState(0);
   const [displayedProgress, setDisplayedProgress] = useState(0);
   const [showVideo, setShowVideo] = useState(false);
-  // Animate displayedProgress towards progress
+  const [paused, setPaused] = useState(false);
+
+  const togglePause = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+    setPaused(p => !p);
+  };
+
   useEffect(() => {
     if (displayedProgress === progress) return;
     let raf: number;
     const step = () => {
       setDisplayedProgress(prev => {
         if (Math.abs(progress - prev) < 0.5) return progress;
-        // Ease towards target
+
         return prev + (progress - prev) * 0.18 + (progress > prev ? 0.3 : -0.3);
       });
       raf = requestAnimationFrame(step);
@@ -67,14 +78,12 @@ export default function Video() {
     return () => cancelAnimationFrame(raf);
   }, [progress, displayedProgress]);
 
-  // Set playback rate
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.49;
     }
   }, []);
 
-  // Listen for video loading progress
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -90,7 +99,7 @@ export default function Video() {
       setTimeout(() => {
         setLoading(false);
         setShowVideo(true);
-      }, 200); // short delay for fade
+      }, 200);
     };
     video.addEventListener('progress', updateProgress);
     video.addEventListener('canplay', onCanPlay);
@@ -102,7 +111,6 @@ export default function Video() {
 
   return (
     <div className="absolute inset-0 w-full h-full">
-      {/* Video with fade-in */}
       <video
         ref={videoRef}
         autoPlay
@@ -118,8 +126,48 @@ export default function Video() {
       >
         <source src="/video/port_animation_fast.mp4" type="video/mp4" />
       </video>
-      {/* Loading overlay */}
+
       {loading && <VideoLoadingOverlay progress={displayedProgress} />}
+
+      {showVideo && (
+        <button
+          onClick={togglePause}
+          aria-label={paused ? 'Wznów wideo' : 'Zatrzymaj wideo'}
+          style={{
+            position: 'absolute',
+            bottom: 16,
+            right: 20,
+            zIndex: 900,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 5,
+            background: 'rgba(6,8,12,0.55)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            color: 'rgba(255,255,255,0.45)',
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: 9,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            padding: '5px 8px',
+            cursor: 'pointer',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            pointerEvents: 'auto',
+            transition: 'color 0.15s, border-color 0.15s',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.8)';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)';
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.45)';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.12)';
+          }}
+        >
+          {paused ? <Play size={10} /> : <Pause size={10} />}
+          {paused ? 'wznów' : 'pauza'}
+        </button>
+      )}
     </div>
   );
 }
