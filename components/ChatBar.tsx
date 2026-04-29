@@ -1,9 +1,10 @@
-'use client';
+﻿'use client';
 
 import { ACCENT, CHIPS } from '@/constants';
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Activity } from 'react';
 
 function MsgText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\n)/g);
@@ -12,7 +13,11 @@ function MsgText({ text }: { text: string }) {
       {parts.map((p, i) => {
         if (p === '\n') return <br key={i} />;
         if (p.startsWith('**') && p.endsWith('**'))
-          return <strong key={i} style={{ color: 'var(--fg)', fontWeight: 600 }}>{p.slice(2, -2)}</strong>;
+          return (
+            <strong key={i} style={{ color: 'var(--fg)', fontWeight: 600 }}>
+              {p.slice(2, -2)}
+            </strong>
+          );
         return <span key={i}>{p}</span>;
       })}
     </>
@@ -21,8 +26,17 @@ function MsgText({ text }: { text: string }) {
 
 export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
   const {
-    value, setValue, messages, thinking, focused, setFocused,
-    inputRef, bottomRef, sendMessage, hasInput, hasMessages,
+    value,
+    setValue,
+    messages,
+    thinking,
+    focused,
+    setFocused,
+    inputRef,
+    bottomRef,
+    sendMessage,
+    hasInput,
+    hasMessages,
   } = useChatMessages(onSend);
 
   return (
@@ -38,7 +52,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
       }}
     >
       <AnimatePresence>
-        {!hasMessages && (
+        <Activity mode={hasMessages ? 'hidden' : 'visible'}>
           <motion.div
             key="chips"
             initial={{ opacity: 1, height: 'auto' }}
@@ -74,11 +88,11 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
               </button>
             ))}
           </motion.div>
-        )}
+        </Activity>
       </AnimatePresence>
 
       <AnimatePresence>
-        {hasMessages && (
+        <Activity mode={hasMessages ? 'visible' : 'hidden'}>
           <motion.div
             key="thread"
             initial={{ opacity: 0, height: 0 }}
@@ -90,7 +104,10 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
               marginBottom: 16,
             }}
           >
-            <div className="flex flex-col overflow-y-auto" style={{ maxHeight: 360, padding: '16px 0' }}>
+            <div
+              className="flex flex-col overflow-y-auto"
+              style={{ maxHeight: 360, padding: '16px 0' }}
+            >
               {messages.map((m, i) => (
                 <motion.div
                   key={i}
@@ -102,7 +119,8 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                     flexDirection: m.role === 'user' ? 'row-reverse' : 'row',
                     gap: 14,
                     padding: '12px 24px',
-                    borderBottom: i < messages.length - 1 || thinking ? '1px solid var(--border-2)' : 'none',
+                    borderBottom:
+                      i < messages.length - 1 || thinking ? '1px solid var(--border-2)' : 'none',
                     alignItems: 'flex-start',
                   }}
                 >
@@ -140,14 +158,29 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                     exit={{ opacity: 0 }}
                     style={{ display: 'flex', gap: 14, padding: '12px 24px', alignItems: 'center' }}
                   >
-                    <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: ACCENT, flexShrink: 0 }}>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono, monospace)',
+                        fontSize: 11,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        color: ACCENT,
+                        flexShrink: 0,
+                      }}
+                    >
                       PCS
                     </span>
                     <span style={{ display: 'flex', gap: 5 }}>
                       {[0, 1, 2].map(dot => (
                         <motion.span
                           key={dot}
-                          style={{ width: 5, height: 5, borderRadius: '50%', background: ACCENT, display: 'inline-block' }}
+                          style={{
+                            width: 5,
+                            height: 5,
+                            borderRadius: '50%',
+                            background: ACCENT,
+                            display: 'inline-block',
+                          }}
                           animate={{ opacity: [0.3, 1, 0.3] }}
                           transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
                         />
@@ -160,17 +193,22 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
               <div ref={bottomRef} />
             </div>
           </motion.div>
-        )}
+        </Activity>
       </AnimatePresence>
 
       <form
-        onSubmit={e => { e.preventDefault(); sendMessage(value); }}
+        onSubmit={e => {
+          e.preventDefault();
+          sendMessage(value);
+        }}
         className="flex items-center gap-3 transition-all duration-200"
         style={{
           background: 'transparent',
           border: 'none',
           borderTop: focused ? `1px solid var(--accent)` : '1px solid var(--border)',
-          boxShadow: focused ? `0 0 24px color-mix(in srgb, var(--accent) 12%, transparent)` : 'none',
+          boxShadow: focused
+            ? `0 0 24px color-mix(in srgb, var(--accent) 12%, transparent)`
+            : 'none',
           padding: '16px 0 0',
         }}
       >
