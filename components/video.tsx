@@ -94,7 +94,7 @@ export default function Video() {
         setProgress(Math.min(100, (end / video.duration) * 100));
       }
     };
-    const onCanPlay = () => {
+    const onReady = () => {
       setProgress(100);
       setTimeout(() => {
         setLoading(false);
@@ -102,10 +102,14 @@ export default function Video() {
       }, 200);
     };
     video.addEventListener('progress', updateProgress);
-    video.addEventListener('canplay', onCanPlay);
+    video.addEventListener('canplaythrough', onReady);
+
+    // already ready (cached or fast connection — event fired before listener attached)
+    if (video.readyState >= 4) onReady();
+
     return () => {
       video.removeEventListener('progress', updateProgress);
-      video.removeEventListener('canplay', onCanPlay);
+      video.removeEventListener('canplaythrough', onReady);
     };
   }, []);
 
@@ -152,7 +156,6 @@ export default function Video() {
             cursor: 'pointer',
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
-            pointerEvents: 'auto',
             transition: 'color 0.15s, border-color 0.15s',
           }}
           onMouseEnter={e => {

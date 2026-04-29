@@ -21,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className={`${chivo.variable}  h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#0a0d12] text-white">{children}</body>
+    <html lang="pl" className={`${chivo.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-[#06080c] text-white">{children}</body>
     </html>
   );
 }

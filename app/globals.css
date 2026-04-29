@@ -1,34 +1,46 @@
-/* Global custom scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #232733 #181b22;
-}
-
-*::-webkit-scrollbar {
-  width: 8px;
-  background: #181b22;
-}
-*::-webkit-scrollbar-thumb {
-  background: #232733;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-*::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
-}
-*::-webkit-scrollbar-corner {
-  background: #181b22;
-}
 @import 'tailwindcss';
 
 :root {
-  --background: #06080c;
-  --foreground: #ffffff;
+  --bg:          #06080c;
+  --bg-2:        #0d1117;
+  --bg-3:        rgba(10,13,18,0.95);
+  --fg:          #ffffff;
+  --fg-2:        rgba(255,255,255,0.65);
+  --fg-3:        rgba(255,255,255,0.35);
+  --border:      rgba(255,255,255,0.12);
+  --border-2:    rgba(255,255,255,0.06);
+  --surface:     rgba(255,255,255,0.04);
+  --accent:      #00edc2;
+  --accent-dark: #00a88a;
+  --accent-fg:   #06080c;
 }
 
-button {
-  cursor: pointer;
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-accent:     var(--accent);
+  --color-accent-fg:  var(--accent-fg);
+  --font-sans:  'Chivo', Arial, sans-serif;
+  --font-mono:  var(--font-jetbrains, monospace);
 }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Chivo', Arial, sans-serif;
+}
+
+button { cursor: pointer; }
+
+/* ── Scrollbar ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--bg-2);
+}
+*::-webkit-scrollbar        { width: 8px; background: var(--bg-2); }
+*::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 6px; transition: background 0.2s; }
+*::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+*::-webkit-scrollbar-corner { background: var(--bg-2); }
 
 @font-face {
   font-family: 'Chivo';
@@ -38,48 +50,11 @@ button {
   src: url(https://fonts.gstatic.com/s/chivo/v21/va9I4kzIxd1KFrBnQeNHkQ.woff2) format('woff2');
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: #3b82f6;
-  --color-accent-dark: #1e40af;
-  --font-sans: 'Chivo', Arial, sans-serif;
-  --font-mono: var(--font-jetbrains);
-  --font-serif: var(--font-playfair);
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Chivo', Arial, sans-serif;
-}
-
 @keyframes ping-dot {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  70% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(1.6); opacity: 0;   }
+  100% { transform: scale(1.6); opacity: 0;   }
 }
-
 .animate-ping-dot {
   animation: ping-dot 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes chat-ping {
-  0% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
 }

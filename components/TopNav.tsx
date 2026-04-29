@@ -4,7 +4,7 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const ACCENT = '#3b82f6';
+const ACCENT = '#00edc2';
 
 const NAV_ITEMS = [
   { code: '01', label: 'O nas' },
@@ -32,10 +32,10 @@ export default function TopNav() {
       aria-label="Główna nawigacja"
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: 'rgba(6,8,12,0.4)',
+        background: 'color-mix(in srgb, var(--bg) 60%, transparent)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '1px solid var(--border)',
       }}
     >
       {/* ── Row 1: utility ticker — hidden on scroll ── */}
@@ -51,8 +51,8 @@ export default function TopNav() {
           fontSize: '10.5px',
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.5)',
-          borderBottom: scrolled ? 'none' : '1px solid rgba(255,255,255,0.05)',
+          color: 'var(--fg-2)',
+          borderBottom: scrolled ? 'none' : '1px solid var(--border-2)',
         }}
       >
         <div className="flex items-center gap-3 min-w-0">
@@ -94,14 +94,14 @@ export default function TopNav() {
               className={`flex items-center gap-1.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[${ACCENT}]`}
               style={{
                 textDecoration: 'none',
-                color: i === 0 ? '#fff' : 'rgba(255,255,255,0.6)',
+                color: i === 0 ? 'var(--fg)' : 'var(--fg-2)',
               }}
             >
               <span
                 style={{
                   fontFamily: 'var(--font-mono, monospace)',
                   fontSize: 11,
-                  color: 'rgba(255,255,255,0.3)',
+                  color: 'var(--fg-3)',
                 }}
               >
                 {item.code}
@@ -142,8 +142,8 @@ export default function TopNav() {
               fontFamily: 'var(--font-sans, sans-serif)',
               fontSize: 13,
               fontWeight: 600,
-              color: '#000',
-              background: '#fff',
+              color: 'var(--accent-fg)',
+              background: 'var(--accent)',
               border: 'none',
               padding: '7px 14px',
               cursor: 'pointer',
@@ -169,7 +169,7 @@ export default function TopNav() {
       {mobileOpen && (
         <div
           className="lg:hidden border-t border-white/8 py-4 px-6 flex flex-col gap-4"
-          style={{ background: 'rgba(6,8,12,0.97)' }}
+          style={{ background: 'var(--bg-3)' }}
         >
           {NAV_ITEMS.map(item => (
             <a
@@ -182,7 +182,7 @@ export default function TopNav() {
                 style={{
                   fontFamily: 'var(--font-mono, monospace)',
                   fontSize: 11,
-                  color: 'rgba(255,255,255,0.3)',
+                  color: 'var(--fg-3)',
                 }}
               >
                 {item.code}
@@ -192,13 +192,13 @@ export default function TopNav() {
           ))}
           <div
             className="flex items-center gap-3 pt-3"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+            style={{ borderTop: '1px solid var(--border)' }}
           >
             <button
               style={{
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: 12,
-                color: 'rgba(255,255,255,0.6)',
+                color: 'var(--fg-2)',
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
@@ -211,8 +211,8 @@ export default function TopNav() {
                 fontFamily: 'var(--font-sans, sans-serif)',
                 fontSize: 13,
                 fontWeight: 600,
-                color: '#000',
-                background: '#fff',
+                color: 'var(--accent-fg)',
+                background: 'var(--accent)',
                 border: 'none',
                 padding: '7px 14px',
                 cursor: 'pointer',

@@ -1,9 +1,8 @@
-﻿'use client';
+'use client';
 
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import Background from './Background';
 import ChatBar from './ChatBar';
-import HeroBody from './HeroBody';
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -12,38 +11,24 @@ export default function Hero() {
     ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.5 } } }
     : {
         hidden: { opacity: 0, y: 14 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.7, ease: 'easeOut' },
-        },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
       };
-
-  const container: Variants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.08 } },
-  };
 
   return (
     <main
-      className="relative h-dvh md:min-h-screen w-full overflow-x-hidden flex flex-col"
-      style={{ background: '#06080c' }}
+      className="relative h-dvh w-full overflow-x-hidden flex flex-col items-center justify-center"
+      style={{ background: 'var(--bg)' }}
     >
       <Background />
 
       <motion.div
-        variants={container}
         initial="hidden"
         animate="visible"
-        className="flex flex-col flex-1"
+        variants={item}
+        className="relative z-10 w-full px-4"
+        style={{ maxWidth: 760 }}
       >
-        <motion.div variants={item} className="flex-1">
-          <HeroBody />
-        </motion.div>
-
-        <motion.div variants={item}>
-          <ChatBar />
-        </motion.div>
+        <ChatBar />
       </motion.div>
     </main>
   );
