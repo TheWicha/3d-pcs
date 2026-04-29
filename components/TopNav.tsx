@@ -1,6 +1,8 @@
 'use client';
 
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
+import { motion } from 'framer-motion';
+import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -14,6 +16,7 @@ const NAV_ITEMS = [
 ];
 
 export default function TopNav() {
+  const { theme, toggle } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -32,7 +35,7 @@ export default function TopNav() {
       aria-label="Główna nawigacja"
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: 'color-mix(in srgb, var(--bg) 60%, transparent)',
+        background: 'var(--nav-bg)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         borderBottom: '1px solid var(--border)',
@@ -75,11 +78,10 @@ export default function TopNav() {
         {/* Logo */}
         <div className="flex items-center shrink-0">
           <Image
-            src="/logo.png"
+            src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
             alt="Polski PCS"
             width={120}
-            height={36}
-            className="h-9"
+            height={45}
             style={{ width: 'auto' }}
             priority
           />
@@ -122,16 +124,61 @@ export default function TopNav() {
         {/* Right actions */}
         <div className="flex items-center gap-3">
           <button
+            aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'}
+            onClick={toggle}
+            className="hidden sm:flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            style={{ background: 'transparent', border: 'none', padding: 0 }}
+          >
+            <motion.div
+              animate={{ backgroundColor: theme === 'dark' ? '#1a2030' : '#d4cfc8' }}
+              transition={{ duration: 0.3 }}
+              style={{
+                width: 44,
+                height: 24,
+                borderRadius: 12,
+                border: '1px solid var(--border)',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0 3px',
+                cursor: 'pointer',
+              }}
+            >
+              <motion.div
+                animate={{ x: theme === 'dark' ? 0 : 20 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                style={{
+                  width: 16,
+                  height: 16,
+                  borderRadius: '50%',
+                  background: 'var(--accent)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                {theme === 'dark' ? (
+                  <Moon size={9} color="var(--accent-fg)" strokeWidth={2.5} />
+                ) : (
+                  <SunMedium size={16} color="var(--accent-fg)" />
+                )}
+              </motion.div>
+            </motion.div>
+          </button>
+          <button
             aria-label="Zmień język"
-            className="hidden sm:flex items-center text-white/60 hover:text-white transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-[#06080c] focus-visible:ring-offset-2"
+            className="hidden sm:flex items-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             style={{
               fontFamily: 'var(--font-mono, monospace)',
               fontSize: 12,
+              color: 'var(--fg-2)',
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
               padding: '4px 8px',
             }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--fg)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--fg-2)')}
           >
             PL / EN
           </button>

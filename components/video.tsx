@@ -51,16 +51,35 @@ export default function Video() {
   const [displayedProgress, setDisplayedProgress] = useState(0);
   const [showVideo, setShowVideo] = useState(false);
   const [paused, setPaused] = useState(false);
+  const interactedRef = useRef(false);
+
+  const stopLoopAndFinish = () => {
+    const video = videoRef.current;
+    if (!video || interactedRef.current) return;
+    interactedRef.current = true;
+    video.loop = false;
+  };
+
+  useEffect(() => {
+    const events = ['keydown', 'mousedown', 'touchstart', 'wheel'] as const;
+    const handler = () => stopLoopAndFinish();
+    events.forEach(e => window.addEventListener(e, handler, { passive: true }));
+    return () => events.forEach(e => window.removeEventListener(e, handler));
+  }, []);
 
   const togglePause = () => {
     const video = videoRef.current;
     if (!video) return;
     if (paused) {
+      interactedRef.current = false;
+      video.loop = true;
+      video.currentTime = 0;
       video.play();
+      setPaused(false);
     } else {
       video.pause();
+      setPaused(true);
     }
-    setPaused(p => !p);
   };
 
   useEffect(() => {
@@ -104,7 +123,6 @@ export default function Video() {
     video.addEventListener('progress', updateProgress);
     video.addEventListener('canplaythrough', onReady);
 
-    // already ready (cached or fast connection — event fired before listener attached)
     if (video.readyState >= 4) onReady();
 
     return () => {
@@ -118,9 +136,13 @@ export default function Video() {
       <video
         ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
+        loop
+        onEnded={() => {
+          videoRef.current?.pause();
+          setPaused(true);
+        }}
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           filter: 'grayscale(1) contrast(1.15) brightness(0.85)',
@@ -136,6 +158,7 @@ export default function Video() {
       {showVideo && (
         <button
           onClick={togglePause}
+          onMouseDown={e => e.stopPropagation()}
           aria-label={paused ? 'Wznów wideo' : 'Zatrzymaj wideo'}
           style={{
             position: 'absolute',
@@ -154,6 +177,7 @@ export default function Video() {
             textTransform: 'uppercase',
             padding: '5px 8px',
             cursor: 'pointer',
+            pointerEvents: 'auto',
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
             transition: 'color 0.15s, border-color 0.15s',

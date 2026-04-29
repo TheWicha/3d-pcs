@@ -25,13 +25,13 @@ export default function HeroBody() {
           lineHeight: 0.9,
           letterSpacing: '6px',
           fontWeight: 400,
-          color: '#fff',
+          color: 'var(--fg)',
           margin: '0 0 32px',
         }}
       >
         Cyfryzacja
         <br />
-        <span style={{ color: 'rgba(255,255,255,0.5)' }}>polskich portów</span>
+        <span style={{ color: 'var(--fg-3)' }}>polskich portów</span>
         <br />
         morskich<span style={{ color: ACCENT }}>.</span>
       </h1>
@@ -42,7 +42,7 @@ export default function HeroBody() {
           fontSize: 'clamp(13px, 1.4vw, 16px)',
           lineHeight: 1.6,
           letterSpacing: '0.06em',
-          color: 'rgba(255,255,255,0.5)',
+          color: 'var(--fg-2)',
           maxWidth: 480,
           margin: 0,
         }}
