@@ -2,7 +2,7 @@
 
 import { ArrowRight, Menu, X } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ACCENT = '#3b82f6';
 
@@ -15,6 +15,13 @@ const NAV_ITEMS = [
 
 export default function TopNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const date = new Date()
     .toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -23,7 +30,7 @@ export default function TopNav() {
   return (
     <nav
       aria-label="Główna nawigacja"
-      className="sticky top-0 z-50"
+      className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: 'rgba(6,8,12,0.4)',
         backdropFilter: 'blur(24px)',
@@ -31,18 +38,21 @@ export default function TopNav() {
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
     >
-      {/* ── Row 1: utility ticker ── */}
+      {/* ── Row 1: utility ticker — hidden on scroll ── */}
       <div
         className="hidden md:flex items-center justify-between px-6 overflow-hidden"
         style={{
-          paddingTop: 8,
-          paddingBottom: 8,
+          paddingTop: scrolled ? 0 : 8,
+          paddingBottom: scrolled ? 0 : 8,
+          maxHeight: scrolled ? 0 : 40,
+          opacity: scrolled ? 0 : 1,
+          transition: 'max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease',
           fontFamily: 'var(--font-mono, monospace)',
           fontSize: '10.5px',
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.5)',
-          borderBottom: '1px solid rgba(255,255,255,0.05)',
+          borderBottom: scrolled ? 'none' : '1px solid rgba(255,255,255,0.05)',
         }}
       >
         <div className="flex items-center gap-3 min-w-0">
@@ -56,7 +66,7 @@ export default function TopNav() {
         <div>
           <span className="inline shrink-0">53.42°N · 14.57°E</span>
           <span className="mx-4 opacity-40">|</span>
-          <span className="shrink-0 ">{date}</span>
+          <span className="shrink-0">{date}</span>
         </div>
       </div>
 

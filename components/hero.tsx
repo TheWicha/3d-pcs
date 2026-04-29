@@ -4,7 +4,6 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import Background from './Background';
 import ChatBar from './ChatBar';
 import HeroBody from './HeroBody';
-import TopNav from './TopNav';
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -38,10 +37,6 @@ export default function Hero() {
         animate="visible"
         className="flex flex-col flex-1"
       >
-        <motion.div variants={item}>
-          <TopNav />
-        </motion.div>
-
         <motion.div variants={item} className="flex-1">
           <HeroBody />
         </motion.div>

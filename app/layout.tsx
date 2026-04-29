@@ -11,9 +11,8 @@ const chivo = Aldrich({
 });
 
 export const metadata: Metadata = {
-  title: 'PCS — Port Community System',
-  description:
-    'Asystent AI dla całego portu. Sprawdź status kontenera, zapytaj o operacje portowe, dokumenty maklerskie.',
+  title: 'Polski PCS',
+  description: ' | digitalizacja usług portowych',
 };
 
 export default function RootLayout({

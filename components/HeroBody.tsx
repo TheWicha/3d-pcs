@@ -4,7 +4,7 @@ export default function HeroBody() {
   const date = new Date();
   const year = date.getFullYear();
   return (
-    <div className="relative z-10 pt-4 md:pt-31 px-14 max-xl:px-6 max-md:px-4">
+    <div className="relative z-10 pt-24 md:pt-52 px-14 max-xl:px-6 max-md:px-4">
       <div>
         <div>
           <h1
