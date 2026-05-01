@@ -56,7 +56,7 @@ export function useVideoPlayer() {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.49;
+      videoRef.current.playbackRate = 1;
     }
   }, []);
 

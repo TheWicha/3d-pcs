@@ -1,4 +1,4 @@
-import type { Chip, NavItem } from '@/types';
+import type { Benefit, Chip, Module, NavItem, NewsItem, PcsFeature, PcsValue, Port, Stat } from '@/types';
 
 export const ACCENT = 'var(--accent)';
 export const ACCENT_HEX = '#00edc2';
@@ -26,4 +26,151 @@ export const NAV_ITEMS: NavItem[] = [
   { code: '02', label: 'Moduł Towarowy' },
   { code: '03', label: 'Moduł Maklerski' },
   { code: '04', label: 'Kontakt' },
+];
+
+export const PARTNERS: string[] = [
+  'Partner 1',
+  'Partner 2',
+  'Partner 3',
+  'Partner 4',
+  'Partner 5',
+];
+
+export const MODULES: Module[] = [
+  {
+    title: 'Moduł Towarowy',
+    items: ['Eksport Towarów', 'Instrukcja T2L', 'Import Towarów'],
+  },
+  {
+    title: 'Moduł Maklerski',
+    items: [],
+  },
+];
+
+export const PCS_VALUES: PcsValue[] = [
+  { title: 'Digitalizacja', description: 'Elektroniczna forma procesów portowych' },
+  { title: 'Bezpieczeństwo', description: 'Sprawny i bezpieczny łańcuch dostaw' },
+  { title: 'Ochrona środowiska', description: 'Redukcja emisji CO₂ przez cyfryzację' },
+  { title: 'Efektywność', description: 'Optymalizacja procesów transportowych' },
+];
+
+export const PCS_FEATURES: PcsFeature[] = [
+  {
+    title: 'Identyfikacja procesów',
+    description:
+      'Głównym zadaniem Systemu PCS jest identyfikacja i automatyzowanie podstawowych procesów biznesowych w portach i otoczeniu portowym.',
+  },
+  {
+    title: 'Zarządzanie informacją',
+    description:
+      'Zarządzanie informacjami przy imporcie i eksporcie towarów oraz wspomaganie wymiany dokumentów i informacji celnych.',
+  },
+  {
+    title: 'Bezpieczna wymiana danych',
+    description:
+      'Jeden, zaufany kanał wymiany danych pomiędzy wszystkimi uczestnikami społeczności portowej.',
+  },
+  {
+    title: 'Efektywność operacji',
+    description:
+      'Skrócenie czasu obsługi dokumentów i odpraw — szybsze decyzje i mniej przestojów w łańcuchu dostaw.',
+  },
+];
+
+export const BENEFITS: Benefit[] = [
+  { code: '01', title: 'Zmniejszenie opóźnień', subtitle: 'w ruchu ładunkowym' },
+  { code: '02', title: 'Zwiększenie efektywności', subtitle: 'w procesach biznesowych portu' },
+  { code: '03', title: 'Płynny przepływ danych', subtitle: 'elektronicznych pomiędzy partnerami' },
+  { code: '04', title: 'Zwiększenie jakości', subtitle: 'udostępnionych informacji' },
+  { code: '05', title: 'Redukcja emisji CO₂', subtitle: 'przez usprawnienie procesów logistycznych' },
+  { code: '06', title: 'Poprawa koordynacji', subtitle: 'wykorzystania infrastruktury portowej' },
+];
+
+export const NEWS: NewsItem[] = [
+  {
+    date: '30 sty 2026',
+    title: 'Zmiany organizacyjne w Zachodniopomorskim Urzędzie Celno-Skarbowym w Szczecinie',
+    excerpt:
+      'Z dniem 1 lutego 2026 będzie funkcjonować jedno Centrum Urzędowego Dokonywania Odpraw — CUDO Oddział Celny w Szczecinie.',
+  },
+  {
+    date: '26 lis 2025',
+    title: 'Zgłaszanie towarów',
+    excerpt:
+      'W związku ze zmianą systemu operacyjnego w BCT Gdynia zmianie uległa numeracja deklaracji magazynowych.',
+  },
+  {
+    date: '02 wrz 2025',
+    title: 'Zaproszenie do złożenia ofert',
+    excerpt:
+      'Zarząd Spółki zaprasza do złożenia oferty w postępowaniu na wybór firmy audytorskiej do badania rocznych sprawozdań finansowych.',
+  },
+];
+
+export const USER_TYPES: string[] = [
+  'Port morski',
+  'Terminal morski',
+  'Armator',
+  'Operator portowy',
+  'Przewoźnik drogowy',
+  'Przewoźnik kolejowy',
+  'Agencja celna',
+  'Administracja państwowa',
+];
+
+export const PORTS: Port[] = [
+  {
+    name: 'Port Szczecin-Świnoujście',
+    description:
+      'Port morski i rzeczny, usytuowany nad Odrą. Razem z portem w Świnoujściu tworzy największy kompleks portowy na południowym Bałtyku.',
+  },
+  {
+    name: 'Port Gdańsk',
+    description:
+      'Port morski położony w Gdańsku nad Zatoką Gdańską na Martwej Wiśle. Jeden z największych bałtyckich portów.',
+  },
+  {
+    name: 'Port Gdynia',
+    description:
+      'Port morski na Pobrzeżu Kaszubskim. Trzeci co do wielkości port morski w Polsce, specjalizujący się w przeładunkach kontenerów.',
+  },
+];
+
+export const STATS: Stat[] = [
+  {
+    label: 'Obsłużone',
+    sublabel: 'kontenery',
+    value: '2.4M+',
+    description: 'Kontenerów obsłużonych rocznie w systemie PCS dla polskich portów',
+  },
+  {
+    label: 'Skrócenie',
+    sublabel: 'czasu odpraw',
+    value: '42%',
+    description: 'Mniej opóźnień dzięki zautomatyzowanej wymianie danych',
+  },
+  {
+    label: 'Aktywni',
+    sublabel: 'użytkownicy',
+    value: '850+',
+    description: 'Firm i instytucji korzysta z platformy Polskiego PCS',
+  },
+  {
+    label: 'Dostępność',
+    sublabel: 'systemu',
+    value: '99.9%',
+    description: 'Gwarantowany SLA uptime przez 24/7/365 obsługę procesów portowych',
+  },
+  {
+    label: 'Redukcja',
+    sublabel: 'emisji CO₂',
+    value: '18k t',
+    description: 'Ton CO₂ zaoszczędzonych rocznie dzięki cyfryzacji dokumentów',
+  },
+  {
+    label: 'Zintegrowane',
+    sublabel: 'systemy',
+    value: '25+',
+    description: 'Połączeń z systemami celnymi, terminalowymi i administracyjnymi',
+  },
 ];

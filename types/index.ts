@@ -22,3 +22,42 @@ export interface GooeyTextProps {
 export interface BackgroundProps {
   overlay?: number;
 }
+
+export interface Module {
+  title: string;
+  items: string[];
+}
+
+export interface Benefit {
+  code: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface NewsItem {
+  date: string;
+  title: string;
+  excerpt: string;
+}
+
+export interface Port {
+  name: string;
+  description: string;
+}
+
+export interface Stat {
+  label: string;
+  sublabel: string;
+  value: string;
+  description: string;
+}
+
+export interface PcsFeature {
+  title: string;
+  description: string;
+}
+
+export interface PcsValue {
+  title: string;
+  description: string;
+}

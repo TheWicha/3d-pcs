@@ -13,7 +13,11 @@ export function useChatMessages(onSend?: (v: string) => void) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const el = bottomRef.current;
+    if (!el) return;
+    const container = el.parentElement;
+    if (!container) return;
+    container.scrollTop = container.scrollHeight;
   }, [messages, thinking]);
 
   const sendMessage = (text: string) => {
