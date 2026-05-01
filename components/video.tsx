@@ -45,7 +45,8 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
 }
 
 export default function Video() {
-  const { videoRef, loading, displayedProgress, showVideo, paused, togglePause, onEnded } = useVideoPlayer();
+  const { videoRef, loading, displayedProgress, showVideo, paused, togglePause, onEnded } =
+    useVideoPlayer();
 
   return (
     <div className="absolute inset-0 w-full h-full">
@@ -63,7 +64,7 @@ export default function Video() {
           transition: 'opacity 0.7s cubic-bezier(0.4,0,0.2,1)',
         }}
       >
-        <source src="/video/port_animation_fast.mp4" type="video/mp4" />
+        <source src="/video/port_507_smooth.mp4" type="video/mp4" />
       </video>
 
       {loading && <VideoLoadingOverlay progress={displayedProgress} />}
