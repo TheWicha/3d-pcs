@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  'inline-flex items-center gap-2 font-sans text-sm font-semibold transition-[opacity,border-color,color] duration-150 cursor-pointer border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 min-h-11 px-5';
+  'inline-flex items-center gap-2 font-sans text-sm font-semibold transition-[opacity,border-color,color] duration-150 cursor-pointer border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--fg) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg) min-h-11 px-5';
 
 const variants: Record<Variant, string> = {
   primary: 'bg-accent text-accent-fg hover:opacity-85',

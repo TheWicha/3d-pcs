@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from '@/components/ThemeProvider';
+import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import { cn } from '@/utils/cn';
 import Image from 'next/image';
@@ -31,37 +32,42 @@ export default function PartnersSection() {
   }, []);
 
   return (
-    <SectionWrapper aria-labelledby="partners-heading" className="py-14">
+    <SectionWrapper aria-labelledby="partners-heading" className="py-18">
       <SectionLabel code="01" label="Partnerzy" />
 
-      <h2
-        id="partners-heading"
-        className="font-michroma font-normal text-[14px] tracking-[0.06em] uppercase text-(--fg-3) mt-0 mb-10"
-      >
-        Współpracujemy z wiodącymi instytucjami
-      </h2>
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 lg:mb-12">
+        <SectionHeading id="partners-heading" className="max-w-170">
+          Współpracujemy z wiodącymi
+          <br />
+          instytucjami
+        </SectionHeading>
+      </div>
 
-      <div className="grid grid-cols-5 border-t border-l border-(--border)">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
         {PARTNERS.map((p, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
             aria-label={p.alt}
             className={cn(
-              'relative flex items-center justify-center px-5 py-6 border-r border-b border-(--border) bg-transparent transition-[opacity,background] duration-[400ms,200ms] min-h-20 hover:bg-surface',
-              active === i ? 'opacity-100' : 'opacity-40'
+              'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] px-4 py-6 sm:px-6 sm:py-7 min-h-32 sm:min-h-36 flex items-center justify-center transition-[transform,border-color,opacity] duration-300',
+              'hover:-translate-y-0.5 hover:border-accent',
+              active === i && ' border-accent'
             )}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = active === i ? '1' : '0.4')}
           >
-            {active === i && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent" />}
+            <span
+              className={cn(
+                'absolute top-0 h-1.5 bg-accent transition-[width,left,right,opacity] duration-300',
+                active === i ? 'left-0 right-0 w-auto ' : 'right-0 w-14 opacity-70'
+              )}
+            />
             <Image
               src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
               alt={p.alt}
-              width={140}
-              height={48}
+              width={180}
+              height={64}
               className={cn(
-                'w-auto h-10 max-w-33.5 object-contain',
+                'w-auto h-10 sm:h-12 lg:h-14 max-w-36 sm:max-w-42 lg:max-w-48 object-contain',
                 p.darkLogo && 'logo-dark-invert'
               )}
             />

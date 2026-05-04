@@ -4,7 +4,6 @@ import { CHIPS } from '@/constants';
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Activity } from 'react';
 
 function MsgText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\n)/g);
@@ -42,7 +41,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
   return (
     <div className="w-full max-w-180 bg-(--bg-3) backdrop-blur-xl border border-(--border) p-6">
       <AnimatePresence>
-        <Activity mode={hasMessages ? 'hidden' : 'visible'}>
+        {!hasMessages && (
           <motion.div
             key="chips"
             initial={{ opacity: 1, height: 'auto' }}
@@ -60,11 +59,11 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
               </button>
             ))}
           </motion.div>
-        </Activity>
+        )}
       </AnimatePresence>
 
       <AnimatePresence>
-        <Activity mode={hasMessages ? 'visible' : 'hidden'}>
+        {hasMessages && (
           <motion.div
             key="thread"
             initial={{ opacity: 0, height: 0 }}
@@ -122,7 +121,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
               <div ref={bottomRef} />
             </div>
           </motion.div>
-        </Activity>
+        )}
       </AnimatePresence>
 
       <form
@@ -139,7 +138,6 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           placeholder="Wpisz numer kontenera lub zadaj pytanie…"
-          aria-label="Wpisz numer kontenera lub zadaj pytanie…"
           className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
           maxLength={240}
         />
