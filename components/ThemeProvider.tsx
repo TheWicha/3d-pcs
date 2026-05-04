@@ -1,11 +1,11 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
-  theme: 'dark',
+  theme: 'light',
   toggle: () => {},
 });
 
@@ -13,21 +13,19 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark');
-
-  useEffect(() => {
-    const stored = localStorage.getItem('pcs-theme') as Theme | null;
-    const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    const initial = stored ?? preferred;
-    setTheme(initial);
-    document.documentElement.setAttribute('data-theme', initial);
-  }, []);
+export function ThemeProvider({
+  children,
+  initialTheme,
+}: {
+  children: React.ReactNode;
+  initialTheme: Theme;
+}) {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
 
   const toggle = () => {
     setTheme(prev => {
       const next = prev === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('pcs-theme', next);
+      document.cookie = `pcs-theme=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
       document.documentElement.setAttribute('data-theme', next);
       return next;
     });

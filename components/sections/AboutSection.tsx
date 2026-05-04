@@ -1,11 +1,10 @@
 'use client';
 
-import { cn } from '@/utils/cn';
-import { PCS_FEATURES, PCS_VALUES } from '@/constants';
 import AccentDot from '@/components/ui/AccentDot';
 import Button from '@/components/ui/Button';
-import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SectionWrapper from '@/components/ui/SectionWrapper';
+import { PCS_VALUES } from '@/constants';
 import { ArrowRight } from 'lucide-react';
 import SectionLabel from './SectionLabel';
 
@@ -43,23 +42,6 @@ export default function AboutSection() {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-(--border)">
-        {PCS_FEATURES.map((feat, i) => (
-          <div
-            key={i}
-            className={cn('p-8', i < PCS_FEATURES.length - 1 && 'border-r border-(--border)')}
-          >
-            <span className="font-mono text-[12px] tracking-[0.12em] text-accent block mb-3">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,20px)] tracking-[0.04em] text-foreground mt-0 mb-2.5 uppercase">
-              {feat.title}
-            </h3>
-            <p className="text-[16px] leading-[1.6] text-(--fg-2) m-0">{feat.description}</p>
-          </div>
-        ))}
       </div>
     </SectionWrapper>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 
 import './globals.css';
 
@@ -16,28 +17,19 @@ export const metadata: Metadata = {
   description: ' | digitalizacja usług portowych',
 };
 
-const themeScript = `
-(function(){
-  try {
-    var stored = localStorage.getItem('pcs-theme');
-    var preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', stored || preferred);
-  } catch(e){}
-})();
-`;
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const theme = (cookieStore.get('pcs-theme')?.value ?? 'light') as 'light' | 'dark';
+
   return (
-    <html lang="pl" className={`${roboto.variable} h-full antialiased`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="pl" data-theme={theme} className={`${roboto.variable} h-full antialiased`} suppressHydrationWarning>
+      <head />
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
       </body>
     </html>
   );
