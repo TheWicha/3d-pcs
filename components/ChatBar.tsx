@@ -2,6 +2,7 @@
 
 import { CHIPS } from '@/constants';
 import { useChatMessages } from '@/hooks/useChatMessages';
+import { cn } from '@/utils/cn';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
@@ -78,15 +79,25 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.22 }}
-                  className={`flex gap-3.5 px-6 py-3 items-start ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'} ${i < messages.length - 1 || thinking ? 'border-b border-(--border-2)' : ''}`}
+                  className={cn(
+                    'flex gap-3.5 px-6 py-3 items-start',
+                    m.role === 'user' ? 'flex-row-reverse' : 'flex-row',
+                    (i < messages.length - 1 || thinking) && 'border-b border-(--border-2)'
+                  )}
                 >
                   <span
-                    className={`font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5 ${m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'}`}
+                    className={cn(
+                      'font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5',
+                      m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
+                    )}
                   >
                     {m.role === 'user' ? 'TY' : 'PCS'}
                   </span>
                   <span
-                    className={`font-sans text-base leading-[1.6] ${m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'}`}
+                    className={cn(
+                      'font-sans text-base leading-[1.6]',
+                      m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
+                    )}
                   >
                     <MsgText text={m.text} />
                   </span>
@@ -129,7 +140,12 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           e.preventDefault();
           sendMessage(value);
         }}
-        className={`flex items-center gap-3 transition-all duration-200 bg-transparent border-0 pt-4 ${focused ? 'border-t border-accent shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_12%,transparent)]' : 'border-t border-(--border)'}`}
+        className={cn(
+          'flex items-center gap-3 transition-all duration-200 bg-transparent border-0 pt-4',
+          focused
+            ? 'border-t border-accent shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_12%,transparent)]'
+            : 'border-t border-(--border)'
+        )}
       >
         <input
           ref={inputRef}
@@ -145,7 +161,12 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           type="submit"
           aria-label="Wyślij"
           disabled={thinking}
-          className={`flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none ${hasInput && !thinking ? 'cursor-pointer' : 'cursor-default'} ${hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)'} ${thinking ? 'opacity-50' : 'opacity-100'}`}
+          className={cn(
+            'flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none',
+            hasInput && !thinking ? 'cursor-pointer' : 'cursor-default',
+            hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)',
+            thinking ? 'opacity-50' : 'opacity-100'
+          )}
         >
           <span>Wyślij</span>
           <ArrowRight size={16} />

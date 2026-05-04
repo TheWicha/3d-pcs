@@ -1,6 +1,5 @@
-import { cn } from '@/utils/cn';
-import { ACCENT } from '@/constants';
 import type { Msg } from '@/types';
+import { cn } from '@/utils/cn';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { RefObject as ReactRefObject } from 'react';
 import { MsgText } from './MsgText';
@@ -27,12 +26,26 @@ export function ChatThread({ messages, thinking, bottomRef }: ChatThreadProps) {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22 }}
-            className={`flex gap-3.5 px-6 py-3 items-start ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'} ${i < messages.length - 1 || thinking ? 'border-b border-(--border-2)' : ''}`}
+            className={cn(
+              'flex gap-3.5 px-6 py-3 items-start',
+              m.role === 'user' ? 'flex-row-reverse' : 'flex-row',
+              (i < messages.length - 1 || thinking) && 'border-b border-(--border-2)'
+            )}
           >
-            <span className={`font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5 ${m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'}`}>
+            <span
+              className={cn(
+                'font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5',
+                m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
+              )}
+            >
               {m.role === 'user' ? 'TY' : 'PCS'}
             </span>
-            <span className={`font-sans text-base leading-[1.6] ${m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'}`}>
+            <span
+              className={cn(
+                'font-sans text-base leading-[1.6]',
+                m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
+              )}
+            >
               <MsgText text={m.text} />
             </span>
           </motion.div>

@@ -1,3 +1,4 @@
+import { cn } from '@/utils/cn';
 import { ArrowRight } from 'lucide-react';
 import type { RefObject as ReactRefObject } from 'react';
 
@@ -30,7 +31,11 @@ export function ChatInput({
         e.preventDefault();
         onSubmit();
       }}
-      className={`flex items-center gap-3 transition-all duration-200 bg-transparent border-0 pt-4 ${focused ? 'border-t border-accent shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_12%,transparent)]' : 'border-t border-(--border)'}`}
+      className={cn(
+        'flex items-center gap-3 transition-all duration-200 bg-transparent border-0 pt-4 border-t border-(--border)',
+        focused &&
+          'border-t border-accent shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_12%,transparent)]'
+      )}
     >
       <input
         ref={inputRef}
@@ -46,7 +51,12 @@ export function ChatInput({
         type="submit"
         aria-label="Wyślij"
         disabled={thinking}
-        className={`flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none ${hasInput && !thinking ? 'cursor-pointer' : 'cursor-default'} ${hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)'} ${thinking ? 'opacity-50' : 'opacity-100'}`}
+        className={cn(
+          'flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none',
+          hasInput && !thinking ? 'cursor-pointer' : 'cursor-default',
+          hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)',
+          thinking ? 'opacity-50' : 'opacity-100'
+        )}
       >
         <span>Wyślij</span>
         <ArrowRight size={16} />
