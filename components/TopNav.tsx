@@ -1,7 +1,8 @@
 'use client';
 
-import { ACCENT_HEX, NAV_ITEMS } from '@/constants';
+import { cn } from '@/utils/cn';
 import { useTheme } from '@/components/ThemeProvider';
+import { NAV_ITEMS } from '@/constants';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
 import Image from 'next/image';
@@ -14,20 +15,14 @@ export default function TopNav() {
   return (
     <nav
       aria-label="Główna nawigacja"
-      className="fixed top-0 left-0 right-0 z-50"
-      style={{
-        background: 'var(--nav-bg)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderBottom: '1px solid var(--border)',
-      }}
+      className="fixed top-0 left-0 right-0 z-50 border-b border-(--border) bg-(--nav-bg) backdrop-blur-xl"
     >
       <div className="flex items-center justify-between px-6 py-3.5">
         <div className="flex items-center shrink-0">
           <div className="relative w-30 h-15">
             <Image
               src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
-              alt="Poski PCS"
+              alt="Polski PCS"
               fill
               priority
             />
@@ -38,19 +33,11 @@ export default function TopNav() {
           {NAV_ITEMS.map((item, i) => (
             <a
               key={item.code}
-              href="#"
-              className={`flex items-center gap-1.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[${ACCENT_HEX}]`}
-              style={{
-                textDecoration: 'none',
-                color: i === 0 ? 'var(--fg)' : 'var(--fg-2)',
-              }}
+              href={item.href}
+              className={cn('flex items-center gap-1.5 no-underline transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2', i === 0 ? 'text-foreground' : 'text-(--fg-2)')}
             >
-              <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, color: 'var(--fg-3)' }}>
-                {item.code}
-              </span>
-              <span style={{ fontFamily: 'var(--font-sans, sans-serif)', fontSize: 13, fontWeight: 500 }}>
-                {item.label}
-              </span>
+              <span className="font-mono text-[12px] text-(--fg-3)">{item.code}</span>
+              <span className="text-[14px] font-medium">{item.label}</span>
             </a>
           ))}
         </div>
@@ -59,36 +46,17 @@ export default function TopNav() {
           <button
             aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'}
             onClick={toggle}
-            className="hidden sm:flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            style={{ background: 'transparent', border: 'none', padding: 0 }}
+            className="hidden sm:flex items-center bg-transparent border-0 p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             <motion.div
               animate={{ backgroundColor: theme === 'dark' ? '#1a2030' : '#d4cfc8' }}
               transition={{ duration: 0.3 }}
-              style={{
-                width: 44,
-                height: 24,
-                borderRadius: 12,
-                border: '1px solid var(--border)',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 3px',
-                cursor: 'pointer',
-              }}
+              className="w-11 h-6 rounded-xl border border-(--border) flex items-center px-0.75 cursor-pointer"
             >
               <motion.div
                 animate={{ x: theme === 'dark' ? 0 : 20 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: '50%',
-                  background: 'var(--accent)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
+                className="w-4 h-4 rounded-full bg-accent flex items-center justify-center shrink-0"
               >
                 {theme === 'dark' ? (
                   <Moon size={9} color="var(--accent-fg)" strokeWidth={2.5} />
@@ -101,45 +69,23 @@ export default function TopNav() {
 
           <button
             aria-label="Zmień język"
-            className="hidden sm:flex items-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            style={{
-              fontFamily: 'var(--font-mono, monospace)',
-              fontSize: 12,
-              color: 'var(--fg-2)',
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              padding: '4px 8px',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--fg)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--fg-2)')}
+            className="hidden sm:flex items-center font-mono text-[12px] text-(--fg-2) bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             PL / EN
           </button>
 
           <button
             aria-label="Zaloguj się do systemu PCS"
-            className="hidden sm:flex items-center gap-1.5 hover:bg-white/90 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-[#06080c] focus-visible:ring-offset-2"
-            style={{
-              fontFamily: 'var(--font-sans, sans-serif)',
-              fontSize: 13,
-              fontWeight: 600,
-              color: 'var(--accent-fg)',
-              background: 'var(--accent)',
-              border: 'none',
-              padding: '7px 14px',
-              cursor: 'pointer',
-              borderRadius: 0,
-            }}
+            className="hidden sm:flex items-center gap-1.5 text-[13px] font-semibold text-accent-fg bg-accent border-0 px-3.5 py-1.75 transition-opacity duration-150 hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Zaloguj się
             <ArrowRight size={13} />
           </button>
 
           <button
-            className="flex lg:hidden items-center justify-center w-9 h-9 text-white/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
             onClick={() => setMobileOpen(v => !v)}
+            className="flex lg:hidden items-center justify-center w-9 h-9 text-(--fg-2) transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -147,49 +93,22 @@ export default function TopNav() {
       </div>
 
       {mobileOpen && (
-        <div
-          className="lg:hidden border-t border-white/8 py-4 px-6 flex flex-col gap-4"
-          style={{ background: 'var(--bg-3)' }}
-        >
+        <div className="lg:hidden py-4 px-6 flex flex-col gap-4 border-t border-(--border) bg-(--bg-3)">
           {NAV_ITEMS.map(item => (
             <a
               key={item.code}
-              href="#"
-              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-              style={{ textDecoration: 'none' }}
+              href={item.href}
+              className="flex items-center gap-2 no-underline text-(--fg-2) transition-colors duration-150 hover:text-foreground"
             >
-              <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 11, color: 'var(--fg-3)' }}>
-                {item.code}
-              </span>
-              <span style={{ fontSize: 14, fontWeight: 500 }}>{item.label}</span>
+              <span className="font-mono text-[12px] text-(--fg-3)">{item.code}</span>
+              <span className="text-[14px] font-medium">{item.label}</span>
             </a>
           ))}
-          <div className="flex items-center gap-3 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
-            <button
-              style={{
-                fontFamily: 'var(--font-mono, monospace)',
-                fontSize: 12,
-                color: 'var(--fg-2)',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-              }}
-            >
+          <div className="flex items-center gap-3 pt-3 border-t border-(--border)">
+            <button className="font-mono text-[12px] text-(--fg-2) bg-transparent border-0">
               PL / EN
             </button>
-            <button
-              style={{
-                fontFamily: 'var(--font-sans, sans-serif)',
-                fontSize: 13,
-                fontWeight: 600,
-                color: 'var(--accent-fg)',
-                background: 'var(--accent)',
-                border: 'none',
-                padding: '7px 14px',
-                cursor: 'pointer',
-                borderRadius: 0,
-              }}
-            >
+            <button className="text-[13px] font-semibold text-accent-fg bg-accent border-0 px-3.5 py-1.75">
               Zaloguj się →
             </button>
           </div>

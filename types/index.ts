@@ -5,6 +5,7 @@ export type Msg = { role: 'user' | 'assistant'; text: string };
 export interface NavItem {
   code: string;
   label: string;
+  href: string;
 }
 
 export interface Chip {
@@ -58,6 +59,11 @@ export interface PcsFeature {
 }
 
 export interface PcsValue {
+  title: string;
+  description: string;
+}
+
+export interface UserType {
   title: string;
   description: string;
 }

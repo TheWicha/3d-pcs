@@ -8,7 +8,7 @@ export function MsgText({ text }: MsgTextProps) {
         if (p === '\n') return <br key={i} />;
         if (p.startsWith('**') && p.endsWith('**'))
           return (
-            <strong key={i} style={{ color: 'var(--fg)', fontWeight: 600 }}>
+            <strong key={i} className="text-foreground font-semibold">
               {p.slice(2, -2)}
             </strong>
           );

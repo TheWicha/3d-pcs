@@ -1,3 +1,4 @@
+import { cn } from '@/utils/cn';
 import { ACCENT } from '@/constants';
 import type { Msg } from '@/types';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -17,50 +18,21 @@ export function ChatThread({ messages, thinking, bottomRef }: ChatThreadProps) {
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: 'auto' }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      style={{
-        overflow: 'hidden',
-        borderBottom: '1px solid var(--border)',
-        marginBottom: 16,
-      }}
+      className="overflow-hidden border-b border-(--border) mb-4"
     >
-      <div className="flex flex-col overflow-y-auto" style={{ maxHeight: 360, padding: '16px 0' }}>
+      <div className="flex flex-col overflow-y-auto max-h-90 py-4">
         {messages.map((m, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22 }}
-            style={{
-              display: 'flex',
-              flexDirection: m.role === 'user' ? 'row-reverse' : 'row',
-              gap: 14,
-              padding: '12px 24px',
-              borderBottom:
-                i < messages.length - 1 || thinking ? '1px solid var(--border-2)' : 'none',
-              alignItems: 'flex-start',
-            }}
+            className={`flex gap-3.5 px-6 py-3 items-start ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'} ${i < messages.length - 1 || thinking ? 'border-b border-(--border-2)' : ''}`}
           >
-            <span
-              style={{
-                fontFamily: 'var(--font-mono, monospace)',
-                fontSize: 11,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                flexShrink: 0,
-                marginTop: 2,
-                color: m.role === 'user' ? 'var(--fg-3)' : ACCENT,
-              }}
-            >
+            <span className={`font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5 ${m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'}`}>
               {m.role === 'user' ? 'TY' : 'PCS'}
             </span>
-            <span
-              style={{
-                fontFamily: 'var(--font-sans, sans-serif)',
-                fontSize: 16,
-                lineHeight: 1.6,
-                color: m.role === 'user' ? 'var(--fg)' : 'var(--fg-2)',
-              }}
-            >
+            <span className={`font-sans text-base leading-[1.6] ${m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'}`}>
               <MsgText text={m.text} />
             </span>
           </motion.div>
@@ -71,31 +43,16 @@ export function ChatThread({ messages, thinking, bottomRef }: ChatThreadProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ display: 'flex', gap: 14, padding: '12px 24px', alignItems: 'center' }}
+              className="flex gap-3.5 px-6 py-3 items-center"
             >
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono, monospace)',
-                  fontSize: 11,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: ACCENT,
-                  flexShrink: 0,
-                }}
-              >
+              <span className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0">
                 PCS
               </span>
-              <span style={{ display: 'flex', gap: 5 }}>
+              <span className="flex gap-1.25">
                 {[0, 1, 2].map(dot => (
                   <motion.span
                     key={dot}
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: '50%',
-                      background: ACCENT,
-                      display: 'inline-block',
-                    }}
+                    className="w-1.25 h-1.25 rounded-full bg-accent inline-block"
                     animate={{ opacity: [0.3, 1, 0.3] }}
                     transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
                   />

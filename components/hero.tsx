@@ -14,45 +14,20 @@ export default function Hero() {
       };
 
   return (
-    <main
-      className="relative h-dvh w-full overflow-x-hidden flex flex-col items-center justify-center"
-      style={{ background: 'var(--bg)' }}
-    >
+    <main className="relative h-dvh w-full overflow-x-hidden flex flex-col items-center justify-center bg-background">
       <Background />
 
       <motion.div
         initial="hidden"
         animate="visible"
         variants={item}
-        className="relative z-10 w-full px-4 flex flex-col items-center"
-        style={{ maxWidth: 760 }}
+        className="relative z-10 w-full px-4 flex flex-col items-center max-w-190"
       >
-        <div
-          className="w-full mb-5"
-          style={{ maxWidth: 720 }}
-        >
-          <h2
-            style={{
-              fontFamily: 'var(--font-michroma, serif)',
-              fontSize: 'clamp(18px, 2.4vw, 26px)',
-              fontWeight: 400,
-              letterSpacing: '0.04em',
-              color: '#ffffff',
-              margin: '0 0 8px',
-              textTransform: 'uppercase',
-            }}
-          >
+        <div className="w-full mb-5 max-w-180">
+          <h2 className="font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] text-white mt-0 mb-2 uppercase">
             Sprawdź status kontenera
           </h2>
-          <p
-            style={{
-              fontFamily: 'var(--font-sans, sans-serif)',
-              fontSize: 'clamp(13px, 1.2vw, 15px)',
-              lineHeight: 1.6,
-              color: '#ffffff',
-              margin: 0,
-            }}
-          >
+          <p className="text-[clamp(13px,1.2vw,15px)] leading-relaxed text-white m-0">
             Wpisz numer kontenera (np. MSCU1234567), aby zobaczyć czy dopłynął.
           </p>
         </div>

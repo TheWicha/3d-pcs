@@ -14,7 +14,7 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
   const o = overlay;
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <Video />
       <div
         className="absolute inset-0"
@@ -28,15 +28,7 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
         }}
       />
       <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.065) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.065) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-          opacity: 0.18,
-        }}
+        className="absolute inset-0 opacity-[0.18] bg-[linear-gradient(rgba(255,255,255,0.065)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.065)_1px,transparent_1px)] bg-size-[80px_80px]"
       />
       <span className="absolute top-6 left-6 opacity-[0.35]"><Crosshair /></span>
       <span className="absolute top-6 right-6 opacity-[0.35]"><Crosshair /></span>

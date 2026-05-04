@@ -1,7 +1,6 @@
 import Hero from '@/components/hero';
 import AboutSection from '@/components/sections/AboutSection';
 import BenefitsSection from '@/components/sections/BenefitsSection';
-import ContactSection from '@/components/sections/ContactSection';
 import Footer from '@/components/sections/Footer';
 import ModulesSection from '@/components/sections/ModulesSection';
 import NewsSection from '@/components/sections/NewsSection';
@@ -24,7 +23,6 @@ export default function Home() {
       <UsersSection />
       <PortsSection />
       <StatsSection />
-      <ContactSection />
       <Footer />
     </>
   );

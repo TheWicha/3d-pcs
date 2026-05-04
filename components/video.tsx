@@ -1,45 +1,22 @@
 'use client';
 
+import { cn } from '@/utils/cn';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { Pause, Play } from 'lucide-react';
 
 function VideoLoadingOverlay({ progress }: { progress: number }) {
   return (
     <div
-      className="absolute inset-0 z-10 flex items-center justify-center"
-      style={{ background: '#0a0d12', transition: 'opacity 0.5s', pointerEvents: 'none' }}
+      className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none bg-(--bg-2) transition-opacity duration-500"
     >
       <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px)
-          `,
-          backgroundSize: '64px 64px',
-          animation: 'video-grid-pulse 1.2s ease-in-out infinite',
-        }}
+        className="absolute inset-0 animate-[video-grid-pulse_1.2s_ease-in-out_infinite] bg-[linear-gradient(var(--border-2)_1px,transparent_1px),linear-gradient(90deg,var(--border-2)_1px,transparent_1px)] bg-size-[64px_64px]"
       />
       <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          fontFamily: 'var(--font-mono, monospace)',
-          fontWeight: 500,
-          fontSize: 28,
-          color: '#e5e7eb',
-          textShadow: '0 2px 12px #000a',
-          letterSpacing: '0.04em',
-        }}
+        className="relative z-[2] font-mono font-medium text-[28px] text-(--fg-2) tracking-[0.04em] [text-shadow:0_2px_12px_#000a]"
       >
         {Math.round(progress)}%
       </div>
-      <style>{`
-        @keyframes video-grid-pulse {
-          0%, 100% { opacity: 0.32; }
-          50% { opacity: 0.7; }
-        }
-      `}</style>
     </div>
   );
 }
@@ -57,12 +34,7 @@ export default function Video() {
         playsInline
         loop
         onEnded={onEnded}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          filter: 'grayscale(1) contrast(1.15) brightness(0.85)',
-          opacity: showVideo ? 1 : 0,
-          transition: 'opacity 0.7s cubic-bezier(0.4,0,0.2,1)',
-        }}
+        className={cn('absolute inset-0 w-full h-full object-cover grayscale contrast-[1.15] brightness-[0.85] transition-opacity duration-700 ease-in-out', showVideo ? 'opacity-100' : 'opacity-0')}
       >
         <source src="/video/animacja.mp4" type="video/mp4" />
       </video>
@@ -74,36 +46,7 @@ export default function Video() {
           onClick={togglePause}
           onMouseDown={e => e.stopPropagation()}
           aria-label={paused ? 'Wznów wideo' : 'Zatrzymaj wideo'}
-          style={{
-            position: 'absolute',
-            bottom: 16,
-            right: 20,
-            zIndex: 900,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 5,
-            background: 'rgba(6,8,12,0.55)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            color: 'rgba(255,255,255,0.45)',
-            fontFamily: 'var(--font-mono, monospace)',
-            fontSize: 9,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            padding: '5px 8px',
-            cursor: 'pointer',
-            pointerEvents: 'auto',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-            transition: 'color 0.15s, border-color 0.15s',
-          }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.8)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)';
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.45)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.12)';
-          }}
+          className="absolute bottom-4 right-5 z-[900] flex items-center gap-1.5 font-mono text-[9px] tracking-[0.12em] uppercase text-(--fg-3) border border-(--border) px-2 py-1.25 pointer-events-auto transition-[color,border-color] duration-150 hover:text-foreground hover:border-accent bg-(--bg-3) backdrop-blur-sm"
         >
           {paused ? <Play size={10} /> : <Pause size={10} />}
           {paused ? 'wznów' : 'pauza'}

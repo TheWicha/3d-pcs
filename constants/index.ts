@@ -1,4 +1,4 @@
-import type { Benefit, Chip, Module, NavItem, NewsItem, PcsFeature, PcsValue, Port, Stat } from '@/types';
+import type { Benefit, Chip, Module, NavItem, NewsItem, PcsFeature, PcsValue, Port, Stat, UserType } from '@/types';
 
 export const ACCENT = 'var(--accent)';
 export const ACCENT_HEX = '#00edc2';
@@ -22,10 +22,10 @@ export const FALLBACK_REPLY =
   'Rozumiem pytanie. Trwa przetwarzanie — zaraz wrócę z odpowiedzią systemu portowego.';
 
 export const NAV_ITEMS: NavItem[] = [
-  { code: '01', label: 'O nas' },
-  { code: '02', label: 'Moduł Towarowy' },
-  { code: '03', label: 'Moduł Maklerski' },
-  { code: '04', label: 'Kontakt' },
+  { code: '01', label: 'O nas', href: '#about-heading' },
+  { code: '02', label: 'Moduły', href: '#modules-heading' },
+  { code: '03', label: 'Aktualności', href: '#news-heading' },
+  { code: '04', label: 'Kontakt', href: '#kontakt' },
 ];
 
 export const PARTNERS: string[] = [
@@ -43,7 +43,7 @@ export const MODULES: Module[] = [
   },
   {
     title: 'Moduł Maklerski',
-    items: [],
+    items: ['Informacje', 'Zgłoszenia', 'FAQ', 'Planner', 'Funkcjonalności'],
   },
 ];
 
@@ -107,15 +107,39 @@ export const NEWS: NewsItem[] = [
   },
 ];
 
-export const USER_TYPES: string[] = [
-  'Port morski',
-  'Terminal morski',
-  'Armator',
-  'Operator portowy',
-  'Przewoźnik drogowy',
-  'Przewoźnik kolejowy',
-  'Agencja celna',
-  'Administracja państwowa',
+export const USER_TYPES: UserType[] = [
+  {
+    title: 'Port morski',
+    description: 'Obiekt gospodarczy usytuowany na styku lądu z morzem, przygotowany technicznie i organizacyjnie do obsługi obrotów handlu morskiego oraz środków transportu morskiego i lądowego.',
+  },
+  {
+    title: 'Terminal morski',
+    description: 'Wydzielony teren w porcie morskim, wyposażony w infrastrukturę do przeładunku, manipulacji i składowania towarów przewożonych drogą morską.',
+  },
+  {
+    title: 'Armator',
+    description: 'Osoba, która we własnym imieniu uprawia żeglugę statkiem morskim własnym lub cudzym.',
+  },
+  {
+    title: 'Operator portowy',
+    description: 'Firma świadcząca usługi przeładunku towaru w porcie morskim, posiadająca dostęp do terenów i infrastruktury portowej.',
+  },
+  {
+    title: 'Przewoźnik drogowy',
+    description: 'Przedsiębiorca uprawniony do wykonywania działalności gospodarczej w zakresie transportu drogowego.',
+  },
+  {
+    title: 'Przewoźnik kolejowy',
+    description: 'Przedsiębiorca uprawniony do wykonywania przewozów kolejowych na podstawie licencji, jednolitego certyfikatu bezpieczeństwa lub świadectwa bezpieczeństwa.',
+  },
+  {
+    title: 'Agencja celna',
+    description: 'Przedsiębiorstwo świadczące profesjonalne usługi pośrednictwa w zakresie reprezentowania podmiotów przed organami celnymi.',
+  },
+  {
+    title: 'Administracja państwowa',
+    description: 'System podmiotów wyposażonych w kompetencje do prowadzenia organizatorskiej i kierowniczej działalności na podstawie ustaw, np. KAS, Inspekcja Weterynaryjna.',
+  },
 ];
 
 export const PORTS: Port[] = [

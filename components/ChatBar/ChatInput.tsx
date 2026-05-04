@@ -30,14 +30,7 @@ export function ChatInput({
         e.preventDefault();
         onSubmit();
       }}
-      className="flex items-center gap-3 transition-all duration-200"
-      style={{
-        background: 'transparent',
-        border: 'none',
-        borderTop: focused ? `1px solid var(--accent)` : '1px solid var(--border)',
-        boxShadow: focused ? `0 0 24px color-mix(in srgb, var(--accent) 12%, transparent)` : 'none',
-        padding: '16px 0 0',
-      }}
+      className={`flex items-center gap-3 transition-all duration-200 bg-transparent border-0 pt-4 ${focused ? 'border-t border-accent shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_12%,transparent)]' : 'border-t border-(--border)'}`}
     >
       <input
         ref={inputRef}
@@ -47,33 +40,14 @@ export function ChatInput({
         onBlur={onBlur}
         placeholder="Wpisz numer kontenera lub zadaj pytanie…"
         aria-label="Konsola asystenta PCS"
-        className="flex-1 bg-transparent outline-none min-w-0"
-        style={{
-          fontFamily: 'var(--font-sans, sans-serif)',
-          fontSize: 16,
-          fontWeight: 400,
-          color: 'var(--fg)',
-        }}
+        className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
         maxLength={240}
       />
       <button
         type="submit"
         aria-label="Wyślij"
         disabled={thinking}
-        className="flex items-center gap-2 transition-all duration-200 focus-visible:outline-none"
-        style={{
-          fontFamily: 'var(--font-sans, sans-serif)',
-          fontSize: 15,
-          fontWeight: 600,
-          padding: '10px 20px',
-          cursor: hasInput && !thinking ? 'pointer' : 'default',
-          background: hasInput ? 'var(--accent)' : 'var(--surface)',
-          border: 'none',
-          color: hasInput ? 'var(--accent-fg)' : 'var(--fg-3)',
-          flexShrink: 0,
-          opacity: thinking ? 0.5 : 1,
-          transition: 'background 0.2s, color 0.2s',
-        }}
+        className={`flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none ${hasInput && !thinking ? 'cursor-pointer' : 'cursor-default'} ${hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)'} ${thinking ? 'opacity-50' : 'opacity-100'}`}
       >
         <span>Wyślij</span>
         <ArrowRight size={16} />

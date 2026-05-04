@@ -1,6 +1,6 @@
-﻿'use client';
+'use client';
 
-import { ACCENT, CHIPS } from '@/constants';
+import { CHIPS } from '@/constants';
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -14,7 +14,7 @@ function MsgText({ text }: { text: string }) {
         if (p === '\n') return <br key={i} />;
         if (p.startsWith('**') && p.endsWith('**'))
           return (
-            <strong key={i} style={{ color: 'var(--fg)', fontWeight: 600 }}>
+            <strong key={i} className="text-foreground font-semibold">
               {p.slice(2, -2)}
             </strong>
           );
@@ -40,17 +40,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
   } = useChatMessages(onSend);
 
   return (
-    <div
-      className="w-full"
-      style={{
-        maxWidth: 720,
-        background: 'var(--bg-3)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid var(--border)',
-        padding: '24px',
-      }}
-    >
+    <div className="w-full max-w-180 bg-(--bg-3) backdrop-blur-xl border border-(--border) p-6">
       <AnimatePresence>
         <Activity mode={hasMessages ? 'hidden' : 'visible'}>
           <motion.div
@@ -64,25 +54,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
               <button
                 key={i}
                 onClick={() => sendMessage(chip.label)}
-                style={{
-                  textAlign: 'left',
-                  background: 'var(--surface)',
-                  border: '1px solid var(--border)',
-                  color: 'var(--fg-2)',
-                  fontFamily: 'var(--font-sans, sans-serif)',
-                  fontSize: 16,
-                  padding: '12px 18px',
-                  cursor: 'pointer',
-                  transition: 'background 0.15s, color 0.15s, border-color 0.15s',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--fg)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--fg-2)';
-                }}
+                className="text-left bg-surface border border-(--border) text-(--fg-2) font-sans text-base px-4.5 py-3 cursor-pointer transition-[background,color,border-color] duration-150 hover:border-accent hover:text-foreground"
               >
                 {chip.label}
               </button>
@@ -98,53 +70,21 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            style={{
-              overflow: 'hidden',
-              borderBottom: '1px solid var(--border)',
-              marginBottom: 16,
-            }}
+            className="overflow-hidden border-b border-(--border) mb-4"
           >
-            <div
-              className="flex flex-col overflow-y-auto"
-              style={{ maxHeight: 360, padding: '16px 0' }}
-            >
+            <div className="flex flex-col overflow-y-auto max-h-90 py-4">
               {messages.map((m, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.22 }}
-                  style={{
-                    display: 'flex',
-                    flexDirection: m.role === 'user' ? 'row-reverse' : 'row',
-                    gap: 14,
-                    padding: '12px 24px',
-                    borderBottom:
-                      i < messages.length - 1 || thinking ? '1px solid var(--border-2)' : 'none',
-                    alignItems: 'flex-start',
-                  }}
+                  className={`flex gap-3.5 px-6 py-3 items-start ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'} ${i < messages.length - 1 || thinking ? 'border-b border-(--border-2)' : ''}`}
                 >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono, monospace)',
-                      fontSize: 11,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      flexShrink: 0,
-                      marginTop: 2,
-                      color: m.role === 'user' ? 'var(--fg-3)' : ACCENT,
-                    }}
-                  >
+                  <span className={`font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5 ${m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'}`}>
                     {m.role === 'user' ? 'TY' : 'PCS'}
                   </span>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-sans, sans-serif)',
-                      fontSize: 16,
-                      lineHeight: 1.6,
-                      color: m.role === 'user' ? 'var(--fg)' : 'var(--fg-2)',
-                    }}
-                  >
+                  <span className={`font-sans text-base leading-[1.6] ${m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'}`}>
                     <MsgText text={m.text} />
                   </span>
                 </motion.div>
@@ -156,31 +96,16 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    style={{ display: 'flex', gap: 14, padding: '12px 24px', alignItems: 'center' }}
+                    className="flex gap-3.5 px-6 py-3 items-center"
                   >
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-mono, monospace)',
-                        fontSize: 11,
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
-                        color: ACCENT,
-                        flexShrink: 0,
-                      }}
-                    >
+                    <span className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0">
                       PCS
                     </span>
-                    <span style={{ display: 'flex', gap: 5 }}>
+                    <span className="flex gap-1.25">
                       {[0, 1, 2].map(dot => (
                         <motion.span
                           key={dot}
-                          style={{
-                            width: 5,
-                            height: 5,
-                            borderRadius: '50%',
-                            background: ACCENT,
-                            display: 'inline-block',
-                          }}
+                          className="w-1.25 h-1.25 rounded-full bg-accent inline-block"
                           animate={{ opacity: [0.3, 1, 0.3] }}
                           transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
                         />
@@ -201,16 +126,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           e.preventDefault();
           sendMessage(value);
         }}
-        className="flex items-center gap-3 transition-all duration-200"
-        style={{
-          background: 'transparent',
-          border: 'none',
-          borderTop: focused ? `1px solid var(--accent)` : '1px solid var(--border)',
-          boxShadow: focused
-            ? `0 0 24px color-mix(in srgb, var(--accent) 12%, transparent)`
-            : 'none',
-          padding: '16px 0 0',
-        }}
+        className={`flex items-center gap-3 transition-all duration-200 bg-transparent border-0 pt-4 ${focused ? 'border-t border-accent shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_12%,transparent)]' : 'border-t border-(--border)'}`}
       >
         <input
           ref={inputRef}
@@ -220,33 +136,14 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           onBlur={() => setFocused(false)}
           placeholder="Wpisz numer kontenera lub zadaj pytanie…"
           aria-label="Konsola asystenta PCS"
-          className="flex-1 bg-transparent outline-none min-w-0"
-          style={{
-            fontFamily: 'var(--font-sans, sans-serif)',
-            fontSize: 16,
-            fontWeight: 400,
-            color: 'var(--fg)',
-          }}
+          className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
           maxLength={240}
         />
         <button
           type="submit"
           aria-label="Wyślij"
           disabled={thinking}
-          className="flex items-center gap-2 transition-all duration-200 focus-visible:outline-none"
-          style={{
-            fontFamily: 'var(--font-sans, sans-serif)',
-            fontSize: 15,
-            fontWeight: 600,
-            padding: '10px 20px',
-            cursor: hasInput && !thinking ? 'pointer' : 'default',
-            background: hasInput ? 'var(--accent)' : 'var(--surface)',
-            border: 'none',
-            color: hasInput ? 'var(--accent-fg)' : 'var(--fg-3)',
-            flexShrink: 0,
-            opacity: thinking ? 0.5 : 1,
-            transition: 'background 0.2s, color 0.2s',
-          }}
+          className={`flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none ${hasInput && !thinking ? 'cursor-pointer' : 'cursor-default'} ${hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)'} ${thinking ? 'opacity-50' : 'opacity-100'}`}
         >
           <span>Wyślij</span>
           <ArrowRight size={16} />
