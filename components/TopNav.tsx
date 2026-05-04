@@ -40,7 +40,7 @@ export default function TopNav() {
               href={item.href}
               className={cn(
                 'flex items-center gap-1.5 no-underline transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
-                i === 0 ? 'text-foreground' : 'text-(--fg-2)'
+                'text-foreground'
               )}
             >
               <span className="font-mono text-[12px] text-(--fg-3)">{item.code}</span>
