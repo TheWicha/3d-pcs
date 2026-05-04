@@ -1,8 +1,7 @@
 'use client';
 
-import { Mail, Phone } from 'lucide-react';
+import { ExternalLink, Mail, Phone } from 'lucide-react';
 import Link from 'next/link';
-import { Activity } from 'react';
 
 function FooterColumnHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -48,12 +47,13 @@ function FooterContactLink({
       aria-label={ariaLabel}
       className="flex items-center gap-2 text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
     >
-      <Activity mode={icon ? 'visible' : 'hidden'}>
-        <span className="text-accent shrink-0">{icon}</span>
-      </Activity>
-      {children}
+      {icon ? <span className="text-accent shrink-0">{icon}</span> : null}
+      <span>{children}</span>
       {opensInNewTab && (
-        <span className="font-mono text-[11px] tracking-[0.06em] text-(--fg-3)">(nowa karta)</span>
+        <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-foreground">
+          <ExternalLink size={12} aria-hidden="true" />
+          otwiera się w nowej karcie
+        </span>
       )}
     </Link>
   );

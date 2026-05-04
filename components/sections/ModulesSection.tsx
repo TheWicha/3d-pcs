@@ -1,9 +1,9 @@
 'use client';
 
-import { MODULES } from '@/constants';
 import Button from '@/components/ui/Button';
-import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SectionWrapper from '@/components/ui/SectionWrapper';
+import { MODULES } from '@/constants';
 import { ArrowRight } from 'lucide-react';
 import SectionLabel from './SectionLabel';
 
@@ -33,7 +33,11 @@ export default function ModulesSection() {
                 <h3 className="font-michroma font-normal text-[clamp(18px,1.6vw,22px)] tracking-[0.04em] text-foreground m-0">
                   {mod.title}
                 </h3>
-                <Button variant="ghost" icon={<ArrowRight size={14} />} aria-label={`Przejdź do ${mod.title}`}>
+                <Button
+                  variant="primary"
+                  icon={<ArrowRight size={14} />}
+                  aria-label={`Przejdź do ${mod.title}`}
+                >
                   Otwórz
                 </Button>
               </div>

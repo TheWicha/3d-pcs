@@ -52,7 +52,7 @@ export function ChatInput({
         aria-label="Wyślij"
         disabled={thinking}
         className={cn(
-          'flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200 focus-visible:outline-none',
+          'flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200',
           hasInput && !thinking ? 'cursor-pointer' : 'cursor-default',
           hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)',
           thinking ? 'opacity-50' : 'opacity-100'

@@ -39,7 +39,7 @@ export default function TopNav() {
               key={item.code}
               href={item.href}
               className={cn(
-                'flex items-center gap-1.5 no-underline transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
+                'flex items-center gap-1.5 no-underline transition-colors duration-150',
                 'text-foreground'
               )}
             >
@@ -53,7 +53,7 @@ export default function TopNav() {
           <button
             aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'}
             onClick={toggle}
-            className="hidden sm:flex items-center bg-transparent border-0 p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="hidden sm:flex items-center bg-transparent border-0 p-0"
           >
             <motion.div
               animate={{ backgroundColor: theme === 'dark' ? '#1a2030' : '#d4cfc8' }}
@@ -76,14 +76,14 @@ export default function TopNav() {
 
           <button
             aria-label="Zmień język"
-            className="hidden sm:flex items-center font-mono text-[12px] text-foreground bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="hidden sm:flex items-center font-mono text-[12px] text-foreground bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground"
           >
             PL / EN
           </button>
 
           <button
             aria-label="Zaloguj się do systemu PCS"
-            className="hidden sm:flex items-center gap-1.5 text-[13px] font-semibold text-accent-fg bg-accent border-0 px-3.5 py-1.75 transition-opacity duration-150 hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="hidden sm:flex items-center gap-1.5 text-[13px] font-semibold text-accent-fg bg-accent border-0 px-3.5 py-1.75 transition-opacity duration-150 hover:opacity-85"
           >
             Zaloguj się
             <ArrowRight size={13} />
@@ -92,7 +92,7 @@ export default function TopNav() {
           <button
             aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
             onClick={() => setMobileOpen(v => !v)}
-            className="flex lg:hidden items-center justify-center w-9 h-9 text-(--fg-2) transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="flex lg:hidden items-center justify-center w-9 h-9 text-(--fg-2) transition-colors duration-150 hover:text-foreground"
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>

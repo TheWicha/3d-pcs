@@ -43,6 +43,11 @@
   --font-mono: var(--font-jetbrains, monospace);
   --font-michroma: var(--font-michroma, 'Roboto', sans-serif);
 }
+*:focus {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px black !important;
+}
 
 body {
   background: var(--bg);
