@@ -1,14 +1,18 @@
 'use client';
 
-import { cn } from '@/utils/cn';
 import { useTheme } from '@/components/ThemeProvider';
 import SectionWrapper from '@/components/ui/SectionWrapper';
+import { cn } from '@/utils/cn';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import SectionLabel from './SectionLabel';
 
 const PARTNERS = [
-  { src: '/partners/partner-1.svg', alt: 'Partner 1', darkSrc: '/partners/partner-1-white.png' },
+  {
+    src: '/partners/partner-1.svg',
+    alt: 'Partner 1',
+    darkSrc: '/partners/partner-1-light.png',
+  },
   { src: '/partners/partner-2.svg', alt: 'Partner 2', darkLogo: true, darkSrc: null },
   { src: '/partners/partner-3.svg', alt: 'Partner 3', darkLogo: false, darkSrc: null },
   { src: '/partners/partner-4.svg', alt: 'Partner 4', darkLogo: true, darkSrc: null },
@@ -43,19 +47,23 @@ export default function PartnersSection() {
             key={i}
             onClick={() => setActive(i)}
             aria-label={p.alt}
-            className={cn('relative flex items-center justify-center px-5 py-6 border-r border-b border-(--border) bg-transparent transition-[opacity,background] duration-[400ms,200ms] min-h-20 hover:bg-surface', active === i ? 'opacity-100' : 'opacity-40')}
+            className={cn(
+              'relative flex items-center justify-center px-5 py-6 border-r border-b border-(--border) bg-transparent transition-[opacity,background] duration-[400ms,200ms] min-h-20 hover:bg-surface',
+              active === i ? 'opacity-100' : 'opacity-40'
+            )}
             onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
             onMouseLeave={e => (e.currentTarget.style.opacity = active === i ? '1' : '0.4')}
           >
-            {active === i && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent" />
-            )}
+            {active === i && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent" />}
             <Image
               src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
               alt={p.alt}
               width={140}
               height={48}
-              className={cn('w-auto h-9 max-w-32.5 object-contain', p.darkLogo && 'logo-dark-invert')}
+              className={cn(
+                'w-auto h-9 max-w-32.5 object-contain',
+                p.darkLogo && 'logo-dark-invert'
+              )}
             />
           </button>
         ))}
@@ -65,14 +73,20 @@ export default function PartnersSection() {
         {PARTNERS.map((p, i) => (
           <div
             key={i}
-            className={cn('absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-700', active === i ? 'opacity-100' : 'opacity-0')}
+            className={cn(
+              'absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-700',
+              active === i ? 'opacity-100' : 'opacity-0'
+            )}
           >
             <Image
               src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
               alt={p.alt}
               width={280}
               height={90}
-              className={cn('w-auto h-18 max-w-70 object-contain', p.darkLogo && 'logo-dark-invert')}
+              className={cn(
+                'w-auto h-18 max-w-70 object-contain',
+                p.darkLogo && 'logo-dark-invert'
+              )}
             />
           </div>
         ))}
@@ -83,7 +97,10 @@ export default function PartnersSection() {
               key={i}
               onClick={() => setActive(i)}
               aria-label={`Pokaż partnera ${i + 1}`}
-              className={cn('h-0.5 border-0 p-0 cursor-pointer transition-[width,background] duration-350', active === i ? 'w-5 bg-accent' : 'w-1.5 bg-(--border)')}
+              className={cn(
+                'h-0.5 border-0 p-0 cursor-pointer transition-[width,background] duration-350',
+                active === i ? 'w-5 bg-accent' : 'w-1.5 bg-(--border)'
+              )}
             />
           ))}
         </div>

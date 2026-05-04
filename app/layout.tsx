@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import './globals.css';
 
 import { ThemeProvider } from '@/components/ThemeProvider';
+import TopNav from '@/components/TopNav';
+import Footer from '@/components/sections/Footer';
 import { Roboto } from 'next/font/google';
 
 const roboto = Roboto({
@@ -26,10 +28,19 @@ export default async function RootLayout({
   const theme = (cookieStore.get('pcs-theme')?.value ?? 'light') as 'light' | 'dark';
 
   return (
-    <html lang="pl" data-theme={theme} className={`${roboto.variable} h-full antialiased`} suppressHydrationWarning>
+    <html
+      lang="pl"
+      data-theme={theme}
+      className={`${roboto.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <head />
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
+        <ThemeProvider initialTheme={theme}>
+          <TopNav />
+          <div className="flex-1 mt-21">{children}</div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

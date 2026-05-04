@@ -1,11 +1,12 @@
 'use client';
 
-import { cn } from '@/utils/cn';
 import { useTheme } from '@/components/ThemeProvider';
 import { NAV_ITEMS } from '@/constants';
+import { cn } from '@/utils/cn';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function TopNav() {
@@ -19,14 +20,17 @@ export default function TopNav() {
     >
       <div className="flex items-center justify-between px-6 py-3.5">
         <div className="flex items-center shrink-0">
-          <div className="relative w-30 h-15">
-            <Image
-              src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
-              alt="Polski PCS"
-              fill
-              priority
-            />
-          </div>
+          <Link href="/" aria-label="Strona główna Polski PCS">
+            <div className="relative w-30 h-15">
+              <Image
+                src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
+                alt="Polski PCS"
+                fill
+                sizes="120px"
+                priority
+              />
+            </div>
+          </Link>
         </div>
 
         <div className="hidden lg:flex items-center gap-8">
@@ -34,7 +38,10 @@ export default function TopNav() {
             <a
               key={item.code}
               href={item.href}
-              className={cn('flex items-center gap-1.5 no-underline transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2', i === 0 ? 'text-foreground' : 'text-(--fg-2)')}
+              className={cn(
+                'flex items-center gap-1.5 no-underline transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
+                i === 0 ? 'text-foreground' : 'text-(--fg-2)'
+              )}
             >
               <span className="font-mono text-[12px] text-(--fg-3)">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
