@@ -6,8 +6,8 @@ import SectionWrapper from '@/components/ui/SectionWrapper';
 import { NEWS } from '@/constants';
 import { cn } from '@/utils/cn';
 import { ArrowRight } from 'lucide-react';
-import SectionLabel from './SectionLabel';
 import Link from 'next/link';
+import SectionLabel from './SectionLabel';
 
 export default function NewsSection() {
   return (
@@ -37,7 +37,7 @@ export default function NewsSection() {
             key={i}
             className={cn(
               'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 min-h-88 flex flex-col transition-[transform,border-color,background] duration-300',
-              'hover:-translate-y-0.5 hover:border-(--accent-dark) hover:bg-[color-mix(in_srgb,var(--surface)_65%,var(--accent)_35%)]'
+              'hover:-translate-y-0.5 hover:border-accent'
             )}
           >
             <div className="absolute right-0 top-0 h-1.5 w-20 bg-accent" />
@@ -55,7 +55,7 @@ export default function NewsSection() {
 
             <div className="mt-auto pt-6">
               <div className="h-1 w-16 bg-accent mb-4" />
-              <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-(--accent-dark) tracking-[0.04em]">
+              <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-black tracking-[0.04em]">
                 Czytaj więcej <ArrowRight size={12} />
               </span>
             </div>

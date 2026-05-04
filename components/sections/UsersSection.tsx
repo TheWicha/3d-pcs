@@ -39,7 +39,7 @@ export default function UsersSection() {
           {USER_TYPES.map((type, i) => (
             <article
               key={i}
-              className="relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] p-6 sm:p-7 min-h-56 transition-[border-color,background,transform] duration-300 hover:-translate-y-0.5 hover:border-(--accent-dark)"
+              className="relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] p-6 sm:p-7 min-h-56"
             >
               <div className="absolute right-0 top-0 h-1.5 w-18 bg-accent" />
 

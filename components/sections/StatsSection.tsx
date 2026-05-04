@@ -26,8 +26,8 @@ export default function StatsSection() {
           <article
             key={i}
             className={[
-              'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-6 sm:p-8 transition-[transform,border-color,background] duration-300',
-              'hover:-translate-y-0.5 hover:border-(--accent-dark) hover:bg-[color-mix(in_srgb,var(--surface)_60%,var(--accent)_40%)]',
+              'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-6 sm:p-8 transition-[transform,border-color] duration-300',
+              'hover:-translate-y-0.5 hover:border-(--accent-dark)',
               i === 0 ? 'md:col-span-2 xl:col-span-2 xl:row-span-1 min-h-72' : '',
               i === 5 ? 'xl:col-span-2' : '',
             ].join(' ')}
