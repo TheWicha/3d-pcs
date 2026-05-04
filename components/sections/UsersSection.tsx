@@ -1,10 +1,10 @@
 'use client';
 
-import { USER_TYPES } from '@/constants';
 import AccentDot from '@/components/ui/AccentDot';
 import Button from '@/components/ui/Button';
-import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SectionWrapper from '@/components/ui/SectionWrapper';
+import { USER_TYPES } from '@/constants';
 import { ArrowRight } from 'lucide-react';
 import SectionLabel from './SectionLabel';
 
@@ -33,11 +33,11 @@ export default function UsersSection() {
           {USER_TYPES.map((type, i) => (
             <div key={i} tabIndex={0} className="user-card p-5 border-r border-b border-(--border)">
               <AccentDot size="sm" className="mb-2.5" />
-              <span className="user-card-title text-[14px] font-medium leading-normal text-(--fg-2) block">
+              <span className="user-card-title text-[14px] font-medium leading-normal text-foreground block">
                 {type.title}
               </span>
               <div className="user-card-desc" aria-hidden="true">
-                <p className="text-[14px] leading-[1.6] text-(--fg-2) m-0">{type.description}</p>
+                <p className="text-[14px] leading-[1.6] text-foreground m-0">{type.description}</p>
               </div>
             </div>
           ))}

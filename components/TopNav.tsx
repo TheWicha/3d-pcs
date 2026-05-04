@@ -34,7 +34,7 @@ export default function TopNav() {
         </div>
 
         <div className="hidden lg:flex items-center gap-8">
-          {NAV_ITEMS.map((item, i) => (
+          {NAV_ITEMS.map(item => (
             <a
               key={item.code}
               href={item.href}
@@ -43,7 +43,7 @@ export default function TopNav() {
                 'text-foreground'
               )}
             >
-              <span className="font-mono text-[12px] text-(--fg-3)">{item.code}</span>
+              <span className="font-mono text-[12px] text-(--fg-2)">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
             </a>
           ))}
@@ -76,7 +76,7 @@ export default function TopNav() {
 
           <button
             aria-label="Zmień język"
-            className="hidden sm:flex items-center font-mono text-[12px] text-(--fg-2) bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="hidden sm:flex items-center font-mono text-[12px] text-foreground bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             PL / EN
           </button>
@@ -105,14 +105,14 @@ export default function TopNav() {
             <a
               key={item.code}
               href={item.href}
-              className="flex items-center gap-2 no-underline text-(--fg-2) transition-colors duration-150 hover:text-foreground"
+              className="flex items-center gap-2 no-underline text-foreground transition-colors duration-150 hover:text-foreground"
             >
-              <span className="font-mono text-[12px] text-(--fg-3)">{item.code}</span>
+              <span className="font-mono text-[12px] text-(--fg-2)">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
             </a>
           ))}
           <div className="flex items-center gap-3 pt-3 border-t border-(--border)">
-            <button className="font-mono text-[12px] text-(--fg-2) bg-transparent border-0">
+            <button className="font-mono text-[12px] text-foreground bg-transparent border-0">
               PL / EN
             </button>
             <button className="text-[13px] font-semibold text-accent-fg bg-accent border-0 px-3.5 py-1.75">

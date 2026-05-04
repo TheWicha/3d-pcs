@@ -36,7 +36,7 @@ export default function PartnersSection() {
 
       <h2
         id="partners-heading"
-        className="font-michroma font-normal text-[14px] tracking-[0.06em] uppercase text-(--fg-3) mt-0 mb-10"
+        className="font-michroma font-normal text-[14px] tracking-[0.06em] uppercase text-(--fg-2) mt-0 mb-10"
       >
         Współpracujemy z wiodącymi instytucjami
       </h2>
