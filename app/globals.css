@@ -50,7 +50,8 @@ body {
   font-family: 'Chivo', Arial, sans-serif;
 }
 
-button {
+button,
+a {
   cursor: pointer;
 }
 
@@ -118,68 +119,4 @@ button {
 
 .animate-ping-dot {
   animation: ping-dot 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* ── User cards ── */
-.user-card {
-  position: relative;
-  cursor: default;
-  transition: background 0.22s ease;
-}
-.user-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 2;
-}
-.user-card:hover::before,
-.user-card:focus-within::before {
-  transform: scaleX(1);
-}
-.user-card:hover,
-.user-card:focus-within {
-  background: var(--surface);
-}
-.user-card-title {
-  transition: color 0.2s ease;
-}
-.user-card:hover .user-card-title,
-.user-card:focus-within .user-card-title {
-  color: var(--fg) !important;
-}
-.user-card-desc {
-  position: absolute;
-  top: 100%;
-  left: -1px;
-  right: -1px;
-  background: var(--bg-2);
-  border: 1px solid var(--accent);
-  border-top: none;
-  padding: 14px 16px 16px;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-  pointer-events: none;
-  z-index: 10;
-}
-.user-card:hover .user-card-desc,
-.user-card:focus-within .user-card-desc {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-@media (prefers-reduced-motion: reduce) {
-  .user-card::before,
-  .user-card-desc {
-    transition: none;
-  }
 }

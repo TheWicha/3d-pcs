@@ -1,8 +1,8 @@
 'use client';
 
-import { BENEFITS } from '@/constants';
-import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SectionWrapper from '@/components/ui/SectionWrapper';
+import { BENEFITS } from '@/constants';
 import SectionLabel from './SectionLabel';
 
 export default function BenefitsSection() {
@@ -20,15 +20,13 @@ export default function BenefitsSection() {
             key={i}
             className="p-9 border-r border-b border-(--border) transition-[background] duration-200 hover:bg-surface"
           >
-            <span className="font-mono text-[12px] tracking-[0.12em] text-accent block mb-4">
+            <span className="font-mono text-[12px] tracking-[0.12em] text-(--accent-dark) block mb-4">
               {benefit.code}
             </span>
             <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,22px)] tracking-[0.03em] text-foreground mt-0 mb-1">
               {benefit.title}
             </h3>
-            <p className="text-[14px] leading-[1.6] text-(--fg-3) m-0">
-              {benefit.subtitle}
-            </p>
+            <p className="text-[14px] leading-[1.6] text-(--fg-3) m-0">{benefit.subtitle}</p>
           </div>
         ))}
       </div>

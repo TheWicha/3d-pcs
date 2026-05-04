@@ -13,13 +13,19 @@ export default function UsersSection() {
     <SectionWrapper aria-labelledby="users-heading">
       <SectionLabel code="04" label="Użytkownicy systemu" />
 
-      <div className="flex flex-col lg:flex-row lg:items-start gap-16">
-        <div className="max-w-100">
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(280px,360px)_1fr] gap-10 xl:gap-14">
+        <div className="xl:sticky xl:top-28 h-fit">
           <SectionHeading id="users-heading" className="mb-6">
             Społeczność
             <br />
             portów polskich
           </SectionHeading>
+
+          <p className="text-[15px] leading-[1.7] text-(--fg-2) m-0 mb-8 max-w-88">
+            Uczestnicy PCS współpracują w jednym środowisku wymiany danych, od planowania po
+            odprawę.
+          </p>
+
           <Button
             variant="primary"
             icon={<ArrowRight size={14} />}
@@ -29,17 +35,27 @@ export default function UsersSection() {
           </Button>
         </div>
 
-        <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-0 border-t border-l border-(--border)">
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
           {USER_TYPES.map((type, i) => (
-            <div key={i} tabIndex={0} className="user-card p-5 border-r border-b border-(--border)">
-              <AccentDot size="sm" className="mb-2.5" />
-              <span className="user-card-title text-[14px] font-medium leading-normal text-foreground block">
-                {type.title}
-              </span>
-              <div className="user-card-desc" aria-hidden="true">
-                <p className="text-[14px] leading-[1.6] text-foreground m-0">{type.description}</p>
+            <article
+              key={i}
+              className="relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] p-6 sm:p-7 min-h-56 transition-[border-color,background,transform] duration-300 hover:-translate-y-0.5 hover:border-(--accent-dark)"
+            >
+              <div className="absolute right-0 top-0 h-1.5 w-18 bg-accent" />
+
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <AccentDot size="md" />
+                <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-(--fg-3)">
+                  {(i + 1).toString().padStart(2, '0')}
+                </span>
               </div>
-            </div>
+
+              <h3 className="font-michroma font-normal text-[clamp(16px,2vw,20px)] tracking-[0.02em] text-foreground mt-0 mb-4 leading-[1.35]">
+                {type.title}
+              </h3>
+
+              <p className="text-[15px] leading-[1.65] text-(--fg-2) m-0">{type.description}</p>
+            </article>
           ))}
         </div>
       </div>

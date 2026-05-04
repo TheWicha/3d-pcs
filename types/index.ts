@@ -39,6 +39,7 @@ export interface NewsItem {
   date: string;
   title: string;
   excerpt: string;
+  link: string;
 }
 
 export interface Port {

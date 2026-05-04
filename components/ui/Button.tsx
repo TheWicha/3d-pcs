@@ -17,7 +17,8 @@ const variants: Record<Variant, string> = {
   primary: 'bg-accent text-accent-fg hover:opacity-85',
   secondary:
     'bg-transparent text-(--fg-2) border border-(--border) hover:border-accent hover:text-foreground',
-  ghost: 'bg-transparent text-accent px-0 min-h-0 hover:opacity-70',
+  ghost:
+    'bg-transparent text-(--accent-dark) px-0 min-h-0 hover:text-(--accent-dark) hover:underline underline-offset-4',
 };
 
 export default function Button({

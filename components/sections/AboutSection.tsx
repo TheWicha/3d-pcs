@@ -38,7 +38,7 @@ export default function AboutSection() {
               <div className="font-michroma text-[16px] tracking-[0.04em] text-foreground mb-1.5 uppercase">
                 {val.title}
               </div>
-              <div className="text-[14px] leading-[1.6] text-(--fg-3)">{val.description}</div>
+              <div className="text-[14px] leading-[1.6] text-(--fg-2)">{val.description}</div>
             </div>
           ))}
         </div>

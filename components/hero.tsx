@@ -14,7 +14,7 @@ export default function Hero() {
       };
 
   return (
-    <main className="relative h-[calc(100dvh-5.25rem)] w-full overflow-x-hidden flex flex-col items-center justify-center bg-background">
+    <section className="relative h-[calc(100dvh-5.25rem)] w-full overflow-x-hidden flex flex-col items-center justify-center bg-background">
       <Background />
 
       <motion.div
@@ -23,16 +23,16 @@ export default function Hero() {
         variants={item}
         className="relative z-10 w-full px-4 flex flex-col items-center max-w-190"
       >
-        <div className="w-full mb-5 max-w-180">
-          <h2 className="text-shadow-2xs font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] text-white mt-0 mb-2 uppercase">
+        <div className="w-full mb-5 max-w-180 px-4 py-3 border border-(--border) bg-[color-mix(in_srgb,var(--bg)_84%,transparent)] backdrop-blur-[2px]">
+          <h1 className="font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] text-foreground mt-0 mb-2 uppercase">
             Sprawdź status kontenera
-          </h2>
-          <p className="text-shadow-2xs text-[clamp(13px,1.2vw,15px)] leading-relaxed text-white m-0">
+          </h1>
+          <p className="text-[clamp(13px,1.2vw,15px)] leading-relaxed text-(--fg-2) m-0">
             Wpisz numer kontenera (np. MSCU1234567), aby zobaczyć czy dopłynął.
           </p>
         </div>
         <ChatBar />
       </motion.div>
-    </main>
+    </section>
   );
 }

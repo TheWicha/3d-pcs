@@ -101,18 +101,21 @@ export const NEWS: NewsItem[] = [
     title: 'Zmiany organizacyjne w Zachodniopomorskim Urzędzie Celno-Skarbowym w Szczecinie',
     excerpt:
       'Z dniem 1 lutego 2026 będzie funkcjonować jedno Centrum Urzędowego Dokonywania Odpraw — CUDO Oddział Celny w Szczecinie.',
+    link: '',
   },
   {
     date: '26 lis 2025',
     title: 'Zgłaszanie towarów',
     excerpt:
       'W związku ze zmianą systemu operacyjnego w BCT Gdynia zmianie uległa numeracja deklaracji magazynowych.',
+    link: '',
   },
   {
     date: '02 wrz 2025',
     title: 'Zaproszenie do złożenia ofert',
     excerpt:
       'Zarząd Spółki zaprasza do złożenia oferty w postępowaniu na wybór firmy audytorskiej do badania rocznych sprawozdań finansowych.',
+    link: '',
   },
 ];
 
