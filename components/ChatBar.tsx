@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { CHIPS } from '@/constants';
 import { useChatMessages } from '@/hooks/useChatMessages';
@@ -81,10 +81,14 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                   transition={{ duration: 0.22 }}
                   className={`flex gap-3.5 px-6 py-3 items-start ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'} ${i < messages.length - 1 || thinking ? 'border-b border-(--border-2)' : ''}`}
                 >
-                  <span className={`font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5 ${m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'}`}>
+                  <span
+                    className={`font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5 ${m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'}`}
+                  >
                     {m.role === 'user' ? 'TY' : 'PCS'}
                   </span>
-                  <span className={`font-sans text-base leading-[1.6] ${m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'}`}>
+                  <span
+                    className={`font-sans text-base leading-[1.6] ${m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'}`}
+                  >
                     <MsgText text={m.text} />
                   </span>
                 </motion.div>
@@ -135,7 +139,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           placeholder="Wpisz numer kontenera lub zadaj pytanie…"
-          aria-label="Konsola asystenta PCS"
+          aria-label="Wpisz numer kontenera lub zadaj pytanie…"
           className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
           maxLength={240}
         />

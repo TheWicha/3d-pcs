@@ -39,7 +39,7 @@ export function ChatInput({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder="Wpisz numer kontenera lub zadaj pytanie…"
-        aria-label="Konsola asystenta PCS"
+        aria-label="Wpisz numer kontenera lub zadaj pytanie…"
         className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
         maxLength={240}
       />

@@ -37,7 +37,9 @@ export default async function RootLayout({
       <head />
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider initialTheme={theme}>
-          <TopNav />
+          <header role="banner">
+            <TopNav />
+          </header>
           <main className="flex-1 mt-21">{children}</main>
           <Footer />
         </ThemeProvider>

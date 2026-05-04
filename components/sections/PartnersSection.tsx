@@ -36,7 +36,7 @@ export default function PartnersSection() {
 
       <h2
         id="partners-heading"
-        className="font-michroma font-normal text-[14px] tracking-[0.06em] uppercase text-(--fg-2) mt-0 mb-10"
+        className="font-michroma font-normal text-[14px] tracking-[0.06em] uppercase text-(--fg-3) mt-0 mb-10"
       >
         Współpracujemy z wiodącymi instytucjami
       </h2>
@@ -61,49 +61,12 @@ export default function PartnersSection() {
               width={140}
               height={48}
               className={cn(
-                'w-auto h-9 max-w-32.5 object-contain',
+                'w-auto h-10 max-w-33.5 object-contain',
                 p.darkLogo && 'logo-dark-invert'
               )}
             />
           </button>
         ))}
-      </div>
-
-      <div className="relative h-35 border-b border-l border-r border-(--border) bg-surface flex items-center justify-center">
-        {PARTNERS.map((p, i) => (
-          <div
-            key={i}
-            className={cn(
-              'absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-700',
-              active === i ? 'opacity-100' : 'opacity-0'
-            )}
-          >
-            <Image
-              src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
-              alt={p.alt}
-              width={280}
-              height={90}
-              className={cn(
-                'w-auto h-18 max-w-70 object-contain',
-                p.darkLogo && 'logo-dark-invert'
-              )}
-            />
-          </div>
-        ))}
-
-        <div className="absolute bottom-3.5 left-1/2 -translate-x-1/2 flex gap-1.5">
-          {PARTNERS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              aria-label={`Pokaż partnera ${i + 1}`}
-              className={cn(
-                'h-0.5 border-0 p-0 cursor-pointer transition-[width,background] duration-350',
-                active === i ? 'w-5 bg-accent' : 'w-1.5 bg-(--border)'
-              )}
-            />
-          ))}
-        </div>
       </div>
     </SectionWrapper>
   );
