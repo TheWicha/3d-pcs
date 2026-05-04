@@ -1,11 +1,12 @@
 'use client';
 
+import { Mail, Phone } from 'lucide-react';
 import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Activity } from 'react';
 
 function FooterColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[12px] tracking-[0.12em] uppercase text-accent block mb-5">
+    <span className="font-mono text-[12px] tracking-[0.13em] font-semibold uppercase text-accent-fg block mb-5">
       {children}
     </span>
   );
@@ -26,19 +27,24 @@ function FooterContactLink({
   href,
   icon,
   children,
+  target,
 }: {
   href: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   children: React.ReactNode;
+  target?: '_blank' | '_self' | '_parent' | '_top';
 }) {
   return (
-    <a
+    <Link
       href={href}
+      target={target}
       className="flex items-center gap-2 text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
     >
-      <span className="text-accent shrink-0">{icon}</span>
+      <Activity mode={icon ? 'visible' : 'hidden'}>
+        <span className="text-accent shrink-0">{icon}</span>
+      </Activity>
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -105,7 +111,10 @@ export default function Footer() {
               Polski PCS sp. z o.o.
             </p>
             <address className="not-italic flex flex-col gap-1 mt-1">
-              <FooterContactLink href="https://maps.google.com/?q=ul.+Bytomska+7,+70-603+Szczecin" icon={<MapPin size={13} />}>
+              <FooterContactLink
+                href="https://maps.google.com/?q=ul.+Bytomska+7,+70-603+Szczecin"
+                target="_blank"
+              >
                 ul. Bytomska 7, 70-603 Szczecin
               </FooterContactLink>
             </address>
@@ -124,7 +133,7 @@ export default function Footer() {
 
           <div>
             <FooterColumnHeading>Kontakt</FooterColumnHeading>
-            <p className="font-mono text-[12px] tracking-[0.06em] text-(--fg-3) mb-2">
+            <p className="font-mono text-[12px] text-(--fg-3) mb-2">
               Wsparcie — Moduł Kontenerowy:
             </p>
             <div className="flex flex-col gap-1">

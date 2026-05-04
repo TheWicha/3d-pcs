@@ -1,8 +1,8 @@
 'use client';
 
-import { STATS } from '@/constants';
-import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SectionWrapper from '@/components/ui/SectionWrapper';
+import { STATS } from '@/constants';
 import SectionLabel from './SectionLabel';
 
 export default function StatsSection() {
@@ -16,27 +16,47 @@ export default function StatsSection() {
           <br />
           portowe PCS
         </SectionHeading>
-        <p className="text-[14px] leading-[1.6] text-(--fg-3) m-0 max-w-90">
+        <p className="text-[14px] leading-[1.6] text-(--fg-3) m-0 max-w-105">
           Realne efekty cyfryzacji procesów w polskich portach morskich.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-(--border)">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {STATS.map((stat, i) => (
-          <div key={i} className="p-9 border-r border-b border-(--border)">
-            <div className="font-mono text-[12px] tracking-[0.12em] uppercase text-(--fg-3) mb-1">
-              {stat.label}
+          <article
+            key={i}
+            className={[
+              'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-6 sm:p-8 transition-[transform,border-color,background] duration-300',
+              'hover:-translate-y-0.5 hover:border-(--accent-dark) hover:bg-[color-mix(in_srgb,var(--surface)_60%,var(--accent)_40%)]',
+              i === 0 ? 'md:col-span-2 xl:col-span-2 xl:row-span-1 min-h-72' : '',
+              i === 5 ? 'xl:col-span-2' : '',
+            ].join(' ')}
+          >
+            <div className="absolute right-0 top-0 h-1.5 w-20 bg-accent" />
+
+            <h3 className="m-0 font-mono text-[12px] tracking-[0.12em] uppercase leading-normal text-(--fg-3)">
+              <span className="block">{stat.label}</span>
+              <span className="block">{stat.sublabel}</span>
+            </h3>
+
+            <div className="mt-5 mb-4">
+              <div
+                className={[
+                  'font-michroma font-normal tracking-[0.01em] leading-none text-foreground',
+                  i === 0 || i === 5
+                    ? 'text-[clamp(36px,6vw,64px)]'
+                    : 'text-[clamp(32px,4.4vw,54px)]',
+                ].join(' ')}
+              >
+                {stat.value}
+              </div>
+              <div className="mt-3 h-1 w-18 bg-accent" />
             </div>
-            <div className="font-mono text-[12px] tracking-[0.12em] uppercase text-(--fg-3) mb-4">
-              {stat.sublabel}
-            </div>
-            <div className="font-michroma font-normal text-[clamp(28px,3.5vw,44px)] tracking-[0.02em] text-accent leading-none mb-3">
-              {stat.value}
-            </div>
-            <p className="text-[14px] leading-[1.6] text-(--fg-3) m-0">
+
+            <p className="text-[14px] leading-[1.6] text-(--fg-2) m-0 max-w-md">
               {stat.description}
             </p>
-          </div>
+          </article>
         ))}
       </div>
     </SectionWrapper>
