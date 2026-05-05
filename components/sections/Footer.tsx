@@ -116,7 +116,7 @@ export default function Footer() {
 
           <div>
             <FooterColumnHeading>Mapa strony</FooterColumnHeading>
-            <nav aria-label="Mapa strony">
+            <nav aria-label="Mapa strony" className="flex flex-col items-baseline">
               <FooterLink href="/">Strona główna</FooterLink>
               <FooterLink href="#about-heading">O nas</FooterLink>
               <FooterLink href="#modules-heading">Moduły</FooterLink>
@@ -129,7 +129,7 @@ export default function Footer() {
 
           <div>
             <FooterColumnHeading>Dokumenty</FooterColumnHeading>
-            <nav aria-label="Dokumenty">
+            <nav aria-label="Dokumenty" className="flex flex-col items-baseline">
               <FooterLink href="/rodo">Polityka RODO</FooterLink>
               <FooterLink href="/cookies">Polityka plików cookies</FooterLink>
               <FooterLink href="/bip">BIP</FooterLink>
@@ -169,12 +169,28 @@ export default function Footer() {
               Wsparcie — Moduł Kontenerowy:
             </p>
             <ul className="flex flex-col gap-1 list-none m-0 p-0">
-              <li><FooterContactLink href="mailto:wsparcie@polskipcs.pl" icon={<Mail size={13} />}>wsparcie@polskipcs.pl</FooterContactLink></li>
-              <li><FooterContactLink href="tel:+48914040563" icon={<Phone size={13} />}>91 404 05 63</FooterContactLink></li>
+              <li>
+                <FooterContactLink href="mailto:wsparcie@polskipcs.pl" icon={<Mail size={13} />}>
+                  wsparcie@polskipcs.pl
+                </FooterContactLink>
+              </li>
+              <li>
+                <FooterContactLink href="tel:+48914040563" icon={<Phone size={13} />}>
+                  91 404 05 63
+                </FooterContactLink>
+              </li>
             </ul>
             <ul className="mt-4 pt-4 border-t border-(--border) flex flex-col gap-1 list-none m-0 p-0">
-              <li><FooterContactLink href="tel:+48914040564" icon={<Phone size={13} />}>91 404 05 64</FooterContactLink></li>
-              <li><FooterContactLink href="mailto:biuro@polskipcs.pl" icon={<Mail size={13} />}>biuro@polskipcs.pl</FooterContactLink></li>
+              <li>
+                <FooterContactLink href="tel:+48914040564" icon={<Phone size={13} />}>
+                  91 404 05 64
+                </FooterContactLink>
+              </li>
+              <li>
+                <FooterContactLink href="mailto:biuro@polskipcs.pl" icon={<Mail size={13} />}>
+                  biuro@polskipcs.pl
+                </FooterContactLink>
+              </li>
             </ul>
           </div>
         </div>
