@@ -137,6 +137,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           onChange={e => setValue(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          aria-label="Wpisz numer kontenera lub zadaj pytanie"
           placeholder="Wpisz numer kontenera lub zadaj pytanie…"
           className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
           maxLength={240}

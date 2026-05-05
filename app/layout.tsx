@@ -57,13 +57,13 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-200 focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-fg focus:font-semibold"
+        >
+          Przejdź do treści głównej
+        </a>
         <ThemeProvider initialTheme={theme}>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-200 focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-fg focus:font-semibold"
-          >
-            Przejdź do treści głównej
-          </a>
           <header role="banner">
             <TopNav />
           </header>

@@ -31,17 +31,17 @@ export default function AboutSection() {
           </Button>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-0 border-t border-l border-(--border)">
+        <ul className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-0 border-t border-l border-(--border) list-none m-0 p-0">
           {PCS_VALUES.map((val, i) => (
-            <div key={i} className="p-6 border-r border-b border-(--border)">
+            <li key={i} className="p-6 border-r border-b border-(--border)">
               <AccentDot size="md" className="mb-3" />
               <div className="font-michroma text-[16px] tracking-[0.04em] text-foreground mb-1.5 uppercase">
                 {val.title}
               </div>
               <div className="text-[14px] leading-[1.6] text-(--fg-2)">{val.description}</div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </SectionWrapper>
   );

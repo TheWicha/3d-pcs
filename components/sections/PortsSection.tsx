@@ -21,9 +21,9 @@ export default function PortsSection() {
         </SectionHeading>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border-t border-(--border)">
+      <ul className="grid grid-cols-1 lg:grid-cols-3 gap-0 border-t border-(--border) list-none m-0 p-0">
         {PORTS.map((port, i) => (
-          <div
+          <li
             key={i}
             className={cn(
               'flex flex-col gap-4 p-9 border-b border-(--border) transition-[background] duration-200 hover:bg-surface',
@@ -42,9 +42,9 @@ export default function PortsSection() {
             >
               Odwiedź stronę
             </Button>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </SectionWrapper>
   );
 }

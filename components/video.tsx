@@ -34,11 +34,12 @@ export default function VideoController() {
         <button
           onClick={togglePause}
           onMouseDown={e => e.stopPropagation()}
-          aria-label={paused ? 'Wznów wideo' : 'Zatrzymaj wideo'}
+          aria-pressed={paused}
           className="absolute bottom-4 right-5 z-900 flex items-center gap-1.5 font-mono text-[9px] tracking-[0.12em] uppercase text-(--fg-3) border border-(--border) px-2 py-1.25 pointer-events-auto transition-[color,border-color] duration-150 hover:text-foreground hover:border-accent bg-(--bg-3) backdrop-blur-sm"
         >
           {paused ? <Play size={10} /> : <Pause size={10} />}
           {paused ? 'wznów' : 'pauza'}
+          <span className="sr-only">wideo</span>
         </button>
       )}
     </>

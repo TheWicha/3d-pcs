@@ -43,7 +43,7 @@ export default function TopNav() {
                 'text-foreground'
               )}
             >
-              <span className="font-mono text-[12px] text-(--fg-2)">{item.code}</span>
+              <span className="font-mono text-[12px] text-foreground">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
             </Link>
           ))}
@@ -144,7 +144,7 @@ export default function TopNav() {
               href={item.href}
               className="flex items-center gap-2 no-underline text-foreground transition-colors duration-150 hover:text-foreground"
             >
-              <span className="font-mono text-[12px] text-(--fg-2)">{item.code}</span>
+              <span className="font-mono text-[12px] text-foreground">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
             </Link>
           ))}
