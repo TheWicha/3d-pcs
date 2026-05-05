@@ -34,17 +34,12 @@ function FooterContactLink({
   target?: '_blank' | '_self' | '_parent' | '_top';
 }) {
   const opensInNewTab = target === '_blank';
-  const ariaLabel =
-    opensInNewTab && typeof children === 'string'
-      ? `${children} (otwiera się w nowej karcie)`
-      : undefined;
 
   return (
     <Link
       href={href}
       target={target}
       rel={opensInNewTab ? 'noopener noreferrer' : undefined}
-      aria-label={ariaLabel}
       className="flex items-center gap-2 text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
     >
       {icon ? <span className="text-accent shrink-0">{icon}</span> : null}
@@ -75,7 +70,9 @@ export default function Footer() {
               <li>
                 <a
                   href="https://x.com/polskipcs"
-                  aria-label="X (Twitter)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X (Twitter), otwiera się w nowej karcie"
                   className="w-9 h-9 flex items-center justify-center border border-(--border) text-(--fg-2) transition-colors duration-150 hover:border-accent hover:text-accent"
                 >
                   <svg
@@ -93,7 +90,9 @@ export default function Footer() {
               <li>
                 <a
                   href="https://linkedin.com/company/polskipcs"
-                  aria-label="LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn, otwiera się w nowej karcie"
                   className="w-9 h-9 flex items-center justify-center border border-(--border) text-(--fg-2) transition-colors duration-150 hover:border-accent hover:text-accent"
                 >
                   <svg

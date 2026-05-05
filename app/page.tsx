@@ -24,11 +24,11 @@ export default function Home() {
 
       <NewsSection />
       <UsersSection />
-      <PortsSection />
       <div className="relative">
         <ShipModel3D direction={-1} />
         <StatsSection />
       </div>
+      <PortsSection />
     </>
   );
 }

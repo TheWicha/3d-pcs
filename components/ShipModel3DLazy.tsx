@@ -25,5 +25,5 @@ export default function ShipModel3DLazy({ direction = 1 }: { direction?: 1 | -1 
     return () => observer.disconnect();
   }, []);
 
-  return <div ref={ref}>{loaded && <ShipModel3DImpl direction={direction} />}</div>;
+  return <div ref={ref} className="relative">{loaded && <ShipModel3DImpl direction={direction} />}</div>;
 }

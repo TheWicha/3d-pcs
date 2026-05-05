@@ -53,7 +53,7 @@ export default function TopNav() {
           <div className="hidden lg:flex items-center gap-2 border-r border-(--border) pr-3 mr-0">
             <Link
               href="https://x.com/polskipcs"
-              aria-label="X (Twitter)"
+              aria-label="X (Twitter), otwiera się w nowej karcie"
               target="_blank"
               rel="noopener noreferrer"
               className="w-7 h-7 flex items-center justify-center border border-(--border) text-(--fg-2) transition-colors duration-150 hover:border-accent hover:text-accent"
@@ -71,7 +71,7 @@ export default function TopNav() {
             </Link>
             <Link
               href="https://linkedin.com/company/polskipcs"
-              aria-label="LinkedIn"
+              aria-label="LinkedIn, otwiera się w nowej karcie"
               target="_blank"
               rel="noopener noreferrer"
               className="w-7 h-7 flex items-center justify-center border border-(--border) text-(--fg-2) transition-colors duration-150 hover:border-accent hover:text-accent"
