@@ -2,7 +2,6 @@
 
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { Pause, Play } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
 
 function VideoLoadingOverlay({ progress }: { progress: number }) {
   return (
@@ -18,7 +17,6 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
 
 export default function Video() {
   const { videoRef, loading, displayedProgress, paused, togglePause } = useVideoPlayer();
-  const { theme } = useTheme();
 
   return (
     <div className="absolute inset-0 w-full h-full">
@@ -30,7 +28,6 @@ export default function Video() {
         loop
         preload="auto"
         poster="/video/poster.jpg"
-        style={{ filter: theme === 'light' ? 'invert(1)' : 'none', willChange: 'opacity' }}
         className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.15] brightness-[0.85] transition-opacity duration-700 ease-in-out opacity-100"
       >
         <source src="/video/animacja.webm" type="video/webm" />
