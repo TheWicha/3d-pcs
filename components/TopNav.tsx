@@ -21,7 +21,7 @@ export default function TopNav() {
       <div className="relative flex items-center justify-between px-6 py-3.5">
         <div className="flex items-center shrink-0">
           <Link href="/" aria-label="Strona główna Polski PCS">
-            <div className="relative w-30 h-15">
+            <div className="relative w-[128px] h-[67px]">
               <Image
                 src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
                 alt="Polski PCS"
