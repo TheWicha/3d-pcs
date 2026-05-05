@@ -42,12 +42,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link
-          rel="preload"
-          href="/video/poster.jpg"
-          as="image"
-          fetchPriority="high"
-        />
+        <link rel="preload" href="/video/poster.jpg" as="image" fetchPriority="high" />
         <link
           rel="preload"
           href="/video/animacja.webm"
@@ -67,7 +62,7 @@ export default async function RootLayout({
           <header role="banner">
             <TopNav />
           </header>
-          <main id="main-content" className="flex-1 mt-21">
+          <main id="main-content" className="flex-1 mt-24">
             {children}
           </main>
           <Footer />

@@ -1,6 +1,5 @@
 'use client';
 
-import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import { PORTS } from '@/constants';
@@ -35,13 +34,14 @@ export default function PortsSection() {
               {port.name}
             </h3>
             <p className="text-[16px] leading-[1.6] text-(--fg-2) m-0 grow">{port.description}</p>
-            <Button
-              variant="ghost"
-              icon={<ArrowUpRight size={12} />}
+            <button
               aria-label={`Odwiedź stronę ${port.name}`}
+              className="group relative inline-flex items-center gap-1.5 pb-1 bg-transparent border-0 p-0 text-[14px] font-semibold tracking-[0.04em] text-(--fg-2) transition-colors duration-150 hover:text-foreground cursor-pointer w-fit"
             >
               Odwiedź stronę
-            </Button>
+              <ArrowUpRight size={12} />
+              <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover:w-full" />
+            </button>
           </li>
         ))}
       </ul>

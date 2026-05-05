@@ -1,7 +1,7 @@
 'use client';
 
 import { useGLTF } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useScroll } from 'framer-motion';
 import { Suspense, useEffect, useRef } from 'react';
 import type { Group } from 'three';
@@ -17,12 +17,14 @@ function Ship({
   const { scene } = useGLTF('/3d/PCS_ship.glb');
   const cloned = scene.clone(true);
   const ref = useRef<Group>(null);
+  const { viewport } = useThree();
 
   useFrame(() => {
     if (!ref.current) return;
     const p = scrollProgress.current ?? 0;
-    const start = direction === 1 ? -7.5 : 9;
-    ref.current.position.x = start + direction * p * 16.5;
+    const half = viewport.width / 2;
+    const start = direction === 1 ? -(half + 1.5) : half + 1.5;
+    ref.current.position.x = start + direction * p * (viewport.width + 3);
   });
 
   return (

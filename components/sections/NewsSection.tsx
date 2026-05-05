@@ -36,7 +36,7 @@ export default function NewsSection() {
             <Link
               href={item.link}
               className={cn(
-                'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 min-h-88 flex flex-col transition-[transform,border-color,background] duration-300',
+                'group/card relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 min-h-88 flex flex-col transition-[transform,border-color,background] duration-300',
                 'hover:-translate-y-0.5 hover:border-accent'
               )}
             >
@@ -55,8 +55,9 @@ export default function NewsSection() {
 
               <div className="mt-auto pt-6">
                 <div className="h-1 w-16 bg-accent mb-4" />
-                <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-foreground tracking-[0.04em]">
+                <span className="group/read relative inline-flex items-center gap-1.5 pb-1 text-[14px] font-semibold tracking-[0.04em] text-(--fg-2) transition-colors duration-150 group-hover/card:text-foreground">
                   Czytaj więcej <ArrowRight size={12} />
+                  <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover/card:w-full" />
                 </span>
               </div>
             </Link>

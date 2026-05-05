@@ -15,9 +15,10 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <Link
       href={href}
-      className="block text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
+      className="group relative inline-flex pb-0.5 text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
     >
       {children}
+      <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover:w-full" />
     </Link>
   );
 }
@@ -40,10 +41,13 @@ function FooterContactLink({
       href={href}
       target={target}
       rel={opensInNewTab ? 'noopener noreferrer' : undefined}
-      className="flex items-center gap-2 text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
+      className="group flex items-center gap-2 text-[14px] text-(--fg-2) no-underline transition-colors duration-150 hover:text-foreground leading-loose"
     >
       {icon ? <span className="text-accent shrink-0">{icon}</span> : null}
-      <span>{children}</span>
+      <span className="relative pb-0.5">
+        {children}
+        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover:w-full" />
+      </span>
       {opensInNewTab && (
         <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-foreground">
           <ExternalLink size={12} aria-hidden="true" />
@@ -143,8 +147,7 @@ export default function Footer() {
                 href="https://maps.google.com/?q=ul.+Bytomska+7,+70-603+Szczecin"
                 target="_blank"
               >
-                <span className="inline-block">ul. Bytomska 7</span>
-                <span className="inline-block">70-603 Szczecin</span>
+                ul. Bytomska 7, 70-603 Szczecin
               </FooterContactLink>
             </address>
             <div className="mt-4 flex flex-col gap-0.5">
