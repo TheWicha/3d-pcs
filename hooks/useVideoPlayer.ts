@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export function useVideoPlayer(videoRef: RefObject<HTMLVideoElement | null>) {
+export function useVideoPlayer() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [displayedProgress, setDisplayedProgress] = useState(0);
@@ -19,7 +20,7 @@ export function useVideoPlayer(videoRef: RefObject<HTMLVideoElement | null>) {
     const events = ['keydown', 'mousedown', 'touchstart', 'wheel'] as const;
     events.forEach(e => window.addEventListener(e, stopLoopAndFinish, { passive: true }));
     return () => events.forEach(e => window.removeEventListener(e, stopLoopAndFinish));
-  }, [videoRef]);
+  }, []);
 
   const togglePause = () => {
     const v = videoRef.current;
@@ -54,22 +55,16 @@ export function useVideoPlayer(videoRef: RefObject<HTMLVideoElement | null>) {
     const v = videoRef.current;
     if (!v) return;
     v.playbackRate = 1;
-  }, [videoRef]);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
+    const play = v.play();
+    if (play !== undefined) play.catch(() => {});
 
     const updateProgress = () => {
       if (v.buffered.length > 0 && v.duration) {
-        const end = v.buffered.end(v.buffered.length - 1);
-        setProgress(Math.min(100, (end / v.duration) * 100));
+        setProgress(Math.min(100, (v.buffered.end(v.buffered.length - 1) / v.duration) * 100));
       }
     };
-    const onReady = () => {
-      setProgress(100);
-      setLoading(false);
-    };
+    const onReady = () => { setProgress(100); setLoading(false); };
+
     v.addEventListener('progress', updateProgress);
     v.addEventListener('canplaythrough', onReady);
     if (v.readyState >= 4) onReady();
@@ -77,7 +72,7 @@ export function useVideoPlayer(videoRef: RefObject<HTMLVideoElement | null>) {
       v.removeEventListener('progress', updateProgress);
       v.removeEventListener('canplaythrough', onReady);
     };
-  }, [videoRef]);
+  }, []);
 
-  return { loading, displayedProgress, paused, togglePause };
+  return { videoRef, loading, displayedProgress, paused, togglePause };
 }

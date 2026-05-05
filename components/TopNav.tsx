@@ -7,11 +7,13 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 export default function TopNav() {
   const { theme, toggle } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav
@@ -34,19 +36,31 @@ export default function TopNav() {
         </div>
 
         <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-          {NAV_ITEMS.map(item => (
-            <Link
-              key={item.code}
-              href={item.href}
-              className={cn(
-                'flex items-center gap-1.5 no-underline transition-colors duration-150',
-                'text-foreground'
-              )}
-            >
-              <span className="font-mono text-[12px] text-foreground">{item.code}</span>
-              <span className="text-[14px] font-medium">{item.label}</span>
-            </Link>
-          ))}
+          {NAV_ITEMS.map(item => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.code}
+                href={item.href}
+                className="group relative flex items-center gap-1.5 no-underline text-foreground pb-1"
+              >
+                <span
+                  className={cn(
+                    'text-[14px] font-medium transition-colors duration-150',
+                    active ? 'text-foreground' : 'text-(--fg-2) group-hover:text-foreground'
+                  )}
+                >
+                  {item.label}
+                </span>
+                <span
+                  className={cn(
+                    'absolute bottom-0 left-0 h-0.5 bg-accent transition-[width] duration-300 ease-out',
+                    active ? 'w-full' : 'w-0 group-hover:w-full'
+                  )}
+                />
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-3">

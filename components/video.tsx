@@ -1,6 +1,5 @@
 'use client';
 
-import { useRef } from 'react';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { Pause, Play } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
@@ -17,18 +16,26 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
   );
 }
 
-export default function VideoController() {
-  const videoElRef = useRef<HTMLVideoElement | null>(
-    typeof document !== 'undefined'
-      ? (document.getElementById('hero-video') as HTMLVideoElement | null)
-      : null
-  );
+export default function Video() {
+  const { videoRef, loading, displayedProgress, paused, togglePause } = useVideoPlayer();
   const { theme } = useTheme();
-  const { loading, displayedProgress, paused, togglePause } = useVideoPlayer(videoElRef);
 
   return (
-    <>
-      <style>{`#hero-video{filter:${theme === 'light' ? 'invert(1)' : 'none'};will-change:opacity}`}</style>
+    <div className="absolute inset-0 w-full h-full">
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="auto"
+        poster="/video/poster.jpg"
+        style={{ filter: theme === 'light' ? 'invert(1)' : 'none', willChange: 'opacity' }}
+        className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.15] brightness-[0.85] transition-opacity duration-700 ease-in-out opacity-100"
+      >
+        <source src="/video/animacja.webm" type="video/webm" />
+        <source src="/video/freecompress-animacja.mp4" type="video/mp4" />
+      </video>
       {loading && <VideoLoadingOverlay progress={displayedProgress} />}
       {!loading && (
         <button
@@ -42,6 +49,6 @@ export default function VideoController() {
           <span className="sr-only">wideo</span>
         </button>
       )}
-    </>
+    </div>
   );
 }
