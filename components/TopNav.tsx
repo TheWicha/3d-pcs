@@ -150,15 +150,21 @@ export default function TopNav() {
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="lg:hidden py-4 px-6 flex flex-col gap-4 border-t border-(--border) bg-(--bg-3)">
+      <motion.div
+        initial={false}
+        animate={mobileOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+        transition={{ duration: 0.25, ease: 'easeInOut' }}
+        className="lg:hidden overflow-hidden border-t border-(--border) bg-(--bg-3)"
+        style={{ borderTopWidth: mobileOpen ? undefined : 0 }}
+      >
+        <div className="py-4 px-6 flex flex-col gap-4">
           {NAV_ITEMS.map(item => (
             <Link
               key={item.code}
               href={item.href}
+              onClick={() => setMobileOpen(false)}
               className="flex items-center gap-2 no-underline text-foreground transition-colors duration-150 hover:text-foreground"
             >
-              <span className="font-mono text-[12px] text-foreground">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
             </Link>
           ))}
@@ -171,7 +177,7 @@ export default function TopNav() {
             </button>
           </div>
         </div>
-      )}
+      </motion.div>
     </nav>
   );
 }
