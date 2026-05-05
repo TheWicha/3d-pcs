@@ -35,6 +35,7 @@ function Ship({
 }
 
 useGLTF.setDecoderPath('/draco/');
+useGLTF.preload('/3d/PCS_ship.glb');
 
 export default function ShipModel3D({ direction = 1 }: { direction?: 1 | -1 }) {
   const scrollProgress = useRef<number>(0);

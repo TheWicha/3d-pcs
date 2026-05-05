@@ -50,6 +50,7 @@ export default async function RootLayout({
           type="video/webm"
           fetchPriority="high"
         />
+        <link rel="preload" href="/3d/PCS_ship.glb" as="fetch" crossOrigin="anonymous" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <a

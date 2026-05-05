@@ -7,7 +7,7 @@ import PartnersSection from '@/components/sections/PartnersSection';
 import PortsSection from '@/components/sections/PortsSection';
 import StatsSection from '@/components/sections/StatsSection';
 import UsersSection from '@/components/sections/UsersSection';
-import ShipModel3D from '@/components/ShipModel3DLazy';
+import ShipModel3D from '@/components/ShipModel3D';
 
 export default function Home() {
   return (
