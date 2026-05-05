@@ -1,7 +1,7 @@
 'use client';
 
+import { useRef } from 'react';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
-import { cn } from '@/utils/cn';
 import { Pause, Play } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
@@ -9,7 +9,7 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none bg-(--bg-2) transition-opacity duration-500">
       <div className="absolute inset-0 bg-black/35" />
-      <div className="absolute inset-0 animate-[video-grid-pulse_1.2s_ease-in-out_infinite] bg-[linear-gradient(var(--border-2)_1px,transparent_1px),linear-gradient(90deg,var(--border-2)_1px,transparent_1px)] bg-size-[64px_64px]" />
+      <div className="absolute inset-0 will-change-[opacity] animate-[video-grid-pulse_1.2s_ease-in-out_infinite] bg-[linear-gradient(var(--border-2)_1px,transparent_1px),linear-gradient(90deg,var(--border-2)_1px,transparent_1px)] bg-size-[64px_64px]" />
       <div className="relative z-2 font-mono font-medium text-[28px] text-foreground tracking-[0.04em] [text-shadow:0_2px_12px_#000a]">
         {Math.round(progress)}%
       </div>
@@ -17,31 +17,20 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
   );
 }
 
-export default function Video() {
-  const { videoRef, loading, displayedProgress, showVideo, paused, togglePause, onEnded } =
-    useVideoPlayer();
-
+export default function VideoController() {
+  const videoElRef = useRef<HTMLVideoElement | null>(
+    typeof document !== 'undefined'
+      ? (document.getElementById('hero-video') as HTMLVideoElement | null)
+      : null
+  );
   const { theme } = useTheme();
+  const { loading, displayedProgress, paused, togglePause } = useVideoPlayer(videoElRef);
 
   return (
-    <div className="absolute inset-0 w-full h-full">
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        playsInline
-        loop
-        style={{ filter: theme === 'light' ? 'invert(1)' : 'invert(0)' }}
-        onEnded={onEnded}
-        className={cn(
-          'absolute inset-0 w-full h-full object-cover grayscale contrast-[1.15] brightness-[0.85] transition-opacity duration-700 ease-in-out',
-          showVideo ? 'opacity-100' : 'opacity-0'
-        )}
-      >
-        <source src="/video/animacja.mp4" type="video/mp4" />
-      </video>
+    <>
+      <style>{`#hero-video{filter:${theme === 'light' ? 'invert(1)' : 'none'};will-change:opacity}`}</style>
       {loading && <VideoLoadingOverlay progress={displayedProgress} />}
-      {showVideo && (
+      {!loading && (
         <button
           onClick={togglePause}
           onMouseDown={e => e.stopPropagation()}
@@ -52,6 +41,6 @@ export default function Video() {
           {paused ? 'wznów' : 'pauza'}
         </button>
       )}
-    </div>
+    </>
   );
 }

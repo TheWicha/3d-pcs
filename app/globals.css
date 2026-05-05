@@ -39,7 +39,7 @@
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
   --color-surface: var(--surface);
-  --font-sans: 'Chivo', Arial, sans-serif;
+  --font-sans: var(--font-chivo, 'Chivo', Arial, sans-serif);
   --font-mono: var(--font-jetbrains, monospace);
   --font-michroma: var(--font-michroma, 'Roboto', sans-serif);
 }
@@ -52,7 +52,7 @@
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Chivo', Arial, sans-serif;
+  font-family: var(--font-chivo, 'Chivo', Arial, sans-serif);
 }
 
 button,
@@ -84,14 +84,6 @@ a {
 }
 *::-webkit-scrollbar-corner {
   background: var(--bg-2);
-}
-
-@font-face {
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/chivo/v21/va9I4kzIxd1KFrBnQeNHkQ.woff2) format('woff2');
 }
 
 [data-theme='dark'] .logo-dark-invert {

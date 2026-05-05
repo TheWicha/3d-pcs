@@ -6,12 +6,19 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import TopNav from '@/components/TopNav';
 import Footer from '@/components/sections/Footer';
-import { Roboto } from 'next/font/google';
+import { Chivo, Roboto } from 'next/font/google';
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-michroma',
+});
+
+const chivo = Chivo({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  display: 'swap',
+  variable: '--font-chivo',
 });
 
 export const metadata: Metadata = {
@@ -31,10 +38,24 @@ export default async function RootLayout({
     <html
       lang="pl"
       data-theme={theme}
-      className={`${roboto.variable} h-full antialiased`}
+      className={`${roboto.variable} ${chivo.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        <link
+          rel="preload"
+          href="/video/poster.jpg"
+          as="image"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          href="/video/animacja.webm"
+          as="video"
+          type="video/webm"
+          fetchPriority="high"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider initialTheme={theme}>
           <a
@@ -46,7 +67,9 @@ export default async function RootLayout({
           <header role="banner">
             <TopNav />
           </header>
-          <main id="main-content" className="flex-1 mt-21">{children}</main>
+          <main id="main-content" className="flex-1 mt-21">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

@@ -18,7 +18,7 @@ export default function TopNav() {
       aria-label="Główna nawigacja"
       className="fixed top-0 left-0 right-0 z-50 border-b border-(--border) bg-(--nav-bg) backdrop-blur-xl"
     >
-      <div className="flex items-center justify-between px-6 py-3.5">
+      <div className="relative flex items-center justify-between px-6 py-3.5">
         <div className="flex items-center shrink-0">
           <Link href="/" aria-label="Strona główna Polski PCS">
             <div className="relative w-30 h-15">
@@ -33,9 +33,9 @@ export default function TopNav() {
           </Link>
         </div>
 
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {NAV_ITEMS.map(item => (
-            <a
+            <Link
               key={item.code}
               href={item.href}
               className={cn(
@@ -45,20 +45,57 @@ export default function TopNav() {
             >
               <span className="font-mono text-[12px] text-(--fg-2)">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 border-r border-(--border) pr-3 mr-0">
+            <Link
+              href="https://x.com/polskipcs"
+              aria-label="X (Twitter)"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-7 h-7 flex items-center justify-center border border-(--border) text-(--fg-2) transition-colors duration-150 hover:border-accent hover:text-accent"
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
+              </svg>
+            </Link>
+            <Link
+              href="https://linkedin.com/company/polskipcs"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-7 h-7 flex items-center justify-center border border-(--border) text-(--fg-2) transition-colors duration-150 hover:border-accent hover:text-accent"
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </Link>
+          </div>
           <button
             aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'}
             onClick={toggle}
             className="hidden sm:flex items-center bg-transparent border-0 p-0"
           >
-            <motion.div
-              animate={{ backgroundColor: theme === 'dark' ? '#1a2030' : '#d4cfc8' }}
-              transition={{ duration: 0.3 }}
-              className="w-11 h-6 rounded-xl border border-(--border) flex items-center px-0.75 cursor-pointer"
+            <div
+              className="w-11 h-6 rounded-xl border border-(--border) flex items-center px-0.75 cursor-pointer transition-colors duration-300"
+              style={{ backgroundColor: theme === 'dark' ? '#1a2030' : '#d4cfc8' }}
             >
               <motion.div
                 animate={{ x: theme === 'dark' ? 0 : 20 }}
@@ -71,7 +108,7 @@ export default function TopNav() {
                   <SunMedium size={16} color="var(--accent-fg)" />
                 )}
               </motion.div>
-            </motion.div>
+            </div>
           </button>
 
           <button
@@ -102,14 +139,14 @@ export default function TopNav() {
       {mobileOpen && (
         <div className="lg:hidden py-4 px-6 flex flex-col gap-4 border-t border-(--border) bg-(--bg-3)">
           {NAV_ITEMS.map(item => (
-            <a
+            <Link
               key={item.code}
               href={item.href}
               className="flex items-center gap-2 no-underline text-foreground transition-colors duration-150 hover:text-foreground"
             >
               <span className="font-mono text-[12px] text-(--fg-2)">{item.code}</span>
               <span className="text-[14px] font-medium">{item.label}</span>
-            </a>
+            </Link>
           ))}
           <div className="flex items-center gap-3 pt-3 border-t border-(--border)">
             <button className="font-mono text-[12px] text-foreground bg-transparent border-0">

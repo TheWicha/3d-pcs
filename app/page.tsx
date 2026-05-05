@@ -7,19 +7,28 @@ import PartnersSection from '@/components/sections/PartnersSection';
 import PortsSection from '@/components/sections/PortsSection';
 import StatsSection from '@/components/sections/StatsSection';
 import UsersSection from '@/components/sections/UsersSection';
+import ShipModel3D from '@/components/ShipModel3DLazy';
 
 export default function Home() {
   return (
     <>
       <Hero />
       <PartnersSection />
+
       <ModulesSection />
-      <AboutSection />
+      <div className="relative">
+        <ShipModel3D direction={1} />
+        <AboutSection />
+      </div>
       <BenefitsSection />
+
       <NewsSection />
       <UsersSection />
       <PortsSection />
-      <StatsSection />
+      <div className="relative">
+        <ShipModel3D direction={-1} />
+        <StatsSection />
+      </div>
     </>
   );
 }

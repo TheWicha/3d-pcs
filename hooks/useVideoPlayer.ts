@@ -1,41 +1,37 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 
-export function useVideoPlayer() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+export function useVideoPlayer(videoRef: RefObject<HTMLVideoElement | null>) {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [displayedProgress, setDisplayedProgress] = useState(0);
-  const [showVideo, setShowVideo] = useState(false);
   const [paused, setPaused] = useState(false);
   const interactedRef = useRef(false);
 
-  const stopLoopAndFinish = () => {
-    const video = videoRef.current;
-    if (!video || interactedRef.current) return;
-    interactedRef.current = true;
-    video.loop = false;
-  };
-
   useEffect(() => {
+    const stopLoopAndFinish = () => {
+      const v = videoRef.current;
+      if (!v || interactedRef.current) return;
+      interactedRef.current = true;
+      v.loop = false;
+    };
     const events = ['keydown', 'mousedown', 'touchstart', 'wheel'] as const;
-    const handler = () => stopLoopAndFinish();
-    events.forEach(e => window.addEventListener(e, handler, { passive: true }));
-    return () => events.forEach(e => window.removeEventListener(e, handler));
-  }, []);
+    events.forEach(e => window.addEventListener(e, stopLoopAndFinish, { passive: true }));
+    return () => events.forEach(e => window.removeEventListener(e, stopLoopAndFinish));
+  }, [videoRef]);
 
   const togglePause = () => {
-    const video = videoRef.current;
-    if (!video) return;
+    const v = videoRef.current;
+    if (!v) return;
     if (paused) {
       interactedRef.current = false;
-      video.loop = true;
-      video.currentTime = 0;
-      video.play();
+      v.loop = true;
+      v.currentTime = 0;
+      v.play();
       setPaused(false);
     } else {
-      video.pause();
+      v.pause();
       setPaused(true);
     }
   };
@@ -55,49 +51,33 @@ export function useVideoPlayer() {
   }, [progress, displayedProgress]);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 1;
-    }
-  }, []);
+    const v = videoRef.current;
+    if (!v) return;
+    v.playbackRate = 1;
+  }, [videoRef]);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const v = videoRef.current;
+    if (!v) return;
 
     const updateProgress = () => {
-      if (video.buffered.length > 0 && video.duration) {
-        const end = video.buffered.end(video.buffered.length - 1);
-        setProgress(Math.min(100, (end / video.duration) * 100));
+      if (v.buffered.length > 0 && v.duration) {
+        const end = v.buffered.end(v.buffered.length - 1);
+        setProgress(Math.min(100, (end / v.duration) * 100));
       }
     };
     const onReady = () => {
       setProgress(100);
-      setTimeout(() => {
-        setLoading(false);
-        setShowVideo(true);
-      }, 200);
+      setLoading(false);
     };
-    video.addEventListener('progress', updateProgress);
-    video.addEventListener('canplaythrough', onReady);
-    if (video.readyState >= 4) onReady();
+    v.addEventListener('progress', updateProgress);
+    v.addEventListener('canplaythrough', onReady);
+    if (v.readyState >= 4) onReady();
     return () => {
-      video.removeEventListener('progress', updateProgress);
-      video.removeEventListener('canplaythrough', onReady);
+      v.removeEventListener('progress', updateProgress);
+      v.removeEventListener('canplaythrough', onReady);
     };
-  }, []);
+  }, [videoRef]);
 
-  const onEnded = () => {
-    videoRef.current?.pause();
-    setPaused(true);
-  };
-
-  return {
-    videoRef,
-    loading,
-    displayedProgress,
-    showVideo,
-    paused,
-    togglePause,
-    onEnded,
-  };
+  return { loading, displayedProgress, paused, togglePause };
 }

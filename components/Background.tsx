@@ -1,5 +1,6 @@
 import type { BackgroundProps } from '@/types';
-import Video from './video';
+import VideoElement from './VideoElement';
+import VideoController from './video';
 
 function Crosshair() {
   return (
@@ -15,7 +16,8 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      <Video />
+      <VideoElement />
+      <VideoController />
       <div
         className="absolute inset-0"
         style={{

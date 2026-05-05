@@ -58,7 +58,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
       {hasMessages && (
         <div className="overflow-hidden border-b border-(--border) mb-4">
           <div className="flex flex-col overflow-y-auto max-h-90 py-4">
-            {messages.map((m, i) => (
+            {messages.map((msg, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 6 }}
@@ -66,25 +66,25 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                 transition={{ duration: 0.22 }}
                 className={cn(
                   'flex gap-3.5 px-6 py-3 items-start',
-                  m.role === 'user' ? 'flex-row-reverse' : 'flex-row',
+                  msg.role === 'user' ? 'flex-row-reverse' : 'flex-row',
                   (i < messages.length - 1 || thinking) && 'border-b border-(--border-2)'
                 )}
               >
                 <span
                   className={cn(
                     'font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5',
-                    m.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
+                    msg.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
                   )}
                 >
-                  {m.role === 'user' ? 'TY' : 'PCS'}
+                  {msg.role === 'user' ? 'TY' : 'PCS'}
                 </span>
                 <span
                   className={cn(
                     'font-sans text-base leading-[1.6]',
-                    m.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
+                    msg.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
                   )}
                 >
-                  <MsgText text={m.text} />
+                  <MsgText text={msg.text} />
                 </span>
               </motion.div>
             ))}
