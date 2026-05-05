@@ -75,7 +75,7 @@ export default function TopNav() {
           </button>
 
           <button
-            aria-label="Zmień język"
+            aria-label="PL / EN — zmień język"
             className="hidden sm:flex items-center font-mono text-[12px] text-foreground bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground"
           >
             PL / EN

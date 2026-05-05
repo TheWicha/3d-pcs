@@ -52,7 +52,7 @@ function FooterContactLink({
       {opensInNewTab && (
         <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-foreground">
           <ExternalLink size={12} aria-hidden="true" />
-          otwiera się w nowej karcie
+          <span className="sr-only">otwiera się w nowej karcie</span>
         </span>
       )}
     </Link>
@@ -140,7 +140,8 @@ export default function Footer() {
                 href="https://maps.google.com/?q=ul.+Bytomska+7,+70-603+Szczecin"
                 target="_blank"
               >
-                ul. Bytomska 7, 70-603 Szczecin
+                <span className="inline-block">ul. Bytomska 7</span>
+                <span className="inline-block">70-603 Szczecin</span>
               </FooterContactLink>
             </address>
             <div className="mt-4 flex flex-col gap-0.5">
@@ -183,7 +184,7 @@ export default function Footer() {
 
       <div className="max-w-300 mx-auto px-6 py-5 border-t border-(--border) flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <span className="font-mono text-[12px] tracking-[0.06em] text-(--fg-3)">
-          © 2026 Polski PCS sp. z o.o.
+          © {new Date().getFullYear()} Polski PCS sp. z o.o.
         </span>
       </div>
     </footer>

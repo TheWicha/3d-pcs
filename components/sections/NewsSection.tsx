@@ -30,38 +30,39 @@ export default function NewsSection() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <ol className="grid grid-cols-1 lg:grid-cols-3 gap-4 list-none m-0 p-0">
         {NEWS.map((item, i) => (
-          <Link
-            href={item.link}
-            key={i}
-            className={cn(
-              'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 min-h-88 flex flex-col transition-[transform,border-color,background] duration-300',
-              'hover:-translate-y-0.5 hover:border-accent'
-            )}
-          >
-            <div className="absolute right-0 top-0 h-1.5 w-20 bg-accent" />
-
-            <time
-              dateTime={item.date}
-              className="font-mono text-[12px] tracking-widest text-(--fg-2) block mb-3.5 uppercase"
+          <li key={i}>
+            <Link
+              href={item.link}
+              className={cn(
+                'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 min-h-88 flex flex-col transition-[transform,border-color,background] duration-300',
+                'hover:-translate-y-0.5 hover:border-accent'
+              )}
             >
-              {item.date}
-            </time>
-            <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,20px)] tracking-[0.03em] text-foreground mt-0 mb-3 leading-[1.4]">
-              {item.title}
-            </h3>
-            <p className="text-[16px] leading-[1.6] text-(--fg-2) mt-0 mb-0">{item.excerpt}</p>
+              <div className="absolute right-0 top-0 h-1.5 w-20 bg-accent" />
 
-            <div className="mt-auto pt-6">
-              <div className="h-1 w-16 bg-accent mb-4" />
-              <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-black tracking-[0.04em]">
-                Czytaj więcej <ArrowRight size={12} />
-              </span>
-            </div>
-          </Link>
+              <time
+                dateTime={item.date}
+                className="font-mono text-[12px] tracking-widest text-(--fg-2) block mb-3.5 uppercase"
+              >
+                {item.date}
+              </time>
+              <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,20px)] tracking-[0.03em] text-foreground mt-0 mb-3 leading-[1.4]">
+                {item.title}
+              </h3>
+              <p className="text-[16px] leading-[1.6] text-(--fg-2) mt-0 mb-0">{item.excerpt}</p>
+
+              <div className="mt-auto pt-6">
+                <div className="h-1 w-16 bg-accent mb-4" />
+                <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-foreground tracking-[0.04em]">
+                  Czytaj więcej <ArrowRight size={12} />
+                </span>
+              </div>
+            </Link>
+          </li>
         ))}
-      </div>
+      </ol>
     </SectionWrapper>
   );
 }

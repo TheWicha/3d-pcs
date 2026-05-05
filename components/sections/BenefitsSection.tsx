@@ -14,9 +14,9 @@ export default function BenefitsSection() {
         Korzyści systemu PCS
       </SectionHeading>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-(--border)">
+      <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-(--border) list-none m-0 p-0">
         {BENEFITS.map((benefit, i) => (
-          <div
+          <li
             key={i}
             className="p-9 border-r border-b border-(--border) transition-[background] duration-200 hover:bg-surface"
           >
@@ -27,9 +27,9 @@ export default function BenefitsSection() {
               {benefit.title}
             </h3>
             <p className="text-[14px] leading-[1.6] text-(--fg-3) m-0">{benefit.subtitle}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
     </SectionWrapper>
   );
 }

@@ -43,37 +43,38 @@ export default function PartnersSection() {
         </SectionHeading>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+      <ol className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 list-none m-0 p-0">
         {PARTNERS.map((p, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            aria-label={p.alt}
-            className={cn(
-              'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] px-4 py-6 sm:px-6 sm:py-7 min-h-32 sm:min-h-36 flex items-center justify-center transition-[transform,border-color,opacity] duration-300',
-              'hover:-translate-y-0.5 hover:border-accent',
-              active === i && ' border-accent'
-            )}
-          >
-            <span
+          <li key={i}>
+            <button
+              onClick={() => setActive(i)}
+              aria-label={p.alt}
               className={cn(
-                'absolute top-0 h-1.5 bg-accent transition-[width,left,right,opacity] duration-300',
-                active === i ? 'left-0 right-0 w-auto ' : 'right-0 w-14 opacity-70'
+                'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] px-4 py-6 sm:px-6 sm:py-7 min-h-32 sm:min-h-36 flex items-center justify-center transition-[transform,border-color,opacity] duration-300 w-full',
+                'hover:-translate-y-0.5 hover:border-accent',
+                active === i && ' border-accent'
               )}
-            />
-            <Image
-              src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
-              alt={p.alt}
-              width={180}
-              height={64}
-              className={cn(
-                'w-auto h-10 sm:h-12 lg:h-14 max-w-36 sm:max-w-42 lg:max-w-48 object-contain',
-                p.darkLogo && 'logo-dark-invert'
-              )}
-            />
-          </button>
+            >
+              <span
+                className={cn(
+                  'absolute top-0 h-1.5 bg-accent transition-[width,left,right,opacity] duration-300',
+                  active === i ? 'left-0 right-0 w-auto ' : 'right-0 w-14 opacity-70'
+                )}
+              />
+              <Image
+                src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
+                alt={p.alt}
+                width={180}
+                height={64}
+                className={cn(
+                  'w-auto h-10 sm:h-12 lg:h-14 max-w-36 sm:max-w-42 lg:max-w-48 object-contain',
+                  p.darkLogo && 'logo-dark-invert'
+                )}
+              />
+            </button>
+          </li>
         ))}
-      </div>
+      </ol>
     </SectionWrapper>
   );
 }

@@ -26,9 +26,9 @@ export default function ModulesSection() {
           </p>
         </div>
 
-        <div className="flex-1 flex flex-col gap-0 border-t border-(--border)">
+        <ol className="flex-1 flex flex-col gap-0 border-t border-(--border) list-none m-0 p-0">
           {MODULES.map((mod, i) => (
-            <div key={i} className="border-b border-(--border) py-7">
+            <li key={i} className="border-b border-(--border) py-7">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-michroma font-normal text-[clamp(18px,1.6vw,22px)] tracking-[0.04em] text-foreground m-0">
                   {mod.title}
@@ -36,7 +36,7 @@ export default function ModulesSection() {
                 <Button
                   variant="primary"
                   icon={<ArrowRight size={14} />}
-                  aria-label={`Przejdź do ${mod.title}`}
+                  aria-label={`Otwórz ${mod.title}`}
                 >
                   Otwórz
                 </Button>
@@ -53,9 +53,9 @@ export default function ModulesSection() {
                   ))}
                 </div>
               )}
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </SectionWrapper>
   );
