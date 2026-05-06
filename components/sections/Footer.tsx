@@ -123,7 +123,7 @@ export default function Footer() {
               <FooterLink href="#news-heading">Aktualności</FooterLink>
               <FooterLink href="#users-heading">Użytkownicy</FooterLink>
               <FooterLink href="#ports-heading">Porty</FooterLink>
-              <FooterLink href="#kontakt">Kontakt</FooterLink>
+              <FooterLink href="/kontakt">Kontakt</FooterLink>
             </nav>
           </div>
 

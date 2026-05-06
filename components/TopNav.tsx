@@ -19,6 +19,7 @@ export default function TopNav() {
     <nav
       aria-label="Główna nawigacja"
       className="fixed top-0 left-0 right-0 z-50 border-b border-(--border) bg-(--nav-bg) backdrop-blur-xl"
+      style={{ backgroundColor: theme === 'dark' ? '#0a0c10' : '#f0ede8' }}
     >
       <div className="relative flex items-center justify-between px-6 py-3.5">
         <div className="flex items-center shrink-0">
