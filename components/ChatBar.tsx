@@ -97,8 +97,11 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
                   exit={{ opacity: 0 }}
                   className="flex gap-3.5 px-6 py-3 items-center"
                 >
-                  <span className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0">
-                    PCS
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0"
+                  >
+                    PCS2
                   </span>
                   <span className="flex gap-1.25">
                     {[0, 1, 2].map(dot => (
