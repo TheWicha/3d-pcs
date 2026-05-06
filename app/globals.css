@@ -2,7 +2,7 @@
 
 :root,
 [data-theme='light'] {
-  --nav-bg: color-mix(in srgb, var(--bg) 100%, transparent);
+  --nav-bg: #f0ede8;
   --bg: #f0ede8;
   --bg-2: #e8e5e0;
   --bg-3: #faf8f5;
@@ -18,7 +18,7 @@
 }
 
 [data-theme='dark'] {
-  --nav-bg: color-mix(in srgb, var(--bg) 80%, transparent);
+  --nav-bg: #0a0c10;
   --bg: #06080c;
   --bg-2: #0d1117;
   --bg-3: rgba(10, 13, 18, 0.95);

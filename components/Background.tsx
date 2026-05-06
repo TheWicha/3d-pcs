@@ -17,6 +17,7 @@ export default function Background({ overlay = 0.7 }: BackgroundProps) {
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <Video />
       <div
+        aria-hidden="true"
         className="absolute inset-0"
         style={{
           background: `linear-gradient(180deg,

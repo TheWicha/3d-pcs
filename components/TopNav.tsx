@@ -26,7 +26,8 @@ export default function TopNav() {
             <div className="relative w-[128px] h-[67px]">
               <Image
                 src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
-                alt="Polski PCS"
+                alt=""
+                aria-hidden="true"
                 fill
                 sizes="120px"
                 priority

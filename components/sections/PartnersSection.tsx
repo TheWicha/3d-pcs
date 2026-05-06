@@ -63,7 +63,8 @@ export default function PartnersSection() {
               />
               <Image
                 src={theme === 'dark' && p.darkSrc ? p.darkSrc : p.src}
-                alt={p.alt}
+                alt=""
+                aria-hidden="true"
                 width={180}
                 height={64}
                 className={cn(
