@@ -35,9 +35,9 @@ export default function UsersSection() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 list-none m-0 p-0">
           {USER_TYPES.map((type, i) => (
-            <article
+            <li
               key={i}
               className="relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] p-6 sm:p-7 min-h-56"
             >
@@ -55,9 +55,9 @@ export default function UsersSection() {
               </h3>
 
               <p className="text-[15px] leading-[1.65] text-(--fg-2) m-0">{type.description}</p>
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </SectionWrapper>
   );

@@ -20,9 +20,9 @@ export default function HeroContent() {
       className="relative z-10 w-full px-4 flex flex-col items-center max-w-190"
     >
       <div className="w-full mb-5 max-w-180 px-4 py-3 border border-(--border) bg-[color-mix(in_srgb,var(--bg)_84%,transparent)] backdrop-blur-[2px]">
-        <h1 className="font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] text-foreground mt-0 mb-2 uppercase">
+        <p className="font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] text-foreground mt-0 mb-2 uppercase">
           Sprawdź status kontenera
-        </h1>
+        </p>
         <p className="text-[clamp(13px,1.2vw,15px)] leading-relaxed text-(--fg-2) m-0">
           Wpisz numer kontenera (np. MSCU1234567), aby zobaczyć czy dopłynął.
         </p>

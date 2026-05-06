@@ -42,16 +42,16 @@ export default function ModulesSection() {
                 </Button>
               </div>
               {mod.items.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2 list-none m-0 p-0">
                   {mod.items.map((item, j) => (
-                    <span
+                    <li
                       key={j}
                       className="text-[14px] text-(--fg-2) bg-surface border border-(--border) px-3.5 py-1.5"
                     >
                       {item}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               )}
             </li>
           ))}

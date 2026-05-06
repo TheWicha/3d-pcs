@@ -21,9 +21,9 @@ export default function StatsSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 list-none m-0 p-0">
         {STATS.map((stat, i) => (
-          <article
+          <li
             key={i}
             className={[
               'relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-6 sm:p-8 transition-[transform,border-color] duration-300',
@@ -56,9 +56,9 @@ export default function StatsSection() {
             <p className="text-[14px] leading-[1.6] text-(--fg-2) m-0 max-w-md">
               {stat.description}
             </p>
-          </article>
+          </li>
         ))}
-      </div>
+      </ul>
     </SectionWrapper>
   );
 }

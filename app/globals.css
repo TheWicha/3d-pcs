@@ -44,9 +44,9 @@
   --font-michroma: var(--font-michroma, 'Roboto', sans-serif);
 }
 *:focus {
-  outline: 2px solid #ffffff !important;
-  outline-offset: 2px !important;
-  box-shadow: 0 0 0 2px black !important;
+  outline: 2px solid var(--fg) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 5px var(--bg) !important;
 }
 
 body {
