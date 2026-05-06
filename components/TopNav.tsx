@@ -50,6 +50,7 @@ export default function TopNav() {
                     'text-[14px] font-medium transition-colors duration-150',
                     active ? 'text-foreground' : 'text-(--fg-2) group-hover:text-foreground'
                   )}
+                  style={{ color: active ? (theme === 'dark' ? '#ffffff' : '#1a1814') : (theme === 'dark' ? '#d4d4d5' : '#2e2c29') }}
                 >
                   {item.label}
                 </span>
@@ -129,6 +130,7 @@ export default function TopNav() {
           <button
             aria-label="PL / EN — zmień język"
             className="hidden sm:flex items-center font-mono text-[12px] text-foreground bg-transparent border-0 px-2 py-1 transition-colors duration-150 hover:text-foreground"
+            style={{ color: theme === 'dark' ? '#ffffff' : '#1a1814' }}
           >
             PL / EN
           </button>
@@ -136,6 +138,7 @@ export default function TopNav() {
           <button
             aria-label="Zaloguj się do systemu PCS"
             className="hidden sm:flex items-center gap-1.5 text-[13px] font-semibold text-accent-fg bg-accent border-0 px-3.5 py-1.75 transition-opacity duration-150 hover:opacity-85"
+            style={{ color: '#06080c', backgroundColor: '#00edc2' }}
           >
             Zaloguj się
             <ArrowRight size={13} />
