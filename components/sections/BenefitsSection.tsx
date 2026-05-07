@@ -21,7 +21,7 @@ export default function BenefitsSection() {
             key={i}
             className="p-9 border-r border-b border-(--border) transition-[background] duration-200 hover:bg-surface"
           >
-            <Text aria-hidden="true" variant="mono" color="accent" as="span" className="block mb-4">
+            <Text aria-hidden="true" variant="mono" color="accent-text" as="span" className="block mb-4">
               {benefit.code}
             </Text>
             <Text variant="subheading" className="mt-0 mb-1">

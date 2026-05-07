@@ -18,7 +18,7 @@ type Variant =
   | 'mono-accent'
   | 'meta';
 
-type Color = 'default' | 'muted' | 'subtle' | 'accent' | 'inherit';
+type Color = 'default' | 'muted' | 'subtle' | 'accent' | 'accent-text' | 'inherit';
 
 type TextProps<T extends As = 'p'> = {
   variant?: Variant;
@@ -50,6 +50,7 @@ const colors: Record<Color, string> = {
   muted: 'text-(--fg-2)',
   subtle: 'text-(--fg-3)',
   accent: 'text-accent',
+  'accent-text': 'text-(--accent-dark)',
   inherit: '',
 };
 
