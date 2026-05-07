@@ -20,10 +20,10 @@ export default function TopNav() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-(--border) bg-(--nav-bg) backdrop-blur-xl">
       <div className="relative flex items-center justify-between px-6 py-3.5">
-        <Link href="/" className="block relative w-32 h-17 shrink-0">
+        <Link href="/" aria-label="Polski PCS — strona główna" className="block relative w-32 h-17 shrink-0">
           <Image
             src={theme === 'light' ? '/logo-light.png' : '/logo.png'}
-            alt=""
+            alt="Polski PCS"
             fill
             sizes="120px"
             priority
@@ -63,7 +63,7 @@ export default function TopNav() {
             <SocialLinks />
           </div>
 
-          <button onClick={toggle} className="hidden sm:flex">
+          <button onClick={toggle} aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'} className="hidden sm:flex">
             <div className="w-11 h-6 rounded-xl border border-(--border) flex items-center px-0.75 bg-(--switch-bg) transition-colors">
               <motion.div
                 animate={{ x: theme === 'dark' ? 0 : 20 }}
@@ -89,6 +89,9 @@ export default function TopNav() {
 
           <button
             onClick={() => setMobileOpen(v => !v)}
+            aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
             className="flex lg:hidden w-9 h-9 items-center justify-center text-(--fg-2)"
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -97,6 +100,7 @@ export default function TopNav() {
       </div>
 
       <motion.div
+        id="mobile-nav"
         initial={false}
         animate={mobileOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
         transition={{ duration: 0.25 }}
