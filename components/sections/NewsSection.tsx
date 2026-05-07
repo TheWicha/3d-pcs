@@ -33,13 +33,13 @@ export default function NewsSection() {
         </Button>
       </div>
 
-      <ol className="grid grid-cols-1 lg:grid-cols-3 gap-4 list-none m-0 p-0">
+      <ol className="grid grid-cols-1 lg:grid-cols-3 gap-4 list-none m-0 p-0 items-stretch">
         {NEWS.map((item, i) => (
-          <li key={i}>
+          <li key={i} className="flex">
             <Link
               href={item.link}
               className={cn(
-                'group/card relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 min-h-88 flex flex-col transition-[transform,border-color,background] duration-300',
+                'group/card relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] p-7 sm:p-8 flex flex-col w-full transition-[transform,border-color,background] duration-300',
                 'hover:-translate-y-0.5 hover:border-accent'
               )}
             >
@@ -48,10 +48,10 @@ export default function NewsSection() {
               <Text variant="meta" color="muted" as="time" dateTime={item.date} className="block mb-3.5">
                 {item.date}
               </Text>
-              <Text variant="subheading" className="mt-0 mb-3 leading-[1.4]">
+              <Text variant="subheading" className="mt-0 mb-3 leading-[1.4] line-clamp-3">
                 {item.title}
               </Text>
-              <Text variant="body" color="muted" className="mt-0 mb-0">
+              <Text variant="body" color="muted" className="mt-0 mb-0 flex-1 line-clamp-4">
                 {item.excerpt}
               </Text>
 

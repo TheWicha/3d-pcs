@@ -52,6 +52,7 @@ export default function Video({ videoRef, loading, displayedProgress }: VideoPro
       >
         <source src="/video/animacja.webm" type="video/webm" />
         <source src="/video/freecompress-animacja.mp4" type="video/mp4" />
+        <track kind="descriptions" src="/video/animacja.vtt" srcLang="pl" label="Polski opis wizualny" default />
       </video>
       {loading && <VideoLoadingOverlay progress={displayedProgress} />}
     </div>
