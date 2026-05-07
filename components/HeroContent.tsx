@@ -1,5 +1,6 @@
 'use client';
 
+import AccentBar from '@/components/ui/AccentBar';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import ChatBar from './ChatBar';
 
@@ -19,7 +20,8 @@ export default function HeroContent() {
       variants={item}
       className="relative z-10 w-full px-4 flex flex-col items-center max-w-190"
     >
-      <div className="w-full mb-5 max-w-180 px-4 py-3 border border-(--border) bg-[color-mix(in_srgb,var(--bg)_84%,transparent)] backdrop-blur-[2px]">
+      <div className="relative overflow-hidden w-full mb-5 max-w-180 px-4 py-3 border border-(--border) bg-[color-mix(in_srgb,var(--bg)_84%,transparent)] backdrop-blur-[2px]">
+        <AccentBar />
         <h1 className="font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] text-foreground mt-0 mb-2 uppercase">
           Sprawdź status kontenera
         </h1>

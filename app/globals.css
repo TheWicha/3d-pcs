@@ -12,9 +12,16 @@
   --border: rgba(26, 24, 20, 0.35);
   --border-2: rgba(26, 24, 20, 0.14);
   --surface: #ede9e3;
+
   --accent: #00edc2;
   --accent-dark: #005546;
   --accent-fg: #06080c;
+
+  --nav-link-active: #1a1814;
+  --nav-link-inactive: #2e2c29;
+  --switch-bg: #d4cfc8;
+  --cta-bg: #00edc2;
+  --cta-fg: #06080c;
 }
 
 [data-theme='dark'] {
@@ -28,9 +35,14 @@
   --border: rgba(255, 255, 255, 0.12);
   --border-2: rgba(255, 255, 255, 0.06);
   --surface: rgba(255, 255, 255, 0.04);
+
   --accent: #00edc2;
   --accent-dark: #00a88a;
   --accent-fg: #06080c;
+
+  --nav-link-active: #ffffff;
+  --nav-link-inactive: #d4d4d5;
+  --switch-bg: #1a2030;
 }
 
 @theme inline {
@@ -41,8 +53,8 @@
   --color-surface: var(--surface);
   --font-sans: var(--font-roboto, 'Roboto', sans-serif);
   --font-mono: var(--font-roboto, 'Roboto', monospace);
-  --font-michroma: var(--font-roboto, 'Roboto', sans-serif);
 }
+
 *:focus {
   outline: 2px solid var(--fg) !important;
   outline-offset: 3px !important;
@@ -65,55 +77,36 @@ a {
   opacity: 1;
 }
 
-/* ── Scrollbar ── */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--border) var(--bg-2);
 }
+
 *::-webkit-scrollbar {
   width: 8px;
   background: var(--bg-2);
 }
+
 *::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 6px;
-  transition: background 0.2s;
 }
+
 *::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
-}
-*::-webkit-scrollbar-corner {
-  background: var(--bg-2);
 }
 
 [data-theme='dark'] .logo-dark-invert {
   filter: invert(1) brightness(2);
 }
 
-@keyframes ping-dot {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  70% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-}
-@keyframes video-grid-pulse {
-  0%,
-  100% {
-    opacity: 0.32;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
 
-.animate-ping-dot {
-  animation: ping-dot 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+.overlay-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(6,8,12,calc(0.92*var(--overlay-o))) 0%,
+    rgba(6,8,12,calc(0.55*var(--overlay-o))) 30%,
+    rgba(6,8,12,calc(0.7*var(--overlay-o))) 65%,
+    rgba(6,8,12,calc(0.98*var(--overlay-o))) 100%
+  );
 }

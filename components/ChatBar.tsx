@@ -5,6 +5,7 @@ import { useChatMessages } from '@/hooks/useChatMessages';
 import { cn } from '@/utils/cn';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Button from './ui/Button';
 
 function MsgText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\n)/g);
@@ -41,86 +42,106 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
 
   return (
     <div className="w-full max-w-180 bg-(--bg-3) backdrop-blur-xl border border-(--border) p-6">
-      {!hasMessages && (
-        <div className="flex flex-col gap-2 mb-3">
-          {CHIPS.map((chip, i) => (
-            <button
-              key={i}
-              onClick={() => sendMessage(chip.label)}
-              className="text-left bg-surface border border-(--border) text-(--fg-2) font-sans text-base px-4.5 py-3 cursor-pointer transition-[background,color,border-color] duration-150 hover:border-accent hover:text-foreground"
-            >
-              {chip.label}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {hasMessages && (
-        <div className="overflow-hidden border-b border-(--border) mb-4">
-          <div className="flex flex-col overflow-y-auto max-h-90 py-4">
-            {messages.map((msg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.22 }}
-                className={cn(
-                  'flex gap-3.5 px-6 py-3 items-start',
-                  msg.role === 'user' ? 'flex-row-reverse' : 'flex-row',
-                  (i < messages.length - 1 || thinking) && 'border-b border-(--border-2)'
-                )}
-              >
-                <span
-                  className={cn(
-                    'font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5',
-                    msg.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
-                  )}
+      <AnimatePresence initial={false}>
+        {!hasMessages && (
+          <motion.div
+            key="chips"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="flex flex-col gap-2 mb-3">
+              {CHIPS.map((chip, i) => (
+                <button
+                  key={i}
+                  onClick={() => sendMessage(chip.label)}
+                  className="text-left bg-surface border border-(--border) text-(--fg-2) font-sans text-base px-4.5 py-3 cursor-pointer transition-[background,color,border-color] duration-150 hover:border-accent hover:text-foreground"
                 >
-                  {msg.role === 'user' ? 'TY' : 'PCS'}
-                </span>
-                <span
-                  className={cn(
-                    'font-sans text-base leading-[1.6]',
-                    msg.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
-                  )}
-                >
-                  <MsgText text={msg.text} />
-                </span>
-              </motion.div>
-            ))}
+                  {chip.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-            <AnimatePresence>
-              {thinking && (
+      <AnimatePresence initial={false}>
+        {hasMessages && (
+          <motion.div
+            key="messages"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            className="overflow-hidden border-b border-(--border) mb-4"
+          >
+            <div className="flex flex-col overflow-y-auto max-h-90 py-4">
+              {messages.map((msg, i) => (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex gap-3.5 px-6 py-3 items-center"
+                  key={i}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.22 }}
+                  className={cn(
+                    'flex gap-3.5 px-6 py-3 items-start',
+                    msg.role === 'user' ? 'flex-row-reverse' : 'flex-row',
+                    (i < messages.length - 1 || thinking) && 'border-b border-(--border-2)'
+                  )}
                 >
                   <span
-                    aria-hidden="true"
-                    className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0"
+                    className={cn(
+                      'font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5',
+                      msg.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
+                    )}
                   >
-                    PCS2
+                    {msg.role === 'user' ? 'TY' : 'PCS'}
                   </span>
-                  <span className="flex gap-1.25">
-                    {[0, 1, 2].map(dot => (
-                      <motion.span
-                        key={dot}
-                        className="w-1.25 h-1.25 rounded-full bg-accent inline-block"
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
-                      />
-                    ))}
+                  <span
+                    className={cn(
+                      'font-sans text-base leading-[1.6]',
+                      msg.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
+                    )}
+                  >
+                    <MsgText text={msg.text} />
                   </span>
                 </motion.div>
-              )}
-            </AnimatePresence>
+              ))}
 
-            <div ref={bottomRef} />
-          </div>
-        </div>
-      )}
+              <AnimatePresence>
+                {thinking && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex gap-3.5 px-6 py-3 items-center"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0"
+                    >
+                      PCS
+                    </span>
+                    <span className="flex gap-1.25">
+                      {[0, 1, 2].map(dot => (
+                        <motion.span
+                          key={dot}
+                          className="w-1.25 h-1.25 rounded-full bg-accent inline-block"
+                          animate={{ opacity: [0.3, 1, 0.3] }}
+                          transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
+                        />
+                      ))}
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div ref={bottomRef} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <form
         onSubmit={e => {
@@ -145,12 +166,11 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
           className="flex-1 bg-transparent outline-none min-w-0 font-sans text-base font-normal text-foreground"
           maxLength={240}
         />
-        <button
+        <Button
           type="submit"
           aria-label="Wyślij"
           disabled={thinking}
           className={cn(
-            'flex items-center gap-2 font-sans text-[15px] font-semibold px-5 py-2.5 border-0 shrink-0 transition-[background,color,opacity] duration-200',
             hasInput && !thinking ? 'cursor-pointer' : 'cursor-default',
             hasInput ? 'bg-accent text-accent-fg' : 'bg-surface text-(--fg-3)',
             thinking ? 'opacity-50' : 'opacity-100'
@@ -158,7 +178,7 @@ export default function ChatBar({ onSend }: { onSend?: (v: string) => void }) {
         >
           <span>Wyślij</span>
           <ArrowRight size={16} />
-        </button>
+        </Button>
       </form>
     </div>
   );

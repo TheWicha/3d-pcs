@@ -1,5 +1,6 @@
 'use client';
 
+import AccentBar from '@/components/ui/AccentBar';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import { STATS } from '@/constants';
@@ -32,7 +33,7 @@ export default function StatsSection() {
               i === 5 ? 'xl:col-span-2' : '',
             ].join(' ')}
           >
-            <div className="absolute right-0 top-0 h-1.5 w-20 bg-accent" />
+            <AccentBar />
 
             <h3 className="m-0 font-mono text-[12px] tracking-[0.12em] uppercase leading-normal text-(--fg-3)">
               <span className="block">{stat.label}</span>
@@ -50,7 +51,7 @@ export default function StatsSection() {
               >
                 {stat.value}
               </div>
-              <div className="mt-3 h-1 w-18 bg-accent" />
+              <AccentBar position="inline" size="md" className="mt-3" />
             </div>
 
             <p className="text-[14px] leading-[1.6] text-(--fg-2) m-0 max-w-md">

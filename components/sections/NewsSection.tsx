@@ -1,5 +1,6 @@
 'use client';
 
+import AccentBar from '@/components/ui/AccentBar';
 import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
@@ -40,7 +41,7 @@ export default function NewsSection() {
                 'hover:-translate-y-0.5 hover:border-accent'
               )}
             >
-              <div className="absolute right-0 top-0 h-1.5 w-20 bg-accent" />
+              <AccentBar />
 
               <time
                 dateTime={item.date}
@@ -54,7 +55,7 @@ export default function NewsSection() {
               <p className="text-[16px] leading-[1.6] text-(--fg-2) mt-0 mb-0">{item.excerpt}</p>
 
               <div className="mt-auto pt-6">
-                <div className="h-1 w-16 bg-accent mb-4" />
+                <AccentBar position="inline" size="md" className="mb-4" />
                 <span className="group/read relative inline-flex items-center gap-1.5 pb-1 text-[14px] font-semibold tracking-[0.04em] text-(--fg-2) transition-colors duration-150 group-hover/card:text-foreground">
                   Czytaj więcej <ArrowRight size={12} />
                   <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover/card:w-full" />

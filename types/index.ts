@@ -22,6 +22,14 @@ export interface GooeyTextProps {
 
 export interface BackgroundProps {
   overlay?: number;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
+  loading: boolean;
+  displayedProgress: number;
+}
+
+export interface VideoPlayPauseProps {
+  paused: boolean;
+  togglePause: () => void;
 }
 
 export interface Module {

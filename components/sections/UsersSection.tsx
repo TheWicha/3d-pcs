@@ -1,5 +1,6 @@
 'use client';
 
+import AccentBar from '@/components/ui/AccentBar';
 import AccentDot from '@/components/ui/AccentDot';
 import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
@@ -41,7 +42,7 @@ export default function UsersSection() {
               key={i}
               className="relative overflow-hidden border border-(--border) bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] p-6 sm:p-7 min-h-56"
             >
-              <div className="absolute right-0 top-0 h-1.5 w-18 bg-accent" />
+              <AccentBar />
 
               <div className="flex items-center justify-between gap-3 mb-4">
                 <AccentDot size="md" />

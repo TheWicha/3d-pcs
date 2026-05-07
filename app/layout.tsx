@@ -48,9 +48,9 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <a
+          tabIndex={0}
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-200 focus:px-4 focus:py-2 focus:font-semibold"
-          style={{ backgroundColor: '#00edc2', color: '#06080c' }}
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-200 focus:px-4 focus:py-2 focus:font-semibold text-foreground bg-accent"
         >
           Przejdź do treści głównej
         </a>

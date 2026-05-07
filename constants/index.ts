@@ -12,7 +12,6 @@ import type {
 } from '@/types';
 
 export const ACCENT = 'var(--accent)';
-export const ACCENT_HEX = '#00edc2';
 
 export const CHIPS: Chip[] = [
   { label: 'Sprawdź status MSKU7834521' },

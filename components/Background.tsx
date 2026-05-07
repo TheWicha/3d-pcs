@@ -1,3 +1,5 @@
+'use client';
+
 import type { BackgroundProps } from '@/types';
 import Video from './video';
 
@@ -10,31 +12,33 @@ function Crosshair() {
   );
 }
 
-export default function Background({ overlay = 0.7 }: BackgroundProps) {
-  const o = overlay;
-
+export default function Background({
+  overlay = 0.7,
+  videoRef,
+  loading,
+  displayedProgress,
+}: BackgroundProps) {
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      <Video />
+      <Video videoRef={videoRef} loading={loading} displayedProgress={displayedProgress} />
       <div
         aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(180deg,
-            rgba(6,8,12,${(0.92 * o).toFixed(3)}) 0%,
-            rgba(6,8,12,${(0.55 * o).toFixed(3)}) 30%,
-            rgba(6,8,12,${(0.7 * o).toFixed(3)}) 65%,
-            rgba(6,8,12,${(0.98 * o).toFixed(3)}) 100%
-          )`,
-        }}
+        className="absolute inset-0 overlay-gradient"
+        style={{ '--overlay-o': overlay } as React.CSSProperties}
       />
-      <div
-        className="absolute inset-0 opacity-[0.18] bg-[linear-gradient(rgba(255,255,255,0.065)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.065)_1px,transparent_1px)] bg-size-[80px_80px]"
-      />
-      <span className="absolute top-6 left-6 opacity-[0.35]"><Crosshair /></span>
-      <span className="absolute top-6 right-6 opacity-[0.35]"><Crosshair /></span>
-      <span className="absolute bottom-6 left-6 opacity-[0.35]"><Crosshair /></span>
-      <span className="absolute bottom-6 right-6 opacity-[0.35]"><Crosshair /></span>
+      <div className="absolute inset-0 opacity-[0.18] bg-[linear-gradient(rgba(255,255,255,0.065)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.065)_1px,transparent_1px)] bg-size-[80px_80px]" />
+      <span className="absolute top-6 left-6 opacity-[0.35]">
+        <Crosshair />
+      </span>
+      <span className="absolute top-6 right-6 opacity-[0.35]">
+        <Crosshair />
+      </span>
+      <span className="absolute bottom-6 left-6 opacity-[0.35]">
+        <Crosshair />
+      </span>
+      <span className="absolute bottom-6 right-6 opacity-[0.35]">
+        <Crosshair />
+      </span>
     </div>
   );
 }

@@ -1,7 +1,13 @@
 'use client';
 
-import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { Pause, Play } from 'lucide-react';
+import type { VideoPlayPauseProps } from '@/types';
+
+interface VideoProps {
+  videoRef: React.RefObject<HTMLVideoElement | null>;
+  loading: boolean;
+  displayedProgress: number;
+}
 
 function VideoLoadingOverlay({ progress }: { progress: number }) {
   return (
@@ -15,9 +21,22 @@ function VideoLoadingOverlay({ progress }: { progress: number }) {
   );
 }
 
-export default function Video() {
-  const { videoRef, loading, displayedProgress, paused, togglePause } = useVideoPlayer();
+export function VideoPlayPause({ paused, togglePause }: VideoPlayPauseProps) {
+  return (
+    <button
+      onClick={togglePause}
+      onMouseDown={e => e.stopPropagation()}
+      aria-pressed={paused}
+      aria-label={paused ? 'Wznów animację tła' : 'Zatrzymaj animację tła'}
+      className="absolute bottom-4 right-5 z-900 flex items-center gap-1.5 font-mono text-[9px] tracking-[0.12em] uppercase text-(--fg-3) border border-(--border) px-2 py-1.25 pointer-events-auto transition-[color,border-color] duration-150 hover:text-foreground hover:border-accent bg-(--bg-3) backdrop-blur-sm"
+    >
+      {paused ? <Play size={10} aria-hidden="true" /> : <Pause size={10} aria-hidden="true" />}
+      <span aria-hidden="true">{paused ? 'wznów' : 'pauza'}</span>
+    </button>
+  );
+}
 
+export default function Video({ videoRef, loading, displayedProgress }: VideoProps) {
   return (
     <div className="absolute inset-0 w-full h-full" aria-hidden="true">
       <video
@@ -35,18 +54,6 @@ export default function Video() {
         <source src="/video/freecompress-animacja.mp4" type="video/mp4" />
       </video>
       {loading && <VideoLoadingOverlay progress={displayedProgress} />}
-      {!loading && (
-        <button
-          onClick={togglePause}
-          onMouseDown={e => e.stopPropagation()}
-          aria-pressed={paused}
-          aria-label={paused ? 'Wznów animację tła' : 'Zatrzymaj animację tła'}
-          className="absolute bottom-4 right-5 z-900 flex items-center gap-1.5 font-mono text-[9px] tracking-[0.12em] uppercase text-(--fg-3) border border-(--border) px-2 py-1.25 pointer-events-auto transition-[color,border-color] duration-150 hover:text-foreground hover:border-accent bg-(--bg-3) backdrop-blur-sm"
-        >
-          {paused ? <Play size={10} aria-hidden="true" /> : <Pause size={10} aria-hidden="true" />}
-          <span aria-hidden="true">{paused ? 'wznów' : 'pauza'}</span>
-        </button>
-      )}
     </div>
   );
 }

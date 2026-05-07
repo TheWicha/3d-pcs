@@ -1,5 +1,6 @@
 'use client';
 
+import AccentBar from '@/components/ui/AccentBar';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import { PORTS } from '@/constants';
@@ -29,7 +30,7 @@ export default function PortsSection() {
               i < PORTS.length - 1 && 'border-r'
             )}
           >
-            <div className="w-8 h-0.5 bg-accent" />
+            <AccentBar position="inline" size="sm" className="h-0.5" />
             <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,22px)] tracking-[0.04em] text-foreground m-0 uppercase">
               {port.name}
             </h3>
