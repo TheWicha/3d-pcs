@@ -337,9 +337,8 @@ Initialized in <head> to prevent flash.
 
 Fonts
 Token	Font	Usage
---font-sans	Chivo	UI text
---font-michroma	Roboto	Headings
---font-mono	JetBrains Mono	Labels / code
+--font-michroma	Roboto
+
 Typography
 
 Hero heading:

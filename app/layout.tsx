@@ -6,19 +6,13 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import TopNav from '@/components/TopNav';
 import Footer from '@/components/sections/Footer';
-import { Chivo, Roboto } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 
 const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-michroma',
-});
-
-const chivo = Chivo({
-  subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['300', '400', '500', '700'],
   display: 'swap',
-  variable: '--font-chivo',
+  variable: '--font-roboto',
 });
 
 export const metadata: Metadata = {
@@ -38,7 +32,7 @@ export default async function RootLayout({
     <html
       lang="pl"
       data-theme={theme}
-      className={`${roboto.variable} ${chivo.variable} h-full antialiased`}
+      className={`${roboto.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

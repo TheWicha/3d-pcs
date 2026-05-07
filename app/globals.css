@@ -39,9 +39,9 @@
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
   --color-surface: var(--surface);
-  --font-sans: var(--font-chivo, 'Chivo', Arial, sans-serif);
-  --font-mono: var(--font-jetbrains, monospace);
-  --font-michroma: var(--font-michroma, 'Roboto', sans-serif);
+  --font-sans: var(--font-roboto, 'Roboto', sans-serif);
+  --font-mono: var(--font-roboto, 'Roboto', monospace);
+  --font-michroma: var(--font-roboto, 'Roboto', sans-serif);
 }
 *:focus {
   outline: 2px solid var(--fg) !important;
@@ -52,7 +52,7 @@
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-chivo, 'Chivo', Arial, sans-serif);
+  font-family: var(--font-roboto, 'Roboto', sans-serif);
 }
 
 button,
