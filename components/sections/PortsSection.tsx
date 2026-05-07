@@ -3,6 +3,8 @@
 import AccentBar from '@/components/ui/AccentBar';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
+import Text from '@/components/ui/Text';
+import UnderlineLink from '@/components/ui/UnderlineLink';
 import { PORTS } from '@/constants';
 import { cn } from '@/utils/cn';
 import { ArrowUpRight } from 'lucide-react';
@@ -31,18 +33,15 @@ export default function PortsSection() {
             )}
           >
             <AccentBar position="inline" size="sm" className="h-0.5" />
-            <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,22px)] tracking-[0.04em] text-foreground m-0 uppercase">
+            <Text variant="heading" uppercase className="m-0">
               {port.name}
-            </h3>
-            <p className="text-[16px] leading-[1.6] text-(--fg-2) m-0 grow">{port.description}</p>
-            <button
-              aria-label={`Odwiedź stronę ${port.name}`}
-              className="group relative inline-flex items-center gap-1.5 pb-1 bg-transparent border-0 p-0 text-[14px] font-semibold tracking-[0.04em] text-(--fg-2) transition-colors duration-150 hover:text-foreground cursor-pointer w-fit"
-            >
-              Odwiedź stronę
-              <ArrowUpRight size={12} />
-              <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover:w-full" />
-            </button>
+            </Text>
+            <Text variant="body" color="muted" className="m-0 grow">
+              {port.description}
+            </Text>
+            <UnderlineLink as="button" aria-label={`Odwiedź stronę ${port.name}`}>
+              Odwiedź stronę <ArrowUpRight size={12} />
+            </UnderlineLink>
           </li>
         ))}
       </ul>

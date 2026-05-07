@@ -4,6 +4,7 @@ import AccentDot from '@/components/ui/AccentDot';
 import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
+import Text from '@/components/ui/Text';
 import { PCS_VALUES } from '@/constants';
 import { ArrowRight } from 'lucide-react';
 import SectionLabel from './SectionLabel';
@@ -35,10 +36,12 @@ export default function AboutSection() {
           {PCS_VALUES.map((val, i) => (
             <li key={i} className="p-6 border-r border-b border-(--border)">
               <AccentDot size="md" className="mb-3" />
-              <div className="font-michroma text-[16px] tracking-[0.04em] text-foreground mb-1.5 uppercase">
+              <Text variant="card-title" className="mb-1.5">
                 {val.title}
-              </div>
-              <div className="text-[14px] leading-[1.6] text-(--fg-2)">{val.description}</div>
+              </Text>
+              <Text variant="body-sm" color="muted">
+                {val.description}
+              </Text>
             </li>
           ))}
         </ul>

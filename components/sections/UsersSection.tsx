@@ -5,6 +5,7 @@ import AccentDot from '@/components/ui/AccentDot';
 import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
+import Text from '@/components/ui/Text';
 import { USER_TYPES } from '@/constants';
 import { ArrowRight } from 'lucide-react';
 import SectionLabel from './SectionLabel';
@@ -22,10 +23,10 @@ export default function UsersSection() {
             portów polskich
           </SectionHeading>
 
-          <p className="text-[15px] leading-[1.7] text-(--fg-2) m-0 mb-8 max-w-88">
+          <Text variant="body" color="muted" className="m-0 mb-8 max-w-88">
             Uczestnicy PCS współpracują w jednym środowisku wymiany danych, od planowania po
             odprawę.
-          </p>
+          </Text>
 
           <Button
             variant="primary"
@@ -46,16 +47,17 @@ export default function UsersSection() {
 
               <div className="flex items-center justify-between gap-3 mb-4">
                 <AccentDot size="md" />
-                <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-(--fg-3)">
+                <Text variant="mono" color="subtle" as="span">
                   {(i + 1).toString().padStart(2, '0')}
-                </span>
+                </Text>
               </div>
 
-              <h3 className="font-michroma font-normal text-[clamp(16px,2vw,20px)] tracking-[0.02em] text-foreground mt-0 mb-4 leading-[1.35]">
+              <Text variant="subheading" className="mt-0 mb-4 leading-[1.35]">
                 {type.title}
-              </h3>
-
-              <p className="text-[15px] leading-[1.65] text-(--fg-2) m-0">{type.description}</p>
+              </Text>
+              <Text variant="body" color="muted" className="m-0">
+                {type.description}
+              </Text>
             </li>
           ))}
         </ul>

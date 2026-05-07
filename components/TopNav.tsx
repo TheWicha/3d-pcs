@@ -5,6 +5,8 @@ import { NAV_ITEMS } from '@/constants';
 import { cn } from '@/utils/cn';
 import { motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
+
+import SocialLinks from '@/components/ui/SocialLinks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -57,6 +59,10 @@ export default function TopNav() {
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center border-r border-(--border) pr-3">
+            <SocialLinks />
+          </div>
+
           <button onClick={toggle} className="hidden sm:flex">
             <div className="w-11 h-6 rounded-xl border border-(--border) flex items-center px-0.75 bg-(--switch-bg) transition-colors">
               <motion.div

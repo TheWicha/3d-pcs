@@ -4,6 +4,8 @@ import AccentBar from '@/components/ui/AccentBar';
 import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
+import Text from '@/components/ui/Text';
+import UnderlineLink from '@/components/ui/UnderlineLink';
 import { NEWS } from '@/constants';
 import { cn } from '@/utils/cn';
 import { ArrowRight } from 'lucide-react';
@@ -43,23 +45,21 @@ export default function NewsSection() {
             >
               <AccentBar />
 
-              <time
-                dateTime={item.date}
-                className="font-mono text-[12px] tracking-widest text-(--fg-2) block mb-3.5 uppercase"
-              >
+              <Text variant="meta" color="muted" as="time" dateTime={item.date} className="block mb-3.5">
                 {item.date}
-              </time>
-              <h3 className="font-michroma font-normal text-[clamp(16px,1.4vw,20px)] tracking-[0.03em] text-foreground mt-0 mb-3 leading-[1.4]">
+              </Text>
+              <Text variant="subheading" className="mt-0 mb-3 leading-[1.4]">
                 {item.title}
-              </h3>
-              <p className="text-[16px] leading-[1.6] text-(--fg-2) mt-0 mb-0">{item.excerpt}</p>
+              </Text>
+              <Text variant="body" color="muted" className="mt-0 mb-0">
+                {item.excerpt}
+              </Text>
 
               <div className="mt-auto pt-6">
                 <AccentBar position="inline" size="md" className="mb-4" />
-                <span className="group/read relative inline-flex items-center gap-1.5 pb-1 text-[14px] font-semibold tracking-[0.04em] text-(--fg-2) transition-colors duration-150 group-hover/card:text-foreground">
+                <UnderlineLink as="span" className="group-hover/card:text-foreground">
                   Czytaj więcej <ArrowRight size={12} />
-                  <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-300 ease-out group-hover/card:w-full" />
-                </span>
+                </UnderlineLink>
               </div>
             </Link>
           </li>

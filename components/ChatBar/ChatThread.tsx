@@ -1,3 +1,5 @@
+import Text from '@/components/ui/Text';
+import ThinkingDots from '@/components/ui/ThinkingDots';
 import type { Msg } from '@/types';
 import { cn } from '@/utils/cn';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -32,22 +34,21 @@ export function ChatThread({ messages, thinking, bottomRef }: ChatThreadProps) {
               (i < messages.length - 1 || thinking) && 'border-b border-(--border-2)'
             )}
           >
-            <span
-              className={cn(
-                'font-mono text-[12px] tracking-widest uppercase shrink-0 mt-0.5',
-                msg.role === 'user' ? 'text-(--fg-3)' : 'text-accent'
-              )}
+            <Text
+              variant="mono"
+              color={msg.role === 'user' ? 'subtle' : 'accent'}
+              as="span"
+              className="shrink-0 mt-0.5"
             >
               {msg.role === 'user' ? 'TY' : 'PCS'}
-            </span>
-            <span
-              className={cn(
-                'font-sans text-base leading-[1.6]',
-                msg.role === 'user' ? 'text-foreground' : 'text-(--fg-2)'
-              )}
+            </Text>
+            <Text
+              variant="body"
+              color={msg.role === 'user' ? 'default' : 'muted'}
+              as="span"
             >
               <MsgText text={msg.text} />
-            </span>
+            </Text>
           </motion.div>
         ))}
         <AnimatePresence>
@@ -58,19 +59,10 @@ export function ChatThread({ messages, thinking, bottomRef }: ChatThreadProps) {
               exit={{ opacity: 0 }}
               className="flex gap-3.5 px-6 py-3 items-center"
             >
-              <span className="font-mono text-[12px] tracking-widest uppercase text-accent shrink-0">
+              <Text variant="mono" color="accent" as="span" className="shrink-0" aria-hidden="true">
                 PCS
-              </span>
-              <span className="flex gap-1.25">
-                {[0, 1, 2].map(dot => (
-                  <motion.span
-                    key={dot}
-                    className="w-1.25 h-1.25 rounded-full bg-accent inline-block"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
-                  />
-                ))}
-              </span>
+              </Text>
+              <ThinkingDots />
             </motion.div>
           )}
         </AnimatePresence>

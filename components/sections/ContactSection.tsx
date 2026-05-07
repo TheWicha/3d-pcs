@@ -4,15 +4,8 @@ import { ArrowRight } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeading from '@/components/ui/SectionHeading';
+import Text from '@/components/ui/Text';
 import SectionLabel from './SectionLabel';
-
-function ContactFieldLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="font-mono text-[12px] tracking-[0.12em] uppercase text-(--fg-3) block mb-4">
-      {children}
-    </span>
-  );
-}
 
 export default function ContactSection() {
   return (
@@ -24,7 +17,9 @@ export default function ContactSection() {
           <SectionHeading id="contact-heading" className="mb-2">
             Porozmawiajmy
           </SectionHeading>
-          <p className="text-[16px] leading-[1.6] text-(--fg-3) mt-0 mb-8">napisz do nas</p>
+          <Text variant="body" color="subtle" className="mt-0 mb-8">
+            napisz do nas
+          </Text>
           <Button variant="primary" icon={<ArrowRight size={14} />} aria-label="Napisz do nas e-mail">
             e-mail
           </Button>
@@ -32,7 +27,9 @@ export default function ContactSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 flex-1">
           <div className="p-12 border-r border-(--border)">
-            <ContactFieldLabel>Adres</ContactFieldLabel>
+            <Text variant="label" color="subtle" as="span" className="block mb-4">
+              Adres
+            </Text>
             <address className="text-[16px] leading-[1.6] text-(--fg-2) not-italic">
               Polski PCS sp. z o.o.
               <br />
@@ -43,7 +40,9 @@ export default function ContactSection() {
           </div>
 
           <div className="p-12 border-r border-(--border)">
-            <ContactFieldLabel>E-mail</ContactFieldLabel>
+            <Text variant="label" color="subtle" as="span" className="block mb-4">
+              E-mail
+            </Text>
             <div className="flex flex-col gap-1 text-[16px] leading-[1.6]">
               <a
                 href="mailto:biuro@polskipcs.pl"
@@ -61,7 +60,9 @@ export default function ContactSection() {
           </div>
 
           <div className="p-12">
-            <ContactFieldLabel>Telefon</ContactFieldLabel>
+            <Text variant="label" color="subtle" as="span" className="block mb-4">
+              Telefon
+            </Text>
             <div className="flex flex-col gap-1 text-[16px] leading-[1.6]">
               <a
                 href="tel:+48914040563"

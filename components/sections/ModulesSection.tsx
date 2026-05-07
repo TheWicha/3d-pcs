@@ -1,8 +1,10 @@
 'use client';
 
+import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionWrapper from '@/components/ui/SectionWrapper';
+import Text from '@/components/ui/Text';
 import { MODULES } from '@/constants';
 import { ArrowRight } from 'lucide-react';
 import SectionLabel from './SectionLabel';
@@ -21,18 +23,18 @@ export default function ModulesSection() {
             <br />
             portowych
           </SectionHeading>
-          <p className="text-[16px] leading-[1.6] text-(--fg-2) m-0">
+          <Text variant="body" color="muted" className="m-0">
             Wybierz moduł, którego potrzebujesz — od obsługi towarowej po działalność maklerską.
-          </p>
+          </Text>
         </div>
 
         <ol className="flex-1 flex flex-col gap-0 border-t border-(--border) list-none m-0 p-0">
           {MODULES.map((mod, i) => (
             <li key={i} className="border-b border-(--border) py-7">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-michroma font-normal text-[clamp(18px,1.6vw,22px)] tracking-[0.04em] text-foreground m-0">
+                <Text variant="heading" className="m-0">
                   {mod.title}
-                </h3>
+                </Text>
                 <Button
                   variant="primary"
                   icon={<ArrowRight size={14} />}
@@ -44,11 +46,8 @@ export default function ModulesSection() {
               {mod.items.length > 0 && (
                 <ul className="flex flex-wrap gap-2 list-none m-0 p-0">
                   {mod.items.map((item, j) => (
-                    <li
-                      key={j}
-                      className="text-[14px] text-(--fg-2) bg-surface border border-(--border) px-3.5 py-1.5"
-                    >
-                      {item}
+                    <li key={j}>
+                      <Badge>{item}</Badge>
                     </li>
                   ))}
                 </ul>
