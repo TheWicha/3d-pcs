@@ -8,12 +8,12 @@ interface SocialLinksProps {
 
 const LINKS = [
   {
-    href: 'https://x.com/polskipcs',
+    href: 'https://x.com/PcsPolski',
     label: 'X (Twitter), otwiera się w nowej karcie',
     Icon: X,
   },
   {
-    href: 'https://linkedin.com/company/polskipcs',
+    href: 'https://www.linkedin.com/company/polski-pcs',
     label: 'LinkedIn, otwiera się w nowej karcie',
     Icon: LinkedIn,
   },
