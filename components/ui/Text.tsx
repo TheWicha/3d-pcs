@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn';
 import { createElement } from 'react';
-import type { ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 type As = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'time' | 'label' | 'div';
 
@@ -20,23 +20,21 @@ type Variant =
 
 type Color = 'default' | 'muted' | 'subtle' | 'accent' | 'inherit';
 
-interface TextProps {
+type TextProps<T extends As = 'p'> = {
   variant?: Variant;
-  as?: As;
+  as?: T;
   color?: Color;
   uppercase?: boolean;
-  className?: string;
   children?: ReactNode;
-  id?: string;
-  dateTime?: string;
-  htmlFor?: string;
-}
+} & Omit<ComponentPropsWithoutRef<T>, 'as'>;
 
 const variants: Record<Variant, string> = {
   hero: 'font-michroma font-normal text-[clamp(18px,2.4vw,26px)] tracking-[0.04em] leading-[1.15] uppercase',
   title: 'font-michroma font-normal text-[clamp(24px,3.2vw,40px)] tracking-[0.02em] leading-[1.15]',
-  heading: 'font-michroma font-normal text-[clamp(18px,1.6vw,22px)] tracking-[0.04em] leading-[1.35]',
-  subheading: 'font-michroma font-normal text-[clamp(16px,1.4vw,22px)] tracking-[0.03em] leading-[1.4]',
+  heading:
+    'font-michroma font-normal text-[clamp(18px,1.6vw,22px)] tracking-[0.04em] leading-[1.35]',
+  subheading:
+    'font-michroma font-normal text-[clamp(16px,1.4vw,22px)] tracking-[0.03em] leading-[1.4]',
   'card-title': 'font-michroma font-normal text-[16px] tracking-[0.04em] uppercase',
   body: 'font-sans text-[16px] leading-[1.6]',
   'body-sm': 'font-sans text-[14px] leading-[1.6]',
@@ -70,25 +68,21 @@ const defaultAs: Record<Variant, As> = {
   meta: 'time',
 };
 
-export default function Text({
+export default function Text<T extends As = 'p'>({
   variant = 'body',
   as,
   color = 'default',
   uppercase,
   className,
   children,
-  id,
-  dateTime,
-  htmlFor,
-}: TextProps) {
-  const tag = as ?? defaultAs[variant];
+  ...rest
+}: TextProps<T>) {
+  const tag = (as ?? defaultAs[variant]) as As;
 
   return createElement(
     tag,
     {
-      id,
-      dateTime,
-      htmlFor,
+      ...rest,
       className: cn(variants[variant], colors[color], uppercase && 'uppercase', className),
     },
     children

@@ -4,9 +4,11 @@ import { useTheme } from '@/components/ThemeProvider';
 import { NAV_ITEMS } from '@/constants';
 import { cn } from '@/utils/cn';
 import { motion } from 'framer-motion';
-import { ArrowRight, Menu, Moon, SunMedium, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 
+import NavLink from '@/components/ui/NavLink';
 import SocialLinks from '@/components/ui/SocialLinks';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -31,31 +33,11 @@ export default function TopNav() {
         </Link>
 
         <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-          {NAV_ITEMS.map(item => {
-            const active = pathname === item.href;
-
-            return (
-              <Link key={item.code} href={item.href} className="group relative pb-1">
-                <span
-                  className={cn(
-                    'text-[14px] font-medium transition-colors duration-150',
-                    active
-                      ? 'text-(--nav-link-active)'
-                      : 'text-(--nav-link-inactive) group-hover:text-foreground'
-                  )}
-                >
-                  {item.label}
-                </span>
-
-                <span
-                  className={cn(
-                    'absolute bottom-0 left-0 h-0.5 bg-accent transition-[width] duration-300',
-                    active ? 'w-full' : 'w-0 group-hover:w-full'
-                  )}
-                />
-              </Link>
-            );
-          })}
+          {NAV_ITEMS.map(item => (
+            <NavLink key={item.code} href={item.href} active={pathname === item.href}>
+              {item.label}
+            </NavLink>
+          ))}
         </div>
 
         <div className="flex items-center gap-3">
@@ -63,21 +45,7 @@ export default function TopNav() {
             <SocialLinks />
           </div>
 
-          <button onClick={toggle} aria-label={theme === 'dark' ? 'Włącz tryb jasny' : 'Włącz tryb ciemny'} className="hidden sm:flex">
-            <div className="w-11 h-6 rounded-xl border border-(--border) flex items-center px-0.75 bg-(--switch-bg) transition-colors">
-              <motion.div
-                animate={{ x: theme === 'dark' ? 0 : 20 }}
-                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                className="w-4 h-4 rounded-full bg-accent flex items-center justify-center"
-              >
-                {theme === 'dark' ? (
-                  <Moon size={9} color="var(--accent-fg)" strokeWidth={2.5} />
-                ) : (
-                  <SunMedium size={16} color="var(--accent-fg)" />
-                )}
-              </motion.div>
-            </div>
-          </button>
+          <ThemeToggle theme={theme} onToggle={toggle} />
 
           <button className="hidden sm:flex font-mono text-[12px] px-2 py-1text-(--nav-link-active)">
             PL / EN
